@@ -1,0 +1,83 @@
+{
+	"title": "Aplicación transaccional de Bancandes Uniandes (Administrador)",
+	"frameH": 600,
+	"frameW": 800,
+	"bannerPath": "./src/main/resources/config/logo.png",
+	"menuBar":
+	[
+		{ "menuTitle": "Registrar",
+		  "options":
+			[
+				{
+					"label": "Registrar Usuario",
+					"event": ""
+				},
+				{
+					"label": "Registrar Oficina",
+					"event": ""
+				},
+				{
+					"label": "Registrar Punto Atencion",
+					"event": ""
+				},
+			]
+		},
+		{ "menuTitle": "Cuenta",
+		  "options":
+			[
+				{
+					"label": "Registrar Cuenta",
+					"event": ""
+				},
+				{
+					"label": "Cerrar Cuenta",
+					"event": ""
+				},
+				{
+					"label": "Registrar Operacion Cuenta",
+					"event": ""
+				},
+			]
+		},		
+		{ "menuTitle": "Prestamo",
+		  "options":
+			[
+				{
+					"label": "Registrar Prestamo",
+					"event": ""
+				},
+				{
+					"label": "Registrar Operaciones Prestamo",
+					"event": ""
+				},
+				{
+					"label": "Cerrar Prestamo",
+					"event": ""
+				}
+			]
+		},		
+		{ "menuTitle": "Consultas",
+		  "options":
+			[
+				{
+					"label": "Consultar Cuentas",
+					"event": ""
+				},
+				{
+					"label": "Consultar Cliente",
+					"event": ""
+				},
+				{
+					"label": "Top 10 operaciones de mayor movimiento",
+					"event": ""
+				},
+				{
+					"label": "Datos usuario más activo",
+					"event": ""
+				}
+			]
+		}		
+		
+	]
+}
+	
