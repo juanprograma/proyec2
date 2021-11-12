@@ -27,7 +27,7 @@ import java.sql.Timestamp;
  * 
  * @author Germán Bravo
  */
-public class Visitan implements VOVisitan
+public class Operacionacciones implements VOVisitan
 {
 	/* ****************************************************************
 	 * 			Atributos
@@ -58,7 +58,7 @@ public class Visitan implements VOVisitan
 	/**
 	 * Constructor por defecto
 	 */
-	public Visitan() 
+	public Operacionacciones() 
 	{
 		this.idBebedor = 0;
 		this.idBar = 0;
@@ -73,7 +73,7 @@ public class Visitan implements VOVisitan
 	 * @param fechaVisita - La fecha en la cual se realiza la visita
 	 * @param horario - El horario en el que el bebedor vista el bar (DIURNO, NOCTURNO, TODOS)
 	 */
-	public Visitan(long idBebedor, long idBar, Timestamp fechaVisita, String horario) 
+	public Operacionacciones(long idBebedor, long idBar, Timestamp fechaVisita, String horario) 
 	{
 		this.idBebedor = idBebedor;
 		this.idBar = idBar;

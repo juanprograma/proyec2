@@ -24,7 +24,7 @@ import java.util.List;
  *
  * @author Germán Bravo
  */
-public class Bebedor implements VOBebedor
+public class Atiende implements VOBebedor
 {
 	/* ****************************************************************
 	 * 			Atributos
@@ -69,7 +69,7 @@ public class Bebedor implements VOBebedor
 	/**
 	 * Constructor por defecto
 	 */
-	public Bebedor() 
+	public Atiende() 
 	{
 		this.id = 0;
 		this.nombre = "";
@@ -86,7 +86,7 @@ public class Bebedor implements VOBebedor
 	 * @param ciudad - La ciudad del bebedor
 	 * @param presupuesto - El presupuesto del bebedor (ALTO, MEDIO, BAJO)
 	 */
-	public Bebedor(long id, String nombre, String ciudad, String presupuesto) 
+	public Atiende(long id, String nombre, String ciudad, String presupuesto) 
 	{
 		this.id = id;
 		this.nombre = nombre;
@@ -224,7 +224,7 @@ public class Bebedor implements VOBebedor
 		i = 1;
 		for (Object [] gusta : bebidasQueLeGustan)
 		{
-			Bebida bebida = (Bebida) gusta [0];
+			Cajeroatm bebida = (Cajeroatm) gusta [0];
 			String tipoBebida = (String) gusta [1];
 			resp += i++ + ". " + "[" + bebida.toString() + ", Tipo Bebida= " + tipoBebida + "]\n";
 		}

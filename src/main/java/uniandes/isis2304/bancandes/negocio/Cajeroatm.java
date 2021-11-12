@@ -20,7 +20,7 @@ package uniandes.isis2304.bancandes.negocio;
  *
  * @author Germán Bravo
  */
-public class Bebida implements VOBebida
+public class Cajeroatm implements VOBebida
 {
 	/* ****************************************************************
 	 * 			Atributos
@@ -51,7 +51,7 @@ public class Bebida implements VOBebida
 	/**
 	 * Constructor por defecto
 	 */
-	public Bebida() 
+	public Cajeroatm() 
 	{
 		this.id = 0;
 		this.nombre = "";
@@ -66,7 +66,7 @@ public class Bebida implements VOBebida
 	 * @param tipo - El identificador del tipo de bebida
 	 * @param gradoAlcohol - El graddo de alcohol de la bebida (Mayor que 0)
 	 */
-	public Bebida(long id, String nombre, long tipo, int gradoAlcohol) 
+	public Cajeroatm(long id, String nombre, long tipo, int gradoAlcohol) 
 	{
 		this.id = id;
 		this.nombre = nombre;

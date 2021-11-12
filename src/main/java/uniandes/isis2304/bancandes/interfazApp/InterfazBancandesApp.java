@@ -46,7 +46,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 
-import uniandes.isis2304.bancandes.negocio.Parranderos;
+import uniandes.isis2304.bancandes.negocio.Clienteaccion;
 import uniandes.isis2304.bancandes.negocio.VOTipoBebida;
 
 /**
@@ -86,7 +86,7 @@ public class InterfazBancandesApp extends JFrame implements ActionListener
     /**
      * Asociación a la clase principal del negocio.
      */
-    private Parranderos parranderos;
+    private Clienteaccion parranderos;
     
 	/* ****************************************************************
 	 * 			Atributos de interfaz
@@ -126,7 +126,7 @@ public class InterfazBancandesApp extends JFrame implements ActionListener
         }
         
         tableConfig = openConfig ("Tablas BD", CONFIG_TABLAS);
-        parranderos = new Parranderos (tableConfig);
+        parranderos = new Clienteaccion (tableConfig);
         
     	String path = guiConfig.get("bannerPath").getAsString();
         panelDatos = new PanelDatos ( );
