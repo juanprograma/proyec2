@@ -20,7 +20,7 @@ package uniandes.isis2304.bancandes.negocio;
  *
  * @author Germán Bravo
  */
-public class Bar implements VOBar
+public class Accion implements VOBar
 {
 	/* ****************************************************************
 	 * 			Atributos
@@ -56,7 +56,7 @@ public class Bar implements VOBar
     /**
      * Constructor por defecto
      */
-	public Bar() 
+	public Accion() 
     {
     	this.id = 0;
 		this.nombre = "";
@@ -73,7 +73,7 @@ public class Bar implements VOBar
 	 * @param presupuesto - El presupuesto del bar (ALTO, MEDIO, BAJO)
 	 * @param cantSedes - Las sedes del bar (Mayor que 0)
 	 */
-    public Bar(long id, String nombre, String ciudad, String presupuesto, int cantSedes) 
+    public Accion(long id, String nombre, String ciudad, String presupuesto, int cantSedes) 
     {
     	this.id = id;
 		this.nombre = nombre;
