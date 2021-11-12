@@ -15,6 +15,8 @@
 
 package uniandes.isis2304.bancandes.negocio;
 
+import java.util.Date;
+
 /**
  * Clase para modelar la relación GUSTAN del negocio de los Parranderos:
  * Cada objeto de esta clase representa el hecho que un bebedor gusta de una bebida y viceversa.
@@ -24,83 +26,74 @@ package uniandes.isis2304.bancandes.negocio;
  * 
  * @author Germán Bravo
  */
-public class Cdt implements VOGustan
+public class Cdt implements VOCdt
 {
 	/* ****************************************************************
 	 * 			Atributos
 	 *****************************************************************/
-	/**
-	 * El identificador del bebedor que gusta de la bebida
-	 */
-	private long idBebedor;
+	private long idcdt;
+	
 
-	/**
-	 * El identificador de la bebida que gusta al bebedor
-	 */
-	private long idBebida;
 
+
+	private long idcliente;
+	private Date fechavencimiento;
+	private long idpuntoatencion;
+	
 	/* ****************************************************************
 	 * 			Métodos
 	 *****************************************************************/
-	/**
-	 * Constructor por defecto
-	 */
-	public Cdt() 
-	{
-		this.idBebedor = 0;
-		this.idBebida = 0;
+	public Cdt() {
+		
+		this.idcdt = 0;
+		this.idcliente = 0;
+		this.fechavencimiento = new Date(0);
+		this.idpuntoatencion = 0;
 	}
-
 	/**
 	 * Constructor con valores
 	 * @param idBebedor - El identificador del bebedor. Debe exixtir un bebedor con dicho identificador
 	 * @param idBebida - El identificador de la bebida. Debe existir una bebida con dicho identificador
 	 */
-	public Cdt(long idBebedor, long idBebida) 
-	{
-		this.idBebedor = idBebedor;
-		this.idBebida = idBebida;
+	public Cdt(long idcdt, long idcliente, Date fechavencimiento, long idpuntoatencion) {
+		super();
+		this.idcdt = idcdt;
+		this.idcliente = idcliente;
+		this.fechavencimiento = fechavencimiento;
+		this.idpuntoatencion = idpuntoatencion;
 	}
 
 	/**
 	 * @return El idBebedor
 	 */
-	public long getIdBebedor() 
-	{
-		return idBebedor;
+	public long getIdcdt() {
+		return idcdt;
 	}
-
-	/**
-	 * @param idBebedor - El nuevo idBebedor. Debe existir un bebedor con dicho identificador
-	 */
-	public void setIdBebedor(long idBebedor) 
-	{
-		this.idBebedor = idBebedor;
+	public void setIdcdt(long idcdt) {
+		this.idcdt = idcdt;
 	}
-
-	/**
-	 * @return El idBebida
-	 */
-	public long getIdBebida() 
-	{
-		return idBebida;
+	public long getIdcliente() {
+		return idcliente;
 	}
-
-	/**
-	 * @param idBebida - El nuevo identificador de bebida. Debe existir una bebida con dicho identificador
-	 */
-	public void setIdBebida(long idBebida) 
-	{
-		this.idBebida = idBebida;
+	public void setIdcliente(long idcliente) {
+		this.idcliente = idcliente;
 	}
-	
-	/** 
-	 * @return Una cadena con la información básica
-	 */
+	public Date getFechavencimiento() {
+		return fechavencimiento;
+	}
+	public void setFechavencimiento(Date fechavencimiento) {
+		this.fechavencimiento = fechavencimiento;
+	}
+	public long getIdpuntoatencion() {
+		return idpuntoatencion;
+	}
+	public void setIdpuntoatencion(long idpuntoatencion) {
+		this.idpuntoatencion = idpuntoatencion;
+	}
 	@Override
-	public String toString() 
-	{
-		return "Gustan [idBebedor=" + idBebedor + ", idBebida=" + idBebida + "]";
+	public String toString() {
+		return "Cdt [idcdt=" + idcdt + ", idcliente=" + idcliente + ", fechavencimiento=" + fechavencimiento
+				+ ", idpuntoatencion=" + idpuntoatencion + "]";
 	}
 	
 }

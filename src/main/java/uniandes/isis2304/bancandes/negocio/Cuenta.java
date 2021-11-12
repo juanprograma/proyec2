@@ -15,6 +15,8 @@
 
 package uniandes.isis2304.bancandes.negocio;
 
+import java.util.Date;
+
 /**
  * Clase para modelar la relación SIRVEN del negocio de los Parranderos:
  * Cada objeto de esta clase representa el hecho que un bar sirve una bebida y viceversa.
@@ -25,106 +27,103 @@ package uniandes.isis2304.bancandes.negocio;
  * 
  * @author Germán Bravo
  */
-public class Cuenta implements VOSirven
+public class Cuenta implements VOCuenta
 {
 	/* ****************************************************************
 	 * 			Atributos
 	 *****************************************************************/
-	/**
-	 * El identificador del bar que sirve la bebida
-	 */
-	private long idBar;
+	private long idcuenta;
 	
-	/**
-	 * El identificador de la bebida que es servida en el bar
-	 */
-	private long idBebida;
-	
-	/**
-	 * El horario en que sirve la bebida en el bar (DIURNO, NOCTURNO, TODOS)
-	 */
-	private String horario;
 
+	private String activa;
+	private Date fechacreacion;
+	private long saldo;
+	private  Date fechaultimomov;
+	private String tipo;
+	private long idcliente;
+	private long cuentasoficina;
 	/* ****************************************************************
 	 * 			Métodos
 	 *****************************************************************/
-	/**
-	 * Constructor por defecto
-	 */
-	public Cuenta () 
-	{
-		this.idBar = 0;
-		this.idBebida = 0;
-		this.horario = "";
+	public Cuenta() {
+		
+		this.idcuenta = 0;
+		this.activa = "";
+		this.fechacreacion = new Date(0);
+		this.saldo = 0;
+		this.fechaultimomov = new Date (0);
+		this.tipo = "";
+		this.idcliente = 0;
+		this.cuentasoficina = 0;
+	}
+	public Cuenta(long idcuenta, String activa, Date fechacreacion, long saldo, Date fechaultimomov, String tipo,
+			long idcliente, long cuentasoficina) {
+		
+		this.idcuenta = idcuenta;
+		this.activa = activa;
+		this.fechacreacion = fechacreacion;
+		this.saldo = saldo;
+		this.fechaultimomov = fechaultimomov;
+		this.tipo = tipo;
+		this.idcliente = idcliente;
+		this.cuentasoficina = cuentasoficina;
+	}
+	
+
+
+	public long getIdcuenta() {
+		return idcuenta;
+	}
+	public void setIdcuenta(long idcuenta) {
+		this.idcuenta = idcuenta;
+	}
+	public String getActiva() {
+		return activa;
+	}
+	public void setActiva(String activa) {
+		this.activa = activa;
+	}
+	public Date getFechacreacion() {
+		return fechacreacion;
+	}
+	public void setFechacreacion(Date fechacreacion) {
+		this.fechacreacion = fechacreacion;
+	}
+	public long getSaldo() {
+		return saldo;
+	}
+	public void setSaldo(long saldo) {
+		this.saldo = saldo;
+	}
+	public Date getFechaultimomov() {
+		return fechaultimomov;
+	}
+	public void setFechaultimomov(Date fechaultimomov) {
+		this.fechaultimomov = fechaultimomov;
+	}
+	public String getTipo() {
+		return tipo;
+	}
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+	public long getIdcliente() {
+		return idcliente;
+	}
+	public void setIdcliente(long idcliente) {
+		this.idcliente = idcliente;
+	}
+	public long getCuentasoficina() {
+		return cuentasoficina;
+	}
+	public void setCuentasoficina(long cuentasoficina) {
+		this.cuentasoficina = cuentasoficina;
 	}
 
-	/**
-	 * Constructor con valores
-	 * @param idBar - El identificador del bar. Debe exixtir un bar con dicho identificador
-	 * @param idBebida - El identificador de la bebida. Debe existir una bebida con dicho identificador
-	 * @param horario - El horario en el que el bar sirve la bebida (DIURNO, NOCTURNO, TODOS)
-	 */
-	public Cuenta (long idBar, long idBebida, String horario) 
-	{
-		this.idBar = idBar;
-		this.idBebida = idBebida;
-		this.horario = horario;
-	}
-
-	/**
-	 * @return El idBar
-	 */
-	public long getIdBar() 
-	{
-		return idBar;
-	}
-
-	/**
-	 * @param idBar - El nuevo identificador de bar. Debe existir un bar con dicho identificador
-	 */
-	public void setIdBar(long idBar) 
-	{
-		this.idBar = idBar;
-	}
-
-	/**
-	 * @return El idBebida
-	 */
-	public long getIdBebida() 
-	{
-		return idBebida;
-	}
-
-	/**
-	 * @param idBebida - El nuevo identificador de bebida. Debe existir una bebida con dicho identificador
-	 */
-	public void setIdBebida(long idBebida) 
-	{
-		this.idBebida = idBebida;
-	}
-
-	/**
-	 * @return El horario en que el bar sirve la bebida
-	 */
-	public String getHorario() 
-	{
-		return horario;
-	}
-
-	/**
-	 * @param horario - El nuevo horario en que el bar sirve la bebida (DIURNO, NOCTURNO, TODOS)
-	 */
-	public void setHorario(String horario) 
-	{
-		this.horario = horario;
-	}
-
-	/** 
-	 * @return Una cadena con la información básica
-	 */
 	@Override
-	public String toString() 
-	{
-		return "Sirven [idBar=" + idBar + ", idBebida=" + idBebida + ", horario=" + horario + "]";
+	public String toString() {
+		return "Cuenta [idcuenta=" + idcuenta + ", activa=" + activa + ", fechacreacion=" + fechacreacion + ", saldo="
+				+ saldo + ", fechaultimomov=" + fechaultimomov + ", tipo=" + tipo + ", idcliente=" + idcliente
+				+ ", cuentasoficina=" + cuentasoficina + "]";
 	}
 }

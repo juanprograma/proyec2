@@ -20,94 +20,90 @@ package uniandes.isis2304.bancandes.negocio;
  *
  * @author Germán Bravo
  */
-public class Oficina implements VOTipoBebida
+public class Oficina implements VOOficina
 {
 	/* ****************************************************************
 	 * 			Atributos
 	 *****************************************************************/
-	/**
-	 * El identificador del tipo de bebida
-	 */
-	private long id;
+	private long idoficina;
+	
+	
 
-	/**
-	 * El nombre del tipo de bebida
-	 */
+
 	private String nombre;
-
+	private String direccion;
+	private long puntoatencion;
+	private long gerente;
 	/* ****************************************************************
 	 * 			Métodos
 	 *****************************************************************/
-	/**
-	 * Constructor por defecto
-	 */
-	public Oficina() 
-	{
-		this.id = 0;
-		this.nombre = "Default";
+	
+	public Oficina() {
+		
+		this.idoficina = 0;
+		this.nombre = "";
+		this.direccion = "";
+		this.puntoatencion = 0;
+		this.gerente = 0;
 	}
 
-	/**
-	 * Constructor con valores
-	 * @param id - El identificador del tipo de bebida
-	 * @param nombre - El nombre del tipo de bebida
-	 */
-	public Oficina(long id, String nombre) 
-	{
-		this.id = id;
+
+	public Oficina(long idoficina, String nombre, String direccion, long puntoatencion, long gerente) {
+		
+		this.idoficina = idoficina;
 		this.nombre = nombre;
-	}
-
-	/**
-	 * @return El id del tipo de bebida
-	 */
-	public long getId() 
-	{
-		return id;
-	}
-
-	/**
-	 * @param id - El nuevo id del tipo de bebida
-	 */
-	public void setId(long id) 
-	{
-		this.id = id;
-	}
-
-	/**
-	 * @return El nombre del tipo de bebida
-	 */
-	public String getNombre() 
-	{
-		return nombre;
-	}
-
-	/**
-	 * @param nombre - El nuevo nombre del tipo de bebida
-	 */
-	public void setNombre(String nombre) 
-	{
-		this.nombre = nombre;
+		this.direccion = direccion;
+		this.puntoatencion = puntoatencion;
+		this.gerente = gerente;
 	}
 
 
-	/**
-	 * @return Una cadena de caracteres con la información del tipo de bebida
-	 */
+	public long getIdoficina() {
+		return idoficina;
+	}
+
+
+	public void setIdoficina(long idoficina) {
+		this.idoficina = idoficina;
+	}
+
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+
+	public long getPuntoatencion() {
+		return puntoatencion;
+	}
+
+
+	public void setPuntoatencion(long puntoatencion) {
+		this.puntoatencion = puntoatencion;
+	}
+
+
+	public long getGerente() {
+		return gerente;
+	}
+
+
+	public void setGerente(long gerente) {
+		this.gerente = gerente;
+	}
+
+
 	@Override
-	public String toString() 
-	{
-		return "TipoBebida [id=" + id + ", nombre=" + nombre + "]";
+	public String toString() {
+		return "Oficina [idoficina=" + idoficina + ", nombre=" + nombre + ", direccion=" + direccion
+				+ ", puntoatencion=" + puntoatencion + ", gerente=" + gerente + "]";
 	}
 
-	/**
-	 * @param tipo - El TipoBebida a comparar
-	 * @return True si tienen el mismo nombre
-	 */
-	public boolean equals(Object tipo) 
-	{
-		Oficina tb = (Oficina) tipo;
-		return id == tb.id && nombre.equalsIgnoreCase (tb.nombre);
-	}
+	
 
 }

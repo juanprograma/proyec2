@@ -20,7 +20,7 @@ package uniandes.isis2304.bancandes.negocio;
  *
  * @author Germán Bravo
  */
-public class Accion implements VOBar
+public class Accion implements VOAccion
 {
 	/* ****************************************************************
 	 * 			Atributos
@@ -28,27 +28,15 @@ public class Accion implements VOBar
 	/**
 	 * El identificador ÚNICO de los bares
 	 */
-	private long id;
+	private long idaccion;
 	
-	/**
-	 * El nombre del bar
-	 */
-	private String nombre;
+	
+	
+	
+	
 
-	/**
-	 * La ciudad donde se encuentra el bar
-	 */
-	private String ciudad;
-	
-	/**
-	 * El presupuesto del bar (ALTO, MEDIO, BAJO)
-	 */
-	private String presupuesto;
-	
-	/**
-	 * El número de sedes del bar en la ciudad
-	 */
-	private int cantSedes;
+	private long cantidad;
+
 
 	/* ****************************************************************
 	 * 			Métodos 
@@ -56,13 +44,10 @@ public class Accion implements VOBar
     /**
      * Constructor por defecto
      */
-	public Accion() 
-    {
-    	this.id = 0;
-		this.nombre = "";
-		this.ciudad = "";
-		this.presupuesto = "";
-		this.cantSedes = 0;
+public Accion() {
+		
+		this.idaccion = 0;
+		this.cantidad = 0;
 	}
 
 	/**
@@ -73,103 +58,30 @@ public class Accion implements VOBar
 	 * @param presupuesto - El presupuesto del bar (ALTO, MEDIO, BAJO)
 	 * @param cantSedes - Las sedes del bar (Mayor que 0)
 	 */
-    public Accion(long id, String nombre, String ciudad, String presupuesto, int cantSedes) 
-    {
-    	this.id = id;
-		this.nombre = nombre;
-		this.ciudad = ciudad;
-		this.presupuesto = presupuesto;
-		this.cantSedes = cantSedes;
+	public Accion(long idaccion, long cantidad) {
+		
+		this.idaccion = idaccion;
+		this.cantidad = cantidad;
 	}
 
-    /**
-	 * @return El id del bar
-	 */
-	public long getId() 
-	{
-		return id;
+	public long getIdaccion() {
+		return idaccion;
 	}
-	
-	/**
-	 * @param id - El nuevo id del bar
-	 */
-	public void setId(long id) 
-	{
-		this.id = id;
+
+	public void setIdaccion(long idaccion) {
+		this.idaccion = idaccion;
 	}
-	
-	/**
-	 * @return el nombre del bar
-	 */
-	public String getNombre() 
-	{
-		return nombre;
+
+	public long getCantidad() {
+		return cantidad;
 	}
-	
-	/**
-	 * @param nombre El nuevo nombre del bar
-	 */
-	public void setNombre(String nombre) 
-	{
-		this.nombre = nombre;
+
+	public void setCantidad(long cantidad) {
+		this.cantidad = cantidad;
 	}
-	
-	/**
-	 * @return la ciudad del bar
-	 */
-	public String getCiudad() 
-	{
-		return ciudad;
-	}
-	
-	/**
-	 * @param ciudad - La nueva ciudad del bar
-	 */
-	public void setCiudad(String ciudad) 
-	{
-		this.ciudad = ciudad;
-	}
-	
-	/**
-	 * @return El presupuesto del bar
-	 */
-	public String getPresupuesto() 
-	{
-		return presupuesto;
-	}
-	
-	/**
-	 * @param presupuesto - El nuevo presupuesto del bar (ALTO, MEDIO, BAJOO)
-	 */
-	public void setPresupuesto(String presupuesto) 
-	{
-		this.presupuesto = presupuesto;
-	}
-	
-	/**
-	 * @return la cantSedes del bar
-	 */
-	public int getCantSedes() 
-	{
-		return cantSedes;
-	}
-	
-	/**
-	 * @param cantSedes - la nueva cantidad de sedes del bar
-	 */
-	public void setCantSedes(int cantSedes) 
-	{
-		this.cantSedes = cantSedes;
-	}
-	
 	@Override
-	/**
-	 * @return Una cadena de caracteres con todos los atributos del bar
-	 */
-	public String toString() 
-	{
-		return "Bar [id=" + id + ", nombre=" + nombre + ", ciudad=" + ciudad + ", presupuesto=" + presupuesto
-				+ ", cantSedes=" + cantSedes + "]";
+	public String toString() {
+		return "Accion [idaccion=" + idaccion + ", cantidad=" + cantidad + "]";
 	}
 	
 

@@ -20,131 +20,61 @@ package uniandes.isis2304.bancandes.negocio;
  *
  * @author Germán Bravo
  */
-public class Cajeroatm implements VOBebida
+public class Cajeroatm implements VOCajeroatm
 {
 	/* ****************************************************************
 	 * 			Atributos
 	 *****************************************************************/
-	/**
-	 * El identificador ÚNICO de la bebida
-	 */
-	private long id;
 	
-	/**
-	 * El nombre de la bebida
-	 */
-	private String nombre;
+	private long idcajeroatm;
 	
-	/**
-	 * El identificador del tipo de bebida de la bebida. Debe existir en la tabla de tipoBebida
-	 */
-	private long idTipoBebida;
+
 	
-	/**
-	 * El grado de alcohol de la bebida (Mayor que 0)
-	 */
-	private int gradoAlcohol;
+
+
+	private long idpuntoatencion;
+	
+	
 
 	/* ****************************************************************
 	 * 			Métodos
 	 *****************************************************************/
-	/**
-	 * Constructor por defecto
-	 */
-	public Cajeroatm() 
-	{
-		this.id = 0;
-		this.nombre = "";
-		this.idTipoBebida = 0;
-		this.gradoAlcohol = 0;
+	
+	public Cajeroatm() {
+		
+		this.idcajeroatm = 0;
+		this.idpuntoatencion = 0;
 	}
 
-	/**
-	 * Constructor con valores
-	 * @param id - El id de la bebida
-	 * @param nombre - El nombre de la bebida
-	 * @param tipo - El identificador del tipo de bebida
-	 * @param gradoAlcohol - El graddo de alcohol de la bebida (Mayor que 0)
-	 */
-	public Cajeroatm(long id, String nombre, long tipo, int gradoAlcohol) 
-	{
-		this.id = id;
-		this.nombre = nombre;
-		this.idTipoBebida = tipo;
-		this.gradoAlcohol = gradoAlcohol;
+	
+	public Cajeroatm(long idcajeroatm, long idpuntoatencion) {
+		
+		this.idcajeroatm = idcajeroatm;
+		this.idpuntoatencion = idpuntoatencion;
 	}
 
-	/**
-	 * @return El id de la bebida
-	 */
-	public long getId() 
-	{
-		return id;
+
+	public long getIdcajeroatm() {
+		return idcajeroatm;
 	}
 
-	/**
-	 * @param id - El nuevo id de la bebida 
-	 */
-	public void setId(long id) 
-	{
-		this.id = id;
+	public void setIdcajeroatm(long idcajeroatm) {
+		this.idcajeroatm = idcajeroatm;
 	}
 
-	/**
-	 * @return El nombre de la bebida
-	 */
-	public String getNombre() 
-	{
-		return nombre;
+	public long getIdpuntoatencion() {
+		return idpuntoatencion;
 	}
 
-	/**
-	 * @param nombre - El nuevo nombre de la bebida
-	 */
-	public void setNombre(String nombre) 
-	{
-		this.nombre = nombre;
+	public void setIdpuntoatencion(long idpuntoatencion) {
+		this.idpuntoatencion = idpuntoatencion;
 	}
 
-	/**
-	 * @return El id del Tipo de Bebida
-	 */
-	public long getIdTipoBebida() 
-	{
-		return idTipoBebida;
-	}
+	
 
-	/**
-	 * @param tipoBebida El nuevo identificador de tipo de bebida
-	 */
-	public void setIdTipoBebida(long tipoBebida) 
-	{
-		this.idTipoBebida = tipoBebida;
-	}
-
-	/**
-	 * @return El gradoAlcohol de la bebida
-	 */
-	public int getGradoAlcohol() 
-	{
-		return gradoAlcohol;
-	}
-
-	/**
-	 * @param gradoAlcohol El nuevo grado de alcohol de la bebida
-	 */
-	public void setGradoAlcohol(int gradoAlcohol) 
-	{
-		this.gradoAlcohol = gradoAlcohol;
-	}
-
-	/**
-	 * @return Una cadena con la información básica de la bebida
-	 */
 	@Override
-	public String toString() 
-	{
-		return "Bebida [id=" + id + ", nombre=" + nombre + ", idTipoBebida=" + idTipoBebida + ", gradoAlcohol=" + gradoAlcohol + "]";
+	public String toString() {
+		return "Cajeroatm [idcajeroatm=" + idcajeroatm + ", idpuntoatencion=" + idpuntoatencion + "]";
 	}
 
 }
