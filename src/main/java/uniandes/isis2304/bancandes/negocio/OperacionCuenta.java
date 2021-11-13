@@ -1,6 +1,6 @@
 package uniandes.isis2304.bancandes.negocio;
 
-import java.sql.Date;
+
 
 public class OperacionCuenta implements VOOperacionCuenta {
 
@@ -15,21 +15,21 @@ public class OperacionCuenta implements VOOperacionCuenta {
 	
 	private long idCuenta;
 	
-	public Date cuentaorigen;
+	public long cuentaorigen;
 	
 
-	public Date cuentadestino;
+	public long cuentadestino;
 	
 	public OperacionCuenta() {
 		this.idOperacion = 0;
 		this.tipo="";
 		this.idTransaccion=0;
 		this.idCuenta=0;
-		this.cuentaorigen= new Date(0);
-		this.cuentadestino= new Date(0);
+		this.cuentaorigen= 0;
+		this.cuentadestino= 0;
 	}
-	public OperacionCuenta(long idOperacion, String tipo, long idTransaccion, long idCuenta, Date cuentaorigen,
-			Date cuentadestino) {
+	public OperacionCuenta(long idOperacion, String tipo, long idTransaccion, long idCuenta, long cuentaorigen,
+			long cuentadestino) {
 		super();
 		this.idOperacion = idOperacion;
 		this.tipo = tipo;
@@ -74,19 +74,19 @@ public class OperacionCuenta implements VOOperacionCuenta {
 	public void setIdCuenta(long idCuenta) {
 		this.idCuenta = idCuenta;
 		
-	}public Date getCuentaorigen() {
+	}public long getCuentaorigen() {
 		return cuentaorigen;
 	}
 
-	public void setCuentaorigen(Date cuentaorigen) {
+	public void setCuentaorigen(long cuentaorigen) {
 		this.cuentaorigen = cuentaorigen;
 	}
 
-	public Date getCuentadestino() {
+	public long getCuentadestino() {
 		return cuentadestino;
 	}
 
-	public void setCuentadestino(Date cuentadestino) {
+	public void setCuentadestino(long cuentadestino) {
 		this.cuentadestino = cuentadestino;
 	}
 	@Override

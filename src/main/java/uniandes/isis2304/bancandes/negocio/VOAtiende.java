@@ -15,8 +15,6 @@
 
 package uniandes.isis2304.bancandes.negocio;
 
-import java.util.List;
-
 /**
  * Interfaz para los métodos get de BEBEDOR.
  * Sirve para proteger la información del negocio de posibles manipulaciones desde la interfaz 
