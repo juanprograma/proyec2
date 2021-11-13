@@ -5,5 +5,6 @@ public  long getIdoficina ();
 public String getDireccion ();
 public long getPuntoatencion ();
 public  long  getGerente ();
-
+@Override
+public String toString();
 }

@@ -5,6 +5,7 @@ public interface VOOperacionacciones {
 	public String getTipo ();
 	public long getIdtransaccion ();
 	public long getIdclienteaccion();
-	
+	@Override
+	public String toString();
 
 }

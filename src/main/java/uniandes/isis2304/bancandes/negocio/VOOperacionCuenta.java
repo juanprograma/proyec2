@@ -9,5 +9,6 @@ public interface VOOperacionCuenta {
 	public long getIdTransaccion();
 	
 	public long getIdCuenta();
-
+	@Override
+	public String toString();
 }

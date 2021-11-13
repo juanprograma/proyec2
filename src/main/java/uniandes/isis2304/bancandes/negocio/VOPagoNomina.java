@@ -10,4 +10,6 @@ public interface VOPagoNomina {
 	public int getValorPagar();
 	
 	public String getFrecuencia();
+	@Override
+	public String toString();
 }

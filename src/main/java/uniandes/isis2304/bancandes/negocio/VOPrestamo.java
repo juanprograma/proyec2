@@ -23,5 +23,7 @@ public interface VOPrestamo {
 	public long getIdCliente();
 	
 	public long getCuentasOficina();
+	@Override
+	public String toString();
 	
 }

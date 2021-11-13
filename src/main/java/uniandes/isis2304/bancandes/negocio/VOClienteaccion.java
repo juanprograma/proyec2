@@ -6,6 +6,7 @@ public interface VOClienteaccion {
 	public long getIdaccion () ;
 	public long getIdcliente () ;
 	public long getCantidad () ;
-	
+	@Override
+	public String toString();
 
 }

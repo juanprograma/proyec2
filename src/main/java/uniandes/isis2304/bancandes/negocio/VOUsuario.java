@@ -27,5 +27,7 @@ public interface VOUsuario {
 	public String getLogin();
 	
 	public String getPalabraClave();
+	@Override
+	public String toString();
 
 }

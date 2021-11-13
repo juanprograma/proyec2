@@ -9,5 +9,6 @@ public interface VOPuntoAtencion {
 	public String getLocalizacion();
 	
 	public long pertenece();
-	
+	@Override
+	public String toString();
 }

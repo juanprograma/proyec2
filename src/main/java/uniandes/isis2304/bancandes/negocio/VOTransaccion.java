@@ -13,5 +13,7 @@ public interface VOTransaccion {
 	public int getValor();
 	
 	public long getOperacionesPunto(); 
+	@Override
+	public String toString();
 
 }

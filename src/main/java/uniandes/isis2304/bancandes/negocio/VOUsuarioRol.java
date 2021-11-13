@@ -5,5 +5,6 @@ public interface VOUsuarioRol {
 	public long getIdCliente();
 	
 	public String getRol();
-	
+	@Override
+	public String toString();
 }

@@ -9,5 +9,7 @@ public interface VOOperacionPrestamo {
 	public long getIdTransaccion();
 	
 	public long getIdPrestamo();
+	@Override
+	public String toString();
 
 }

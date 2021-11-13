@@ -11,5 +11,6 @@ public Date getFechaultimomov();
 public String getTipo ();
 public long getIdcliente();
 public long getCuentasoficina ();
-
+@Override
+public String toString();
 }

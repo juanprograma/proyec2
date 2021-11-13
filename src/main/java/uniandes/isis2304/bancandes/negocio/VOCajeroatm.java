@@ -28,7 +28,8 @@ public interface VOCajeroatm
 	 */
 	public long getIdcajeroatm();
 	public long getIdpuntoatencion ();
-	
+	@Override
+	public String toString();
 	
 
 }

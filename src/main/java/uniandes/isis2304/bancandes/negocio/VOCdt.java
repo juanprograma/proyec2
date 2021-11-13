@@ -8,4 +8,6 @@ public interface VOCdt {
 	public long getIdcliente();
 	public Date getFechavencimiento();
 	public long getTasarendimiento();
+	@Override
+	public String toString();
 }

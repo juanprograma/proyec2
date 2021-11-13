@@ -9,4 +9,6 @@ public interface VOOperacionDepositosInversion {
 	public long getIdTransaccion();
 	
 	public long getIdCuenta();
+	@Override
+	public String toString();
 }
