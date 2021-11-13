@@ -51,12 +51,12 @@ public class Atiende implements VOAtiende
 	
 
 	public Atiende() {
-		super();
+		
 		this.idcajero = 0;
 		this.idpuntoatencion = 0;
 	}
 	public Atiende(long idcajero, long idpuntoatencion) {
-		super();
+		
 		this.idcajero = idcajero;
 		this.idpuntoatencion = idpuntoatencion;
 	}

@@ -29,27 +29,10 @@ public interface VOAccion
      /**
 	 * @return El id del bar
 	 */
-	public long getId();
+	public long getIdaccion();
+	public long getCantidad();
 	
-	/**
-	 * @return el nombre del bar
-	 */
-	public String getNombre();
 	
-	/**
-	 * @return la ciudad del bar
-	 */
-	public String getCiudad();
-	
-	/**
-	 * @return El presupuesto del bar
-	 */
-	public String getPresupuesto();
-	
-	/**
-	 * @return la cantSedes del bar
-	 */
-	public int getCantSedes();
 
 	@Override
 	/**

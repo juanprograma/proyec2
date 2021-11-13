@@ -31,44 +31,17 @@ public interface VOAtiende
 	/**
 	 * @return El id del bebedor
 	 */
-	public long getId();
+	public long getIdcajero();
 
 	/**
 	 * @return El nombre del bebedor
 	 */
-	public String getNombre();
+	public long getIdpuntoatencion();
 
-	/**
-	 * @return La ciudad del bebedor
-	 */
-	public String getCiudad();
-
-	/**
-	 * @return El presupuesto del bebedor
-	 */
-	public String getPresupuesto();
-
-	/**
-	 * @return La lista de visitasRealizadas por el bebedor 
-	 */
-	public List<Object []> getVisitasRealizadas();
-
-	/**
-	 * @return Las bebidasQueLeGustan al bebedor
-	 */
-	public List<Object[]> getBebidasQueLeGustan();
-
-	/**
-	 * @return Una cadena de caracteres con la información básica del bebedor
-	 */
+	
 	@Override
 	public String toString();
 
-	/**
-	 * @return Una cadena de caracteres con la información COMPLEtA del bebedor.
-	 * Además de la información básica, contiene las visitas realizadas (una por línea) y 
-	 * las bebidas que le gustan al bebedor (una por línea)
-	 */
-	public String toStringCompleto ();
+	
 
 }

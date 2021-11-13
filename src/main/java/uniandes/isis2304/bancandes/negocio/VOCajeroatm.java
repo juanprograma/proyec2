@@ -26,27 +26,9 @@ public interface VOCajeroatm
 	/**
 	 * @return El id de la bebida
 	 */
-	public long getId();
-
-	/**
-	 * @return El nombre de la bebida
-	 */
-	public String getNombre();
-
-	/**
-	 * @return El id del Tipo de Bebida
-	 */
-	public long getIdTipoBebida();
-
-	/**
-	 * @return El gradoAlcohol de la bebida
-	 */
-	public int getGradoAlcohol();
-
-	/**
-	 * @return Una cadena con la información básica de la bebida
-	 */
-	@Override
-	public String toString();
+	public long getIdcajeroatm();
+	public long getIdpuntoatencion ();
+	
+	
 
 }
