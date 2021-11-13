@@ -38,7 +38,7 @@ public class Cdt implements VOCdt
 
 	private long idcliente;
 	private Date fechavencimiento;
-	private long idpuntoatencion;
+	private long idtasarendimiento;
 	
 	/* ****************************************************************
 	 * 			Métodos
@@ -48,19 +48,19 @@ public class Cdt implements VOCdt
 		this.idcdt = 0;
 		this.idcliente = 0;
 		this.fechavencimiento = new Date(0);
-		this.idpuntoatencion = 0;
+		this.idtasarendimiento = 0;
 	}
 	/**
 	 * Constructor con valores
 	 * @param idBebedor - El identificador del bebedor. Debe exixtir un bebedor con dicho identificador
 	 * @param idBebida - El identificador de la bebida. Debe existir una bebida con dicho identificador
 	 */
-	public Cdt(long idcdt, long idcliente, Date fechavencimiento, long idpuntoatencion) {
+	public Cdt(long idcdt, long idcliente, Date fechavencimiento, long idtasarendimiento) {
 		super();
 		this.idcdt = idcdt;
 		this.idcliente = idcliente;
 		this.fechavencimiento = fechavencimiento;
-		this.idpuntoatencion = idpuntoatencion;
+		this.idtasarendimiento= idtasarendimiento;
 	}
 
 	/**
@@ -84,16 +84,16 @@ public class Cdt implements VOCdt
 	public void setFechavencimiento(Date fechavencimiento) {
 		this.fechavencimiento = fechavencimiento;
 	}
-	public long getIdpuntoatencion() {
-		return idpuntoatencion;
+	public long getTasarendimiento() {
+		return idtasarendimiento;
 	}
-	public void setIdpuntoatencion(long idpuntoatencion) {
-		this.idpuntoatencion = idpuntoatencion;
+	public void setTasarendimiento (long idtasarendimiento) {
+		this.idtasarendimiento= idtasarendimiento;
 	}
 	@Override
 	public String toString() {
 		return "Cdt [idcdt=" + idcdt + ", idcliente=" + idcliente + ", fechavencimiento=" + fechavencimiento
-				+ ", idpuntoatencion=" + idpuntoatencion + "]";
+				+ ", idtasarendimiento=" + idtasarendimiento + "]";
 	}
 	
 }
