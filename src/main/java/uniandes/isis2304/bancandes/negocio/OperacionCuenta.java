@@ -1,8 +1,13 @@
 package uniandes.isis2304.bancandes.negocio;
 
+import java.sql.Date;
+
 public class OperacionCuenta implements VOOperacionCuenta {
 
 	private long idOperacion;
+	
+	
+
 	
 	private String tipo;
 	
@@ -10,18 +15,28 @@ public class OperacionCuenta implements VOOperacionCuenta {
 	
 	private long idCuenta;
 	
+	public Date cuentaorigen;
+	
+
+	public Date cuentadestino;
+	
 	public OperacionCuenta() {
 		this.idOperacion = 0;
 		this.tipo="";
 		this.idTransaccion=0;
 		this.idCuenta=0;
+		this.cuentaorigen= new Date(0);
+		this.cuentadestino= new Date(0);
 	}
-	
-	public OperacionCuenta(long idOperacion, String tipo, long idTransaccion, long idCuenta) {
+	public OperacionCuenta(long idOperacion, String tipo, long idTransaccion, long idCuenta, Date cuentaorigen,
+			Date cuentadestino) {
+		super();
 		this.idOperacion = idOperacion;
-		this.tipo=tipo;
-		this.idTransaccion=idTransaccion;
-		this.idCuenta=idCuenta;
+		this.tipo = tipo;
+		this.idTransaccion = idTransaccion;
+		this.idCuenta = idCuenta;
+		this.cuentaorigen = cuentaorigen;
+		this.cuentadestino = cuentadestino;
 	}
 	
 	@Override
@@ -58,6 +73,26 @@ public class OperacionCuenta implements VOOperacionCuenta {
 	
 	public void setIdCuenta(long idCuenta) {
 		this.idCuenta = idCuenta;
+		
+	}public Date getCuentaorigen() {
+		return cuentaorigen;
 	}
 
+	public void setCuentaorigen(Date cuentaorigen) {
+		this.cuentaorigen = cuentaorigen;
+	}
+
+	public Date getCuentadestino() {
+		return cuentadestino;
+	}
+
+	public void setCuentadestino(Date cuentadestino) {
+		this.cuentadestino = cuentadestino;
+	}
+	@Override
+	public String toString() {
+		return "OperacionCuenta [idOperacion=" + idOperacion + ", tipo=" + tipo + ", idTransaccion=" + idTransaccion
+				+ ", idCuenta=" + idCuenta + ", cuentaorigen=" + cuentaorigen + ", cuentadestino=" + cuentadestino
+				+ "]";
+	}
 }
