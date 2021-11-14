@@ -23,8 +23,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 
-
-
 public class PersistenciaBancandes {
 	
 	public final static String SQL = "javax.jdo.query.SQL";

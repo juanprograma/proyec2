@@ -1,5 +1,8 @@
 package uniandes.isis2304.bancandes.persistencia;
 
+import javax.jdo.PersistenceManager;
+import javax.jdo.Query;
+
 public class SQLPagoNomina {
   private final static String SQL = PersistenciaBancandes.SQL;
 	
@@ -17,4 +20,4 @@ public class SQLPagoNomina {
 	}
 }
 
-}
+
