@@ -243,7 +243,7 @@ public class InterfazBancandesApp extends JFrame implements ActionListener
      * Adiciona un tipo de bebida con la información dada por el usuario
      * Se crea una nueva tupla de tipoBebida en la base de datos, si un tipo de bebida con ese nombre no existía
      */
-    public void adicionarTipoBebida( )
+    public void registrarCuenta( )
     {
     	try 
     	{
@@ -273,6 +273,44 @@ public class InterfazBancandesApp extends JFrame implements ActionListener
 		}
     }
 
+    
+    public void registrarOperacionprestamo( )
+    {
+    	try 
+    	{
+    		String nombreTipo = JOptionPane.showInputDialog (this, "Nombre del tipo de bedida?", "Adicionar tipo de bebida", JOptionPane.QUESTION_MESSAGE);
+    		if (nombreTipo != null)
+    		{
+        		VOTipoBebida tb = parranderos.adicionarTipoBebida (nombreTipo);
+        		if (tb == null)
+        		{
+        			throw new Exception ("No se pudo crear un tipo de bebida con nombre: " + nombreTipo);
+        		}
+        		String resultado = "En adicionarTipoBebida\n\n";
+        		resultado += "Tipo de bebida adicionado exitosamente: " + tb;
+    			resultado += "\n Operación terminada";
+    			panelDatos.actualizarInterfaz(resultado);
+    		}
+    		else
+    		{
+    			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+    		}
+		} 
+    	catch (Exception e) 
+    	{
+//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+    }
+
+    
+    
+    
+    
+    
+    
+    
     /**
      * Consulta en la base de datos los tipos de bebida existentes y los muestra en el panel de datos de la aplicación
      */
