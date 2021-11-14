@@ -1,15 +1,26 @@
 {
-	"title": "Nombres de las tablas de Parranderos Uniandes para la aplicación A",
-	"unidadPersistencia": "Parranderos",
+	"title": "Nombres de las tablas de Bancandes",
+	"unidadPersistencia": "Bancandes",
 	"tablas":
 	[
-		"Parranderos_sequence",
-		"A_TIPOBEBIDA",
-		"A_BEBIDA",
-		"A_BAR",
-		"A_BEBEDOR",
-		"A_GUSTAN",
-		"A_SIRVEN",
-		"A_VISITAN"
+		"bancandes_sequence",
+		"ACCION",
+		"ATIENDE",
+		"CAJEROATM",
+		"CDT",
+		"CLIENTEACCION",
+		"CUENTA",
+		"OFICINA",
+		"OPERACIONACCIONES",
+		"OPERACIONCDT",
+		"OPERACIONCUENTA",
+		"OPERACIONDEPOSITOSINVERSION",
+		"OPERACIONPRESTAMO",
+		"PAGONOMINA",
+		"PRESTAMO",
+		"PUNTOATENCION",
+		"TRANSACCION",
+		"USUARIO",
+		"USUARIOROL"
 	]
 }

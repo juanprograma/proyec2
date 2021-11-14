@@ -46,7 +46,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 
+import uniandes.isis2304.bancandes.negocio.Bancandes;
 import uniandes.isis2304.bancandes.negocio.Clienteaccion;
+import uniandes.isis2304.bancandes.negocio.VOPagoNomina;
 import uniandes.isis2304.bancandes.negocio.VOTipoBebida;
 
 /**
@@ -86,7 +88,7 @@ public class InterfazBancandesApp extends JFrame implements ActionListener
     /**
      * Asociaci贸n a la clase principal del negocio.
      */
-    private Clienteaccion parranderos;
+    private Bancandes bancandes;
     
 	/* ****************************************************************
 	 * 			Atributos de interfaz
@@ -126,7 +128,7 @@ public class InterfazBancandesApp extends JFrame implements ActionListener
         }
         
         tableConfig = openConfig ("Tablas BD", CONFIG_TABLAS);
-        parranderos = new Clienteaccion (tableConfig);
+        bancandes = new Bancandes(tableConfig);
         
     	String path = guiConfig.get("bannerPath").getAsString();
         panelDatos = new PanelDatos ( );
@@ -237,7 +239,7 @@ public class InterfazBancandesApp extends JFrame implements ActionListener
     }
     
 	/* ****************************************************************
-	 * 			CRUD de TipoBebida
+	 * 			Requerimientos iteracion 2
 	 *****************************************************************/
     /**
      * Adiciona un tipo de bebida con la informaci贸n dada por el usuario
@@ -314,102 +316,47 @@ public class InterfazBancandesApp extends JFrame implements ActionListener
 		}
     }
 
+	/* ****************************************************************
+	 * 			Requerimientos iteracion 3
+	 *****************************************************************/
     
-    
-    
-    
-    
-    
-    
-    /**
-     * Consulta en la base de datos los tipos de bebida existentes y los muestra en el panel de datos de la aplicaci贸n
-     */
-    public void listarTipoBebida( )
-    {
-    	try 
-    	{
-			List <VOTipoBebida> lista = parranderos.darVOTiposBebida();
-
-			String resultado = "En listarTipoBebida";
-			resultado +=  "\n" + listarTiposBebida (lista);
-			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operaci贸n terminada";
-		} 
-    	catch (Exception e) 
-    	{
-//			e.printStackTrace();
-			String resultado = generarMensajeError(e);
-			panelDatos.actualizarInterfaz(resultado);
-		}
-    }
-
-    /**
-     * Borra de la base de datos el tipo de bebida con el identificador dado po el usuario
-     * Cuando dicho tipo de bebida no existe, se indica que se borraron 0 registros de la base de datos
-     */
-    public void eliminarTipoBebidaPorId( )
-    {
-    	try 
-    	{
-    		String idTipoStr = JOptionPane.showInputDialog (this, "Id del tipo de bedida?", "Borrar tipo de bebida por Id", JOptionPane.QUESTION_MESSAGE);
-    		if (idTipoStr != null)
+    public void registrarPagoNomina() {
+    	
+    	try {
+    		String idCuentaPJstr = JOptionPane.showInputDialog(this, "Ingrese el id de la cuenta corporativa", "Asociar un pago de n髆ina", JOptionPane.QUESTION_MESSAGE);
+    		String idCuentaPNstr = JOptionPane.showInputDialog(this, "Ingrese el id de la cuenta a la que se le va asignar", "Asociar un pago de n髆ina", JOptionPane.QUESTION_MESSAGE);
+    		String valorPagarstr = JOptionPane.showInputDialog(this, "Ingrese el valor a pagar", "Asociar un pago de n髆ina", JOptionPane.QUESTION_MESSAGE);
+    		String frecuencia = JOptionPane.showInputDialog(this, "Ingrese la frecuencia del pago", "Asociar un pago de n髆ina", JOptionPane.QUESTION_MESSAGE);
+    		
+    		if(idCuentaPJstr != null && idCuentaPNstr != null && valorPagarstr != null && frecuencia != null)
     		{
-    			long idTipo = Long.valueOf (idTipoStr);
-    			long tbEliminados = parranderos.eliminarTipoBebidaPorId (idTipo);
-
-    			String resultado = "En eliminar TipoBebida\n\n";
-    			resultado += tbEliminados + " Tipos de bebida eliminados\n";
-    			resultado += "\n Operaci贸n terminada";
+    			long idCuentaPJ = Long.parseLong(idCuentaPJstr);
+    			long idCuentaPN = Long.parseLong(idCuentaPNstr);
+    			int valorPagar = Integer.parseInt(valorPagarstr);
+    			
+    			VOPagoNomina pn = bancandes.adicionarPagoNomina(idCuentaPJ, idCuentaPN, valorPagar, frecuencia);
+    			if (pn == null) {
+    				
+    				throw new Exception("No se pudo asociar las cuentas");
+    				
+    			}
+    			String resultado = "En PagoNomina\n\n";
+    			resultado += "Pago de Nomina asociado exitosamente: " + pn;
+    			resultado += "\n Operaci髇 terminada";
     			panelDatos.actualizarInterfaz(resultado);
     		}
-    		else
-    		{
-    			panelDatos.actualizarInterfaz("Operaci贸n cancelada por el usuario");
-    		}
-		} 
-    	catch (Exception e) 
-    	{
-//			e.printStackTrace();
+    		
+    		else {
+    			panelDatos.actualizarInterfaz("Operaci髇 cancelada por el usuario");
+    		} 		
+    	}
+    	catch (Exception e) {
+    		e.printStackTrace();
 			String resultado = generarMensajeError(e);
 			panelDatos.actualizarInterfaz(resultado);
-		}
+    	}
     }
-
-    /**
-     * Busca el tipo de bebida con el nombre indicado por el usuario y lo muestra en el panel de datos
-     */
-    public void buscarTipoBebidaPorNombre( )
-    {
-    	try 
-    	{
-    		String nombreTb = JOptionPane.showInputDialog (this, "Nombre del tipo de bedida?", "Buscar tipo de bebida por nombre", JOptionPane.QUESTION_MESSAGE);
-    		if (nombreTb != null)
-    		{
-    			VOTipoBebida tipoBebida = parranderos.darTipoBebidaPorNombre (nombreTb);
-    			String resultado = "En buscar Tipo Bebida por nombre\n\n";
-    			if (tipoBebida != null)
-    			{
-        			resultado += "El tipo de bebida es: " + tipoBebida;
-    			}
-    			else
-    			{
-        			resultado += "Un tipo de bebida con nombre: " + nombreTb + " NO EXISTE\n";    				
-    			}
-    			resultado += "\n Operaci贸n terminada";
-    			panelDatos.actualizarInterfaz(resultado);
-    		}
-    		else
-    		{
-    			panelDatos.actualizarInterfaz("Operaci贸n cancelada por el usuario");
-    		}
-		} 
-    	catch (Exception e) 
-    	{
-//			e.printStackTrace();
-			String resultado = generarMensajeError(e);
-			panelDatos.actualizarInterfaz(resultado);
-		}
-    }
+  
 
 
 	/* ****************************************************************
@@ -610,9 +557,8 @@ public class InterfazBancandesApp extends JFrame implements ActionListener
 	 */
 	private String generarMensajeError(Exception e) 
 	{
-		String resultado = "************ Error en la ejecuci贸n\n";
+		String resultado = "************ Error en la ejecucion";
 		resultado += e.getLocalizedMessage() + ", " + darDetalleException(e);
-		resultado += "\n\nRevise datanucleus.log y parranderos.log para m谩s detalles";
 		return resultado;
 	}
 
@@ -669,7 +615,7 @@ public class InterfazBancandesApp extends JFrame implements ActionListener
 		String evento = pEvento.getActionCommand( );		
         try 
         {
-			Method req = InterfazBancandesApp.class.getMethod ( evento );			
+			Method req = InterfazBancandesApp.class.getMethod( evento );			
 			req.invoke ( this );
 		} 
         catch (Exception e) 

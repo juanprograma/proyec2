@@ -1,6 +1,7 @@
 package uniandes.isis2304.bancandes.negocio;
 
 import uniandes.isis2304.bancandes.persistencia.PersistenciaBancandes;
+
 import org.apache.log4j.Logger;
 
 import com.google.gson.JsonObject;
@@ -51,5 +52,14 @@ public class Bancandes {
 	 {
 	  pb.cerrarUnidadPersistencia ();
 	 }
+	 
+	 public PagoNomina adicionarPagoNomina(long idCuentaPJ, long idCuentaPN, int valorPagar, String frecuencia) {
+		 
+		 	
+	        PagoNomina resp = pb.adicionarPagoNomina(idCuentaPJ, idCuentaPN, valorPagar, frecuencia);
+	        return resp;
+	 }
+	 
+	 
 
 }
