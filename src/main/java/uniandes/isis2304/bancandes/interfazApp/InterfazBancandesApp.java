@@ -243,23 +243,33 @@ public class InterfazBancandesApp extends JFrame implements ActionListener
      * Adiciona un tipo de bebida con la información dada por el usuario
      * Se crea una nueva tupla de tipoBebida en la base de datos, si un tipo de bebida con ese nombre no existía
      */
-    public void registrarCuenta( )
+    public void registrarOperacioncuenta( )
     {
     	try 
     	{
-    		String nombreTipo = JOptionPane.showInputDialog (this, "Nombre del tipo de bedida?", "Adicionar tipo de bebida", JOptionPane.QUESTION_MESSAGE);
-    		if (nombreTipo != null)
+    		String tipoOperacion = JOptionPane.showInputDialog (this, "ingrese tipo transacion?", "tipo", JOptionPane.QUESTION_MESSAGE);
+    		String  idTransaccion  = JOptionPane.showInputDialog (this, "ingrese Id transacion?", "id transaccion", JOptionPane.QUESTION_MESSAGE);
+    		 String cuentaOrigen = JOptionPane.showInputDialog (this, "ingrese cuenta de origen?", "cuenta origen", JOptionPane.QUESTION_MESSAGE);
+    		 String cuentaDestino = JOptionPane.showInputDialog (this, "ingrese cuenta destino?", "cuenta destino", JOptionPane.QUESTION_MESSAGE);
+    		 String idCuenta = JOptionPane.showInputDialog (this, "ingrese id cuetna?", "id cuenta", JOptionPane.QUESTION_MESSAGE);
+    		 String  idUsuario = JOptionPane.showInputDialog (this, "transacion?", "id cuenta", JOptionPane.QUESTION_MESSAGE);
+    		 String valor = JOptionPane.showInputDialog (this, "ingrese valor?", "id cuenta", JOptionPane.QUESTION_MESSAGE);
+    		 String operacionPunto =JOptionPane.showInputDialog (this, "ingrese id punto?", "id cuenta", JOptionPane.QUESTION_MESSAGE);
+    		 if (tipoOperacion != null && idTransaccion != null && cuentaOrigen != null && cuentaDestino != null && idCuenta != null && idUsuario != null && valor != null && operacionPunto != null) 
     		{
-        		VOTipoBebida tb = parranderos.adicionarTipoBebida (nombreTipo);
-        		if (tb == null)
+        		VOOperacioncuenta tb = Bancandes.registrarCuenta (nombreTipo);
+        	if (tb == null)
         		{
-        			throw new Exception ("No se pudo crear un tipo de bebida con nombre: " + nombreTipo);
+        			throw new Exception ("No se pudo registrar Cuenta " + nombreTipo);
         		}
-        		String resultado = "En adicionarTipoBebida\n\n";
+        		String resultado = "En registraCuenta\n\n";
         		resultado += "Tipo de bebida adicionado exitosamente: " + tb;
     			resultado += "\n Operación terminada";
     			panelDatos.actualizarInterfaz(resultado);
     		}
+    		 
+    		 
+    		 
     		else
     		{
     			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
