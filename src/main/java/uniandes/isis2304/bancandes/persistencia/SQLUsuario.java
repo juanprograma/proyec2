@@ -25,8 +25,7 @@ public class SQLUsuario {
         return (long) q.executeUnique();
 	}
 	
-	pub
-	
+		
 	
 	
 

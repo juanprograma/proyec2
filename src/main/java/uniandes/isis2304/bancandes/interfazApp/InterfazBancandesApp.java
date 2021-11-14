@@ -257,7 +257,7 @@ public class InterfazBancandesApp extends JFrame implements ActionListener
     		 String operacionPunto =JOptionPane.showInputDialog (this, "ingrese id punto?", "id cuenta", JOptionPane.QUESTION_MESSAGE);
     		 if (tipoOperacion != null && idTransaccion != null && cuentaOrigen != null && cuentaDestino != null && idCuenta != null && idUsuario != null && valor != null && operacionPunto != null) 
     		{
-        		VOOperacioncuenta tb = Bancandes.registrarCuenta (nombreTipo);
+        		VOOperacioncuenta tb = Bancandes.registrarOperacioncuenta(nombreTipo);
         	if (tb == null)
         		{
         			throw new Exception ("No se pudo registrar Cuenta " + nombreTipo);
