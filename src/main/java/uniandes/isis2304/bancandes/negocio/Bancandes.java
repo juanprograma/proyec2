@@ -126,23 +126,37 @@ public class Bancandes {
 		 return cuentasNoPagadas;
 	 }
 	 
+
+	
 	 
 	 
-	 
-	 public long crearTransaccionCuenta(long idUsuario, int valor, long operacionespunto, String tipoOperacion, 
+	 public long crearOperacionCuenta(long idUsuario, int valor, long operacionespunto, String tipoOperacion, 
 			 									long cuentaOrigen, long cuentaDestino, long idCuenta)
 	 {
 
 			log.info ("Crear transaccion cuenta: " + idUsuario);
 	        
-			long  operacion = pb.crearTransaccion(idUsuario, new Timestamp (System.currentTimeMillis()), valor, operacionespunto, tipoOperacion, cuentaOrigen, cuentaDestino, idCuenta);
+			long  operacion = pb.crearOperacionCuenta(idUsuario, new Timestamp (System.currentTimeMillis()), valor, operacionespunto, tipoOperacion, cuentaOrigen, cuentaDestino, idCuenta);
 				
 			log.info ("CrearTransaccion cuenta: " + idUsuario); 
 			return operacion;
 		 
+	
 		 
 	 }
 	 
+	 public long crearOperacionPrestamo(Timestamp diaPago, long interes, long saldoPendiente, long operacionesPunto, Timestamp fechahora,  String tipo, long idprestamo, long idUsuario, int valor , long cuentasOficina, long valorCuotaMinima, long numeroCuotas, long idCliente )
+	 {
+
+		 log.info ("Crear transaccion : " + idCliente);
+
+		 long  prestamo = pb.crearOperacionPrestamo( diaPago,  interes,  saldoPendiente,  operacionesPunto,  new Timestamp (System.currentTimeMillis()),   tipo,  idprestamo,  idUsuario,  valor ,  cuentasOficina, valorCuotaMinima,  numeroCuotas, idCliente);
+		 log.info ("CrearTransaccion : " + idCliente); 
+		 return prestamo;
+
+
+
+	 }
 
 	 
 	 

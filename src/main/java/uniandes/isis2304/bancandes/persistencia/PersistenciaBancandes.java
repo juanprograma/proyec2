@@ -21,7 +21,7 @@ import uniandes.isis2304.bancandes.negocio.Cuenta;
 
 import uniandes.isis2304.bancandes.negocio.PagoNomina;
 import uniandes.isis2304.bancandes.negocio.Transaccion;
-
+import uniandes.isis2304.bancandes.negocio.Prestamo;
 
 
 import javax.jdo.PersistenceManagerFactory;
@@ -68,6 +68,8 @@ public class PersistenciaBancandes {
 	private SQLOperacionDepositosInversion sqlOperacionDepositosInversion;
 	
 	private SQLOperacionPrestamo sqlOperacionPrestamo;
+	
+	private SQLPrestamo  sqlPrestamo;
 	
 	private SQLPagoNomina sqlPagoNomina;
 	
@@ -392,7 +394,7 @@ public class PersistenciaBancandes {
 		
 			
 
-	public long crearTransaccion ( long idUsuario, Timestamp fechahora, int valor, long operacionespunto, String tipoOperacion, 
+	public long crearOperacionCuenta ( long idUsuario, Timestamp fechahora, int valor, long operacionespunto, String tipoOperacion, 
 										long cuentaOrigen, long cuentaDestino, long idCuenta) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -432,7 +434,7 @@ public class PersistenciaBancandes {
             	
             }
             
-            else
+            else if (tipoOperacion.equals("Retirar"))
             {
             	insertarTran = sqlTransaccion.crearTransaccion(pm, idtransaccion, idUsuario, fechahora, valor, operacionespunto);
                 insertarOpe = sqlOperacionCuenta.crearOperacionCuenta(pm, idOperacion, tipoOperacion, idtransaccion, idCuenta1, cuentaOrigen, cuentaDestino);
@@ -467,27 +469,52 @@ public class PersistenciaBancandes {
 	
 	
 	
-	public OperacionCuenta crearOperacionCuenta( String tipo, long idtransaccion, long idcuenta,
-			long cuentaorigen, long cuentadestinp) 
+	public long crearOperacionPrestamo (Timestamp diaPago, long interes, long saldoPendiente, long operacionesPunto, Timestamp fechahora,  String tipo, long idprestamo, long idUsuario, int valor , long cuentasOficina, long valorCuotaMinima, long numeroCuotas, long idCliente ) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
         try
         {
             tx.begin();
-            long idoperacion = nextval ();
-            long tuplasInsertadas = sqlOperacionCuenta.crearOperacionCuenta(pm, idoperacion, tipo, idtransaccion, idcuenta,cuentaorigen,cuentadestinp);
+            long idtransaccion = nextval ();
+            long idOperacion = nextval();
+            long idPrestamo1 = nextval();
+            long insertarTran = 0;
+            long insertarOpe = 0;
+            long insertarPres = 0;
+            if (tipo.equals("Pedir"))
+            {
+            	
+            	insertarTran = sqlTransaccion.crearTransaccion(pm, idtransaccion, idUsuario, fechahora, valor, operacionesPunto);
+                insertarOpe = sqlOperacionPrestamo.crearOperacionPrestamo(pm,idOperacion, tipo, idtransaccion, idPrestamo1);
+                insertarPres = sqlPrestamo.crearPrestamo(pm,  idPrestamo1,  interes,  saldoPendiente,  diaPago, valorCuotaMinima,  numeroCuotas, tipo,idCliente,cuentasOficina);
+            	
+            }
+            
+            
+            
+            else if (tipo.equals("Pagar"))
+            {
+            	insertarTran = sqlTransaccion.crearTransaccion(pm, idtransaccion, idUsuario, fechahora, valor, operacionesPunto);
+                insertarOpe = sqlOperacionPrestamo.crearOperacionPrestamo(pm,idOperacion, tipo, idtransaccion, idprestamo);
+                insertarPres = sqlPrestamo.consignarPrestamo(pm, valor, idprestamo);
+            	
+            	
+            }
+            
+           
+            
+          
             tx.commit();
+            return insertarTran;
 
-            log.trace ("Inserción de Bar: " + tipo + ": " + tuplasInsertadas + " tuplas insertadas");
-
-            return new OperacionCuenta (idoperacion, tipo, idtransaccion, idcuenta,cuentaorigen,cuentadestinp);
+           
         }
         catch (Exception e)
         {
 //        	e.printStackTrace();
         	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-        	return null;
+        	return -1;
         }
         finally
         {
@@ -497,12 +524,16 @@ public class PersistenciaBancandes {
             }
             pm.close();
         }
-	}
-
-
-
 
 	}
+	}
+
+	
+
+
+
+
+	
 
 	
 

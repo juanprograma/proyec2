@@ -28,14 +28,14 @@ private final static String SQL = PersistenciaBancandes.SQL;
 	
 	public long consignarCuenta(PersistenceManager pm, int cantidad, long idCuenta) {
 		
-		Query q = pm.newQuery(SQL, "UPDATE " + pb.darTablaCuenta() +" SET SALDO = SALDO + ? WHERE IDCLIENTE = ?");
+		Query q = pm.newQuery(SQL, "UPDATE " + pb.darTablaCuenta() +" SET SALDO = SALDO + ? WHERE IDCUENTA = ?");
 		q.setParameters(cantidad, idCuenta);
 		return (long) q.executeUnique();
 	}
 	
 	public long cobrarDeCuenta(PersistenceManager pm, int cantidad, long idCuenta) {
 		
-		Query q = pm.newQuery(SQL, "UPDATE " + pb.darTablaCuenta() +" SET SALDO = SALDO - ? WHERE IDCLIENTE = ?");
+		Query q = pm.newQuery(SQL, "UPDATE " + pb.darTablaCuenta() +" SET SALDO = SALDO - ? WHERE IDCUENTA = ?");
 		q.setParameters(cantidad, idCuenta);
 		return (long) q.executeUnique();
 	}
@@ -64,7 +64,7 @@ private final static String SQL = PersistenciaBancandes.SQL;
 	
 	public long cerrarCuenta(PersistenceManager pm, long idCuenta) {
 		
-		Query q = pm.newQuery(SQL, "UPDATE " + pb.darTablaCuenta() +" SET ACTIVA = N - ? WHERE IDCLIENTE = ?");
+		Query q = pm.newQuery(SQL, "UPDATE " + pb.darTablaCuenta() +" SET ACTIVA = N   WHERE IDCUENTA = ?");
 		q.setParameters(idCuenta);
 		return (long) q.executeUnique();
 	}
@@ -72,7 +72,7 @@ private final static String SQL = PersistenciaBancandes.SQL;
 	
 	public long retirarCuenta(PersistenceManager pm, int cantidad, long idCuenta) {
 		
-		Query q = pm.newQuery(SQL, "UPDATE " + pb.darTablaCuenta() +" SET SALDO = SALDO - ? WHERE IDCLIENTE = ?");
+		Query q = pm.newQuery(SQL, "UPDATE " + pb.darTablaCuenta() +" SET SALDO = SALDO - ? WHERE IDCUENTA = ?");
 		q.setParameters(cantidad, idCuenta);
 		return (long) q.executeUnique();
 	}
