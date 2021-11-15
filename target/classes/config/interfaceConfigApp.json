@@ -9,8 +9,12 @@
 		  "options":
 			[
 				{
-					"label": "Asociar usuario pago nomina",
+					"label": "Asociar usuario pago nomina (RF10)",
 					"event": "registrarPagoNomina"
+				},
+				{
+					"label": "Pagar Nomina (RF13)",
+					"event": "pagarNomina"
 				}
 			]
 		}	

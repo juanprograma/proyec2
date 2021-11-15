@@ -13,6 +13,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import uniandes.isis2304.bancandes.negocio.Cuenta;
 import uniandes.isis2304.bancandes.negocio.PagoNomina;
 import javax.jdo.PersistenceManagerFactory;
 
@@ -304,6 +305,74 @@ public class PersistenciaBancandes {
 		else
 			return false;
 			
+	}
+	
+	public List<PagoNomina> listarPagosNominaPorIdCorporativa(long idCuentaPJ){
+		
+		return sqlPagoNomina.listarPagosNominaPorIdCorporativa(pmf.getPersistenceManager(), idCuentaPJ); 
+	}
+	
+	public boolean consignarCuenta(int cantidad, long idCuenta) {
+		
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long tuplasActualizadas = sqlCuenta.consignarCuenta(pm, cantidad, idCuenta);
+            tx.commit();
+
+            return true; 
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	System.out.println("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return false;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
+	public boolean cobrarDeCuenta(int cantidad, long idCuenta) {
+		
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long tuplasActualizadas = sqlCuenta.cobrarDeCuenta(pm, cantidad, idCuenta);
+            tx.commit();
+
+            return true; 
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	System.out.println("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return false;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
+	public int consultarSaldoCuenta(long idCuenta) {
+		
+		int saldo = sqlCuenta.consultarSaldoCuenta(pmf.getPersistenceManager(), idCuenta);
+		return saldo;
+		
 	}
 	
 	

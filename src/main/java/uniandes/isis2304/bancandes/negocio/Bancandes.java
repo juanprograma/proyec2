@@ -2,6 +2,9 @@ package uniandes.isis2304.bancandes.negocio;
 
 import uniandes.isis2304.bancandes.persistencia.PersistenciaBancandes;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 
 import com.google.gson.JsonObject;
@@ -67,6 +70,59 @@ public class Bancandes {
 		 	}
 		 	
 		 	return resp;
+	 }
+	 
+	 public List<PagoNomina> listarPagosNominaPorIdCorporativa(long idCuentaPJ){
+		 
+		 List<PagoNomina> cuentas =  pb.listarPagosNominaPorIdCorporativa(idCuentaPJ);
+		 return cuentas;
+	 }
+	 
+	 public boolean consignarCuenta(int cantidad, long idCuenta) {
+		 
+		 boolean exitoso = pb.consignarCuenta(cantidad, idCuenta);
+		 return exitoso;
+	 }
+	 
+	 public boolean cobrarDeCuenta(int cantidad, long idCuenta) {
+		 
+		 int saldoCuenta = consultarSaldo(idCuenta);
+		 
+		 if(saldoCuenta < cantidad) {
+			 return false;
+		 }
+		 else {
+			 pb.cobrarDeCuenta(cantidad, idCuenta);
+			 return true;
+		 }
+	 }
+	 
+	 public int consultarSaldo(long idCuenta) {
+		 int saldo = pb.consultarSaldoCuenta(idCuenta);
+		 return saldo;
+	 }
+	 
+	 public List<PagoNomina> pagarNomina(long idCuenta) {
+		 
+		 List<PagoNomina> cuentasAPagar = listarPagosNominaPorIdCorporativa(idCuenta);
+		 List<PagoNomina> cuentasNoPagadas = new LinkedList<PagoNomina>();
+		 
+		 for(int i=0; i < cuentasAPagar.size(); i++) {
+			 
+			 PagoNomina cuentaActual = cuentasAPagar.get(i);
+			 int monto = cuentaActual.getValorPagar();
+			 
+			 if(!cobrarDeCuenta(monto, idCuenta)) {
+				 cuentasNoPagadas.add(cuentaActual);
+			 }
+			 
+			 else {
+				 cobrarDeCuenta(monto, idCuenta);
+				 consignarCuenta(monto, cuentaActual.getIdCuentaPN());
+			 }
+		 }
+		 
+		 return cuentasNoPagadas;
 	 }
 	 
 	 

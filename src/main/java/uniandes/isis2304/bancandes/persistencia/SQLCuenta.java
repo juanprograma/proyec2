@@ -22,4 +22,29 @@ private final static String SQL = PersistenciaBancandes.SQL;
 		q.setResultClass(String.class);
 		return (String) q.executeUnique();
 	}
+	
+	public long consignarCuenta(PersistenceManager pm, int cantidad, long idCuenta) {
+		
+		Query q = pm.newQuery(SQL, "UPDATE " + pb.darTablaCuenta() +" SET SALDO = SALDO + ? WHERE IDCLIENTE = ?");
+		q.setParameters(cantidad, idCuenta);
+		return (long) q.executeUnique();
+	}
+	
+	public long cobrarDeCuenta(PersistenceManager pm, int cantidad, long idCuenta) {
+		
+		Query q = pm.newQuery(SQL, "UPDATE " + pb.darTablaCuenta() +" SET SALDO = SALDO - ? WHERE IDCLIENTE = ?");
+		q.setParameters(cantidad, idCuenta);
+		return (long) q.executeUnique();
+	}
+	
+	public int consultarSaldoCuenta(PersistenceManager pm, long idCuenta) {
+		
+		Query q = pm.newQuery(SQL, "SELECT SALDO FROM " + pb.darTablaCuenta() + " WHERE IDCUENTA = ?");
+		q.setResultClass(Integer.class);
+		q.setParameters(idCuenta);
+		return (Integer) q.executeUnique();
+		
+	}
 }
+
+

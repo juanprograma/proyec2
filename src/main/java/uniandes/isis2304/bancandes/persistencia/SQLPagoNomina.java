@@ -30,6 +30,14 @@ public class SQLPagoNomina {
 		 return (PagoNomina) q.executeUnique();
 	}
 	
+	public List<PagoNomina> listarPagosNominaPorIdCorporativa(PersistenceManager pm, long idCuentaPJ){
+		
+		 Query q = pm.newQuery(SQL, "SELECT * FROM " + pb.darTablaPagoNomina() + " PN WHERE PN.IDCUENTAPJ = ?");
+	     q.setResultClass(PagoNomina.class);
+	     q.setParameters(idCuentaPJ);
+		 return (List<PagoNomina>) q.executeList();
+	}
+	
 	
 }
 
