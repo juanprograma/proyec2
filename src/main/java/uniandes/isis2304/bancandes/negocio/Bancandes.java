@@ -85,17 +85,10 @@ public class Bancandes {
 		 return exitoso;
 	 }
 	 
-	 public boolean cobrarDeCuenta(int cantidad, long idCuenta) {
+	 public int cobrarDeCuenta(int cantidad, long idCuenta) {
 		 
-		 int saldoCuenta = consultarSaldo(idCuenta);
-		 
-		 if(saldoCuenta < cantidad) {
-			 return false;
-		 }
-		 else {
 			 pb.cobrarDeCuenta(cantidad, idCuenta);
-			 return true;
-		 }
+			 return cantidad;
 	 }
 	 
 	 public int consultarSaldo(long idCuenta) {
@@ -112,8 +105,9 @@ public class Bancandes {
 			 
 			 PagoNomina cuentaActual = cuentasAPagar.get(i);
 			 int monto = cuentaActual.getValorPagar();
+			 int saldo = consultarSaldo(idCuenta);
 			 
-			 if(!cobrarDeCuenta(monto, idCuenta)) {
+			 if(monto>saldo) {
 				 cuentasNoPagadas.add(cuentaActual);
 			 }
 			 
