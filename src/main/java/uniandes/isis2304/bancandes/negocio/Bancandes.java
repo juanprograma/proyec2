@@ -85,17 +85,10 @@ public class Bancandes {
 		 return exitoso;
 	 }
 	 
-	 public boolean cobrarDeCuenta(int cantidad, long idCuenta) {
+	 public int cobrarDeCuenta(int cantidad, long idCuenta) {
 		 
-		 int saldoCuenta = consultarSaldo(idCuenta);
-		 
-		 if(saldoCuenta < cantidad) {
-			 return false;
-		 }
-		 else {
 			 pb.cobrarDeCuenta(cantidad, idCuenta);
-			 return true;
-		 }
+			 return cantidad;
 	 }
 	 
 	 public int consultarSaldo(long idCuenta) {
@@ -112,8 +105,9 @@ public class Bancandes {
 			 
 			 PagoNomina cuentaActual = cuentasAPagar.get(i);
 			 int monto = cuentaActual.getValorPagar();
+			 int saldo = consultarSaldo(idCuenta);
 			 
-			 if(!cobrarDeCuenta(monto, idCuenta)) {
+			 if(monto>saldo) {
 				 cuentasNoPagadas.add(cuentaActual);
 			 }
 			 
@@ -145,6 +139,7 @@ public class Bancandes {
 		 
 	 }
 	 
+
 	 public long crearOperacionPrestamo(Timestamp diaPago, long interes, long saldoPendiente, long operacionesPunto, Timestamp fechahora,  String tipo, long idprestamo, long idUsuario, int valor , long cuentasOficina, long valorCuotaMinima, long numeroCuotas, long idCliente )
 	 {
 
@@ -157,6 +152,35 @@ public class Bancandes {
 
 
 	 }
+
+	 public long cerrarCuenta(long idCuenta, long idCuentaAlterna) {
+		 
+		 long resp;
+		 if(!pb.verificarCuentaCorporativa(idCuenta)) {
+			 resp = pb.cerrarCuenta(idCuenta);
+			 return resp;
+		 }
+		 
+		 else {
+			 List<PagoNomina> cuentasParaAsociar = listarPagosNominaPorIdCorporativa(idCuenta);
+			 
+			 pb.eliminarPagoNomina(idCuenta);
+			 
+			 for(PagoNomina pn: cuentasParaAsociar) {
+				 try {
+					adicionarPagoNomina(idCuentaAlterna, pn.getIdCuentaPN(), pn.getValorPagar(), pn.getFrecuencia());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			 }
+			 
+			 resp = pb.cerrarCuenta(idCuenta);
+			 return resp;
+		 }
+		 
+	 }
+	 
+
 
 	 
 	 

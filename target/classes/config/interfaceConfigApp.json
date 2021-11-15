@@ -14,7 +14,11 @@
 				},
 				{
 					"label": "Pagar Nomina (RF13)",
-					"event": "pagarNomina"
+					"event": "pagoNomina"
+				},
+				{
+					"label": "Cancelar cuenta (RF14)",
+					"event": "cerrarCuenta"
 				}
 			]
 		}	

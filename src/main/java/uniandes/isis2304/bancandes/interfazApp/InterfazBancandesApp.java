@@ -48,6 +48,7 @@ import com.google.gson.stream.JsonReader;
 
 import uniandes.isis2304.bancandes.negocio.Bancandes;
 import uniandes.isis2304.bancandes.negocio.Clienteaccion;
+import uniandes.isis2304.bancandes.negocio.PagoNomina;
 import uniandes.isis2304.bancandes.negocio.VOPagoNomina;
 
 
@@ -286,6 +287,103 @@ public class InterfazBancandesApp extends JFrame implements ActionListener
 			String resultado = generarMensajeError(e);
 			panelDatos.actualizarInterfaz(resultado);
     	}
+    }
+    
+    public void pagoNomina() {
+    	
+    	try {
+    		String idCuentaPJstr = JOptionPane.showInputDialog(this, "Ingrese la cuenta de donde se va cobrar para pagar nómina.", "Pago de nomina", JOptionPane.QUESTION_MESSAGE);
+    		
+    		if(idCuentaPJstr != null)
+    		{
+    			long idCuentaPJ = Long.parseLong(idCuentaPJstr);
+    			
+    			List<PagoNomina> lpn = bancandes.pagarNomina(idCuentaPJ);
+    			if (lpn.isEmpty()) {
+    				
+    				panelDatos.actualizarInterfaz("Se han pagado todas las cuentas asociadas a la cuenta: " + idCuentaPJ);
+    				
+    			}
+    			
+    			else {
+    				String resultado = "Estas son las cuentas que quedaron pendientes de pagar: \n";
+    				for(int i = 0; i < lpn.size(); i++) {
+    					resultado += "Cuenta: " + lpn.get(i).getIdCuentaPN() + "\n"; 
+    				}
+    				panelDatos.actualizarInterfaz(resultado);
+    			}
+    		}
+    		
+    		else {
+    			panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
+    		} 		
+    	}
+    	catch (Exception e) {
+    		e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+    	}
+    }
+    
+    public void cerrarCuenta() {
+    	
+    	try 
+    	{
+    		String idCuentastr;
+    		String idCuentaAlternastr;
+    		long idCuenta;
+    		long idCuentaAlterna;
+    		long resp;
+    		
+    		int opcion = JOptionPane.showOptionDialog(this, "¿La cuenta que desea cerrar es corporativa?", "Cerrar cuenta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+    		
+    		if(opcion == 0) {
+    			idCuentastr = JOptionPane.showInputDialog(this, "Ingrese la cuenta a cerrar", "Cerrar cuenta", JOptionPane.QUESTION_MESSAGE);
+    			idCuentaAlternastr = JOptionPane.showInputDialog(this, "Ingrese la cuenta que se va encargar de pagar la nomina.", "Cerrar cuenta", JOptionPane.QUESTION_MESSAGE);
+    			
+    			if (idCuentastr != null && idCuentaAlternastr != null)
+        		{
+        			idCuenta = Long.valueOf(idCuentastr);
+        			idCuentaAlterna = Long.valueOf(idCuentaAlternastr);
+        			resp = bancandes.cerrarCuenta(idCuenta, idCuentaAlterna);
+        			
+        			String resultado = "En cerrar Cuenta\n\n";
+        			resultado += resp + " Cuenta(s) cerrada\n";
+        			resultado += "\n Operación terminada";
+        			panelDatos.actualizarInterfaz(resultado);
+        		}
+    			else {
+        			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+    			}
+    				
+    		}
+    		else if(opcion == 1) {
+    			idCuentastr = JOptionPane.showInputDialog(this, "Ingrese la cuenta a cerrar", "Cerrar cuenta", JOptionPane.QUESTION_MESSAGE);
+    			idCuentaAlternastr = null;
+    			if(idCuentastr != null && idCuentaAlternastr == null) {
+        			
+        			idCuenta = Long.valueOf(idCuentastr);
+        			idCuentaAlterna = 0;
+        			resp = bancandes.cerrarCuenta(idCuenta, 0);
+        			
+        			String resultado = "En cerrar Cuenta\n\n";
+        			resultado += resp + " Cuenta(s) cerrada\n";
+        			resultado += "\n Operación terminada";
+        			panelDatos.actualizarInterfaz(resultado);
+        			
+        		}
+    			else {
+        			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+    			}
+    		}
+    
+		} 
+    	catch (Exception e) 
+    	{
+//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
     }
   
 
