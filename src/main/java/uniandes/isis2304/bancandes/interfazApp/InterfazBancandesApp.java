@@ -48,6 +48,7 @@ import com.google.gson.stream.JsonReader;
 
 import uniandes.isis2304.bancandes.negocio.Bancandes;
 import uniandes.isis2304.bancandes.negocio.Clienteaccion;
+import uniandes.isis2304.bancandes.negocio.PagoNomina;
 import uniandes.isis2304.bancandes.negocio.VOPagoNomina;
 
 
@@ -279,6 +280,42 @@ public class InterfazBancandesApp extends JFrame implements ActionListener
     		
     		else {
     			panelDatos.actualizarInterfaz("Operaciï¿½n cancelada por el usuario");
+    		} 		
+    	}
+    	catch (Exception e) {
+    		e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+    	}
+    }
+    
+    public void pagoNomina() {
+    	
+    	try {
+    		String idCuentaPJstr = JOptionPane.showInputDialog(this, "Ingrese la cuenta de donde se va cobrar para pagar nómina.", "Pago de nomina", JOptionPane.QUESTION_MESSAGE);
+    		
+    		if(idCuentaPJstr != null)
+    		{
+    			long idCuentaPJ = Long.parseLong(idCuentaPJstr);
+    			
+    			List<PagoNomina> lpn = bancandes.pagarNomina(idCuentaPJ);
+    			if (lpn.isEmpty()) {
+    				
+    				panelDatos.actualizarInterfaz("Se han pagado todas las cuentas asociadas a la cuenta: " + idCuentaPJ);
+    				
+    			}
+    			
+    			else {
+    				String resultado = "Estas son las cuentas que quedaron pendientes de pagar: \n";
+    				for(int i = 0; i < lpn.size(); i++) {
+    					resultado += "Cuenta: " + lpn.get(i).getIdCuentaPN() + "\n"; 
+    				}
+    				panelDatos.actualizarInterfaz(resultado);
+    			}
+    		}
+    		
+    		else {
+    			panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
     		} 		
     	}
     	catch (Exception e) {
