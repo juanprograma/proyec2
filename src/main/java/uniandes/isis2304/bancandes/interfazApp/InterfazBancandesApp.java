@@ -324,6 +324,67 @@ public class InterfazBancandesApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
     	}
     }
+    
+    public void cerrarCuenta() {
+    	
+    	try 
+    	{
+    		String idCuentastr;
+    		String idCuentaAlternastr;
+    		long idCuenta;
+    		long idCuentaAlterna;
+    		long resp;
+    		
+    		int opcion = JOptionPane.showOptionDialog(this, "¿La cuenta que desea cerrar es corporativa?", "Cerrar cuenta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+    		
+    		if(opcion == 0) {
+    			idCuentastr = JOptionPane.showInputDialog(this, "Ingrese la cuenta a cerrar", "Cerrar cuenta", JOptionPane.QUESTION_MESSAGE);
+    			idCuentaAlternastr = JOptionPane.showInputDialog(this, "Ingrese la cuenta que se va encargar de pagar la nomina.", "Cerrar cuenta", JOptionPane.QUESTION_MESSAGE);
+    			
+    			if (idCuentastr != null && idCuentaAlternastr != null)
+        		{
+        			idCuenta = Long.valueOf(idCuentastr);
+        			idCuentaAlterna = Long.valueOf(idCuentaAlternastr);
+        			resp = bancandes.cerrarCuenta(idCuenta, idCuentaAlterna);
+        			
+        			String resultado = "En cerrar Cuenta\n\n";
+        			resultado += resp + " Cuenta(s) cerrada\n";
+        			resultado += "\n Operación terminada";
+        			panelDatos.actualizarInterfaz(resultado);
+        		}
+    			else {
+        			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+    			}
+    				
+    		}
+    		else if(opcion == 1) {
+    			idCuentastr = JOptionPane.showInputDialog(this, "Ingrese la cuenta a cerrar", "Cerrar cuenta", JOptionPane.QUESTION_MESSAGE);
+    			idCuentaAlternastr = null;
+    			if(idCuentastr != null && idCuentaAlternastr == null) {
+        			
+        			idCuenta = Long.valueOf(idCuentastr);
+        			idCuentaAlterna = 0;
+        			resp = bancandes.cerrarCuenta(idCuenta, 0);
+        			
+        			String resultado = "En cerrar Cuenta\n\n";
+        			resultado += resp + " Cuenta(s) cerrada\n";
+        			resultado += "\n Operación terminada";
+        			panelDatos.actualizarInterfaz(resultado);
+        			
+        		}
+    			else {
+        			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+    			}
+    		}
+    
+		} 
+    	catch (Exception e) 
+    	{
+//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+    }
   
 
 

@@ -143,6 +143,33 @@ public class Bancandes {
 		 
 	 }
 	 
+	 public long cerrarCuenta(long idCuenta, long idCuentaAlterna) {
+		 
+		 long resp;
+		 if(!pb.verificarCuentaCorporativa(idCuenta)) {
+			 resp = pb.cerrarCuenta(idCuenta);
+			 return resp;
+		 }
+		 
+		 else {
+			 List<PagoNomina> cuentasParaAsociar = listarPagosNominaPorIdCorporativa(idCuenta);
+			 
+			 pb.eliminarPagoNomina(idCuenta);
+			 
+			 for(PagoNomina pn: cuentasParaAsociar) {
+				 try {
+					adicionarPagoNomina(idCuentaAlterna, pn.getIdCuentaPN(), pn.getValorPagar(), pn.getFrecuencia());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			 }
+			 
+			 resp = pb.cerrarCuenta(idCuenta);
+			 return resp;
+		 }
+		 
+	 }
+	 
 
 	 
 	 

@@ -64,7 +64,7 @@ private final static String SQL = PersistenciaBancandes.SQL;
 	
 	public long cerrarCuenta(PersistenceManager pm, long idCuenta) {
 		
-		Query q = pm.newQuery(SQL, "UPDATE " + pb.darTablaCuenta() +" SET ACTIVA = N - ? WHERE IDCLIENTE = ?");
+		Query q = pm.newQuery(SQL, "UPDATE " + pb.darTablaCuenta() +" SET ACTIVA = N, SALDO = 0 WHERE IDCLIENTE = ?");
 		q.setParameters(idCuenta);
 		return (long) q.executeUnique();
 	}

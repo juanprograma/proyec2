@@ -297,6 +297,34 @@ public class PersistenciaBancandes {
         }
 	}
 	
+	public long eliminarPagoNomina(long idCuentaPJ) {
+		
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long resp = sqlPagoNomina.eliminarPagoNomina(pm, idCuentaPJ);
+            tx.commit();
+
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	System.out.println("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
 	public boolean verificarCuentaCorporativa(long idCuentaPJ) {
 		
 		if(sqlCuenta.verificarCuentaCorporativa(pmf.getPersistenceManager(), idCuentaPJ).equals("Juridica")) 
@@ -488,6 +516,34 @@ public class PersistenciaBancandes {
 //        	e.printStackTrace();
         	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
         	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
+	public long cerrarCuenta(long idCuenta) {
+		
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long resp = sqlCuenta.cerrarCuenta(pm, idCuenta);
+            tx.commit();
+
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	System.out.println("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
         }
         finally
         {
