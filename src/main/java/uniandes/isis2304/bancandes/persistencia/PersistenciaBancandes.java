@@ -422,7 +422,7 @@ public class PersistenciaBancandes {
 		
 			
 
-	public long crearOperacionCuenta ( long idUsuario, Timestamp fechahora, int valor, long operacionespunto, String tipoOperacion, 
+	public long crearOperacionCuenta ( long idUsuario, int valor, long operacionespunto, String tipoOperacion, 
 										long cuentaOrigen, long cuentaDestino, long idCuenta, String tipo) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -436,6 +436,7 @@ public class PersistenciaBancandes {
             long insertarTran = 0;
             long insertarOpe = 0;
             long insertarCuen = 0;
+            Timestamp fechahora = new Timestamp(System.currentTimeMillis());
             if (tipoOperacion.equals("Abrir"))
             {
             	insertarTran = sqlTransaccion.crearTransaccion(pm, idtransaccion, idUsuario, fechahora, valor, operacionespunto);
@@ -497,7 +498,7 @@ public class PersistenciaBancandes {
 	
 	
 	
-	public long crearOperacionPrestamo (Timestamp diaPago, long interes, long saldoPendiente, long operacionesPunto, Timestamp fechahora,  String tipo, long idprestamo, long idUsuario, int valor , long cuentasOficina, long valorCuotaMinima, long numeroCuotas, long idCliente ) 
+	public long crearOperacionPrestamo (Timestamp diaPago, long interes, long saldoPendiente, long operacionesPunto, String tipo, long idprestamo, long idUsuario, int valor , long cuentasOficina, long valorCuotaMinima, long numeroCuotas, long idCliente, String tipoPrestamo) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
@@ -510,12 +511,13 @@ public class PersistenciaBancandes {
             long insertarTran = 0;
             long insertarOpe = 0;
             long insertarPres = 0;
+            Timestamp fechahora = new Timestamp(System.currentTimeMillis());
             if (tipo.equals("Pedir"))
             {
             	
             	insertarTran = sqlTransaccion.crearTransaccion(pm, idtransaccion, idUsuario, fechahora, valor, operacionesPunto);
                 insertarOpe = sqlOperacionPrestamo.crearOperacionPrestamo(pm,idOperacion, tipo, idtransaccion, idPrestamo1);
-                insertarPres = sqlPrestamo.crearPrestamo(pm,  idPrestamo1,  interes,  saldoPendiente,  diaPago, valorCuotaMinima,  numeroCuotas, tipo,idCliente,cuentasOficina);
+                insertarPres = sqlPrestamo.crearPrestamo(pm,  idPrestamo1,  interes,  saldoPendiente,  diaPago, valorCuotaMinima,  numeroCuotas, tipoPrestamo ,idCliente,cuentasOficina);
             	
             }
             

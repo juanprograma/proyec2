@@ -130,7 +130,7 @@ public class Bancandes {
 
 			log.info ("Crear transaccion cuenta: " + idUsuario);
 	        
-			long  operacion = pb.crearOperacionCuenta(idUsuario, new Timestamp (System.currentTimeMillis()), valor, operacionespunto, tipoOperacion, cuentaOrigen, cuentaDestino, idCuenta,tipo);
+			long  operacion = pb.crearOperacionCuenta(idUsuario, valor, operacionespunto, tipoOperacion, cuentaOrigen, cuentaDestino, idCuenta,tipo);
 				
 			log.info ("CrearTransaccion cuenta: " + idUsuario); 
 			return operacion;
@@ -140,12 +140,12 @@ public class Bancandes {
 	 }
 	 
 
-	 public long crearOperacionPrestamo(Timestamp diaPago, long interes, long saldoPendiente, long operacionesPunto, Timestamp fechahora,  String tipo, long idprestamo, long idUsuario, int valor , long cuentasOficina, long valorCuotaMinima, long numeroCuotas, long idCliente )
+	 public long crearOperacionPrestamo(Timestamp diaPago, long interes, long saldoPendiente, long operacionesPunto, Timestamp fechahora,  String tipo, long idprestamo, long idUsuario, int valor , long cuentasOficina, long valorCuotaMinima, long numeroCuotas, long idCliente, String tipoPrestamo)
 	 {
 
 		 log.info ("Crear transaccion : " + idCliente);
 
-		 long  prestamo = pb.crearOperacionPrestamo( diaPago,  interes,  saldoPendiente,  operacionesPunto,  new Timestamp (System.currentTimeMillis()),   tipo,  idprestamo,  idUsuario,  valor ,  cuentasOficina, valorCuotaMinima,  numeroCuotas, idCliente);
+		 long  prestamo = pb.crearOperacionPrestamo( diaPago,  interes,  saldoPendiente,  operacionesPunto, tipo,  idprestamo,  idUsuario,  valor ,  cuentasOficina, valorCuotaMinima,  numeroCuotas, idCliente, tipoPrestamo);
 		 log.info ("CrearTransaccion : " + idCliente); 
 		 return prestamo;
 

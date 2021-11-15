@@ -14,11 +14,11 @@
 				},
 				{
 					"label": "Crear operacion cuenta (RF11)",
-					"event": "crearOperacionPrestamo"
+					"event": "crearOperacionCuenta"
 				},
 				{
 					"label": "Crear operacion prestamo (RF12)",
-					"event": "crearOperacionCuenta"
+					"event": "crearOperacionPrestamo"
 				},
 				{
 					"label": "Pagar Nomina (RF13)",

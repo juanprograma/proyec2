@@ -26,6 +26,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.jdo.JDODataStoreException;
@@ -385,6 +386,101 @@ public class InterfazBancandesApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
     }
+    
+    public void crearOperacionCuenta() {
+    	
+    	try {
+    		
+    		String tipoOperacion = JOptionPane.showInputDialog(this, "Indique el tipo de operación que desea registrar", "Operacion cuenta", JOptionPane.QUESTION_MESSAGE);
+    		String idUsuariostr = JOptionPane.showInputDialog(this, "Ingrese el id del usuario", "Operacion cuenta", JOptionPane.QUESTION_MESSAGE);
+    		String valorstr = JOptionPane.showInputDialog(this, "Ingrese el valor (si su tipo de operacion es abrir o cerrar coloque 0)", "Operacion cuenta", JOptionPane.QUESTION_MESSAGE);
+    		String operacionesPuntostr = JOptionPane.showInputDialog(this, "Ingrese el id del punto de atencion", "Operacion cuenta", JOptionPane.QUESTION_MESSAGE);
+    		String cuentaOrigenstr = JOptionPane.showInputDialog(this, "Ingrese el id de la cuenta de origen(si su tipo es abrir, cerrar o retirar el id de origen y destino es el mismo.)", "Operacion cuenta", JOptionPane.QUESTION_MESSAGE);
+    		String cuentaDestinostr = JOptionPane.showInputDialog(this, "Ingrese el id de la cuenta de destino(si su tipo es abrir, cerrar o retirar el id de origen y destino es el mismo.)", "Operacion cuenta", JOptionPane.QUESTION_MESSAGE);
+    		String tipo = JOptionPane.showInputDialog(this, "Ingrese el tipo de la cuenta a abrir (en caso que la operacion no sea abrir no ingrese nada)", "Operacion cuenta", JOptionPane.QUESTION_MESSAGE);
+    		
+   
+    		if(tipoOperacion != null)
+    		{
+    			long idUsuario = Long.parseLong(idUsuariostr);
+    			int valor = Integer.parseInt(valorstr);
+    			long operacionesPunto = Long.parseLong(operacionesPuntostr);
+    			long cuentaOrigen = Long.parseLong(cuentaOrigenstr); 
+    			long cuentaDestino = Long.parseLong(cuentaDestinostr);
+    			long idCuenta = cuentaDestino;
+    			
+    			long oc = bancandes.crearOperacionCuenta(idUsuario, valor, operacionesPunto, tipoOperacion, cuentaOrigen, cuentaDestino, idCuenta, tipo);
+    	
+    			panelDatos.actualizarInterfaz("Se han insertado: " + oc + " transacciones");
+    		}
+    		
+    		else {
+    			panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
+    		} 		
+    	}
+    	catch (Exception e) {
+    		e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+    	}
+    }
+    
+    public void crearOperacionPrestamo() {
+    	
+    	try {
+    		
+    		String tipo = JOptionPane.showInputDialog(this, "Indique el tipo de operación de prestamo que desea registrar", "Operacion prestamo", JOptionPane.QUESTION_MESSAGE);
+    		String idUsuariostr = JOptionPane.showInputDialog(this, "Ingrese el id del usuario", "Operacion cuenta", JOptionPane.QUESTION_MESSAGE);
+    		String valorstr = JOptionPane.showInputDialog(this, "Ingrese el valor (si su tipo de operacion es abrir o cerrar coloque 0)", "Operacion cuenta", JOptionPane.QUESTION_MESSAGE);
+    		String operacionesPuntostr = JOptionPane.showInputDialog(this, "Ingrese el id del punto de atencion", "Operacion cuenta", JOptionPane.QUESTION_MESSAGE);
+    		String cuentaOrigenstr = JOptionPane.showInputDialog(this, "Ingrese el id de la cuenta de origen(si su tipo es abrir, cerrar o retirar el id de origen y destino es el mismo.)", "Operacion cuenta", JOptionPane.QUESTION_MESSAGE);
+    		String cuentaDestinostr = JOptionPane.showInputDialog(this, "Ingrese el id de la cuenta de destino(si su tipo es abrir, cerrar o retirar el id de origen y destino es el mismo.)", "Operacion cuenta", JOptionPane.QUESTION_MESSAGE);
+    		String tipo = JOptionPane.showInputDialog(this, "Ingrese el tipo de la cuenta a abrir (en caso que la operacion no sea abrir no ingrese nada)", "Operacion cuenta", JOptionPane.QUESTION_MESSAGE);
+    		
+   
+    		if(tipoOperacion != null)
+    		{
+    			//Cuando se va a crear
+    			Timestamp diaPago = 
+    			long interes = 0;
+    			long saldoPendiente = 
+    			long operacionesPunto =
+    			long valorCuotaMinima =
+    			long numeroCuotas =
+    			String tipoPrestamo =
+    	    	long idCliente =
+    	    	long cuentasOficina =
+
+    	    	//Cuando se va a abonar
+    	    	int valor
+    			long idprestamo 
+
+    			
+    			String tipo, 
+    			long idUsuario, 
+    			 
+    			long cuentasOficina, 
+    			long valorCuotaMinima, 
+    			long numeroCuotas, 
+    			String tipoPrestamo =
+    			
+    			long oc = bancandes.crearOperacionCuenta(idUsuario, valor, operacionesPunto, tipoOperacion, cuentaOrigen, cuentaDestino, idCuenta, tipo);
+    	
+    			panelDatos.actualizarInterfaz("Se han insertado: " + oc + " transacciones");
+    		}
+    		
+    		else {
+    			panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
+    		} 		
+    	}
+    	catch (Exception e) {
+    		e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+    	}
+    }
+    
+    
   
 
 
