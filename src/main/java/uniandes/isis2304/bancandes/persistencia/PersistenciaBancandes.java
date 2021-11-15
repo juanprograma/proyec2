@@ -423,7 +423,7 @@ public class PersistenciaBancandes {
 			
 
 	public long crearOperacionCuenta ( long idUsuario, Timestamp fechahora, int valor, long operacionespunto, String tipoOperacion, 
-										long cuentaOrigen, long cuentaDestino, long idCuenta) 
+										long cuentaOrigen, long cuentaDestino, long idCuenta, String tipo) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
@@ -440,7 +440,7 @@ public class PersistenciaBancandes {
             {
             	insertarTran = sqlTransaccion.crearTransaccion(pm, idtransaccion, idUsuario, fechahora, valor, operacionespunto);
                 insertarOpe = sqlOperacionCuenta.crearOperacionCuenta(pm, idOperacion, tipoOperacion, idtransaccion, idCuenta1, cuentaOrigen, cuentaDestino);
-                insertarCuen = sqlCuenta.crearCuenta(pm, idCuenta1, "Y", fechahora, valor, fechahora, "Ahorro" , idUsuario, 1);
+                insertarCuen = sqlCuenta.crearCuenta(pm, idCuenta1, "Y", fechahora, valor, fechahora, tipo , idUsuario, 1);
             	
             }
             

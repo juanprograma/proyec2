@@ -125,12 +125,12 @@ public class Bancandes {
 	 
 	 
 	 public long crearOperacionCuenta(long idUsuario, int valor, long operacionespunto, String tipoOperacion, 
-			 									long cuentaOrigen, long cuentaDestino, long idCuenta)
+			 									long cuentaOrigen, long cuentaDestino, long idCuenta, String tipo)
 	 {
 
 			log.info ("Crear transaccion cuenta: " + idUsuario);
 	        
-			long  operacion = pb.crearOperacionCuenta(idUsuario, new Timestamp (System.currentTimeMillis()), valor, operacionespunto, tipoOperacion, cuentaOrigen, cuentaDestino, idCuenta);
+			long  operacion = pb.crearOperacionCuenta(idUsuario, new Timestamp (System.currentTimeMillis()), valor, operacionespunto, tipoOperacion, cuentaOrigen, cuentaDestino, idCuenta,tipo);
 				
 			log.info ("CrearTransaccion cuenta: " + idUsuario); 
 			return operacion;
