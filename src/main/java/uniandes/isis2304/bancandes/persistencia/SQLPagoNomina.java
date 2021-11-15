@@ -16,7 +16,7 @@ public class SQLPagoNomina {
 	}
 	
 	public long eliminarPagoNomina(PersistenceManager pm, long idCuentaPJ) {
-		 Query q = pm.newQuery(SQL, "DELETE FROM " + pb.darTablaPagoNomina() + "WHERE IDCUENTAPJ = ?");
+		 Query q = pm.newQuery(SQL, "DELETE FROM " + pb.darTablaPagoNomina() + " WHERE IDCUENTAPJ = ?");
 		 q.setParameters(idCuentaPJ);
 		 return (long) q.executeUnique();
 	}
