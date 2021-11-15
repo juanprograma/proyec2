@@ -49,7 +49,6 @@ import com.google.gson.stream.JsonReader;
 import uniandes.isis2304.bancandes.negocio.Bancandes;
 import uniandes.isis2304.bancandes.negocio.Clienteaccion;
 import uniandes.isis2304.bancandes.negocio.VOPagoNomina;
-import uniandes.isis2304.bancandes.negocio.VOTipoBebida;
 
 /**
  * Clase principal de la interfaz
@@ -245,6 +244,7 @@ public class InterfazBancandesApp extends JFrame implements ActionListener
      * Adiciona un tipo de bebida con la información dada por el usuario
      * Se crea una nueva tupla de tipoBebida en la base de datos, si un tipo de bebida con ese nombre no existía
      */
+    /*
     public void registrarOperacioncuenta( )
     {
     	try 
@@ -416,6 +416,8 @@ public class InterfazBancandesApp extends JFrame implements ActionListener
 	 * Limpia todas las tuplas de todas las tablas de la base de datos de parranderos
 	 * Muestra en el panel de datos el número de tuplas eliminadas de cada tabla
 	 */
+	
+	/*
 	public void limpiarBD ()
 	{
 		try 
@@ -443,6 +445,7 @@ public class InterfazBancandesApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
+	*/
 	
 	/**
 	 * Muestra la presentación general del proyecto
@@ -523,6 +526,7 @@ public class InterfazBancandesApp extends JFrame implements ActionListener
      * @param lista - La lista con los tipos de bebida
      * @return La cadena con una líea para cada tipo de bebida recibido
      */
+    /*
     private String listarTiposBebida(List<VOTipoBebida> lista) 
     {
     	String resp = "Los tipos de bebida existentes son:\n";
@@ -533,6 +537,7 @@ public class InterfazBancandesApp extends JFrame implements ActionListener
         }
         return resp;
 	}
+	*/
 
     /**
      * Genera una cadena de caracteres con la descripción de la excepcion e, haciendo énfasis en las excepcionsde JDO

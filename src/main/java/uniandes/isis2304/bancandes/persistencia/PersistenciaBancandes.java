@@ -285,7 +285,26 @@ public class PersistenciaBancandes {
         }
 	}
 	
+	public boolean verificarCuentaCorporativa(long idCuentaPJ) {
+		
+		if(sqlCuenta.verificarCuentaCorporativa(pmf.getPersistenceManager(), idCuentaPJ).equals("Juridica")) 
+			return true;
+		
+		else 
+			return false;
+	}
 	
+	public boolean existenCuentasAsociadasAPN(long idCuentaPN) {
+		
+		PagoNomina cuentaPN = sqlPagoNomina.existenCuentasAsociadasAPN(pmf.getPersistenceManager(), idCuentaPN);
+		
+		if(cuentaPN != null)
+			return true;
+
+		else
+			return false;
+			
+	}
 	
 	
 	

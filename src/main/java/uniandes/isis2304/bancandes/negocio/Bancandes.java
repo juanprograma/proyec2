@@ -53,11 +53,20 @@ public class Bancandes {
 	  pb.cerrarUnidadPersistencia ();
 	 }
 	 
-	 public PagoNomina adicionarPagoNomina(long idCuentaPJ, long idCuentaPN, int valorPagar, String frecuencia) {
+	 public PagoNomina adicionarPagoNomina(long idCuentaPJ, long idCuentaPN, int valorPagar, String frecuencia) throws Exception {
 		 
+		 	PagoNomina resp = null;
+		 	if(!pb.verificarCuentaCorporativa(idCuentaPJ)) {
+		 		throw new Exception("La cuenta que ingresó no es corporativa.");
+		 	}
+		 	else if (pb.existenCuentasAsociadasAPN(idCuentaPN)) {
+		 		throw new Exception("La cuenta de persona natural ya tiene asociada una cuenta corporativa");
+		 	}
+		 	else {
+		 		resp = pb.adicionarPagoNomina(idCuentaPJ, idCuentaPN, valorPagar, frecuencia);
+		 	}
 		 	
-	        PagoNomina resp = pb.adicionarPagoNomina(idCuentaPJ, idCuentaPN, valorPagar, frecuencia);
-	        return resp;
+		 	return resp;
 	 }
 	 
 	 
