@@ -1,83 +1,23 @@
 {
-	"title": "Aplicación transaccional de Bancandes Uniandes (Administrador)",
+	"title": "Aplicacion transaccional de Bancandes Uniandes",
 	"frameH": 600,
 	"frameW": 800,
 	"bannerPath": "./src/main/resources/config/logo.png",
 	"menuBar":
 	[
-		{ "menuTitle": "Registrar",
+		{ "menuTitle": "Iteracion tres",
 		  "options":
 			[
 				{
-					"label": "Registrar Usuario",
-					"event": ""
+					"label": "Asociar usuario pago nomina (RF10)",
+					"event": "registrarPagoNomina"
 				},
 				{
-					"label": "Registrar Oficina",
-					"event": ""
-				},
-				{
-					"label": "Registrar Punto Atencion",
-					"event": ""
-				},
-			]
-		},
-		{ "menuTitle": "Cuenta",
-		  "options":
-			[
-				{
-					"label": "Registrar Cuenta",
-					"event": ""
-				},
-				{
-					"label": "Cerrar Cuenta",
-					"event": ""
-				},
-				{
-					"label": "Registrar Operacion Cuenta",
-					"event": ""
-				},
-			]
-		},		
-		{ "menuTitle": "Prestamo",
-		  "options":
-			[
-				{
-					"label": "Registrar Prestamo",
-					"event": ""
-				},
-				{
-					"label": "Registrar Operaciones Prestamo",
-					"event": ""
-				},
-				{
-					"label": "Cerrar Prestamo",
-					"event": ""
+					"label": "Pagar Nomina (RF13)",
+					"event": "pagarNomina"
 				}
 			]
-		},		
-		{ "menuTitle": "Consultas",
-		  "options":
-			[
-				{
-					"label": "Consultar Cuentas",
-					"event": ""
-				},
-				{
-					"label": "Consultar Cliente",
-					"event": ""
-				},
-				{
-					"label": "Top 10 operaciones de mayor movimiento",
-					"event": ""
-				},
-				{
-					"label": "Datos usuario más activo",
-					"event": ""
-				}
-			]
-		}		
-		
+		}	
 	]
 }
 	
