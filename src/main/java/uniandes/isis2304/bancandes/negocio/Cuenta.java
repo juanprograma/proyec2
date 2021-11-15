@@ -33,8 +33,6 @@ public class Cuenta implements VOCuenta
 	 * 			Atributos
 	 *****************************************************************/
 	private long idcuenta;
-	
-
 	private String activa;
 	private Date fechacreacion;
 	private long saldo;

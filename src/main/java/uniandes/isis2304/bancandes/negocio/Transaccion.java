@@ -26,7 +26,7 @@ public class Transaccion implements VOTransaccion {
 		this.setIdTransaccion(idTransaccion);
 		this.setIdUsuario(idUsuario);
 		this.setFechaHora(fechaHora);
-		this.setValor(valor);
+		this.setValor(valor); 
 		this.setOperacionesPunto(operacionesPunto);
 	}
 

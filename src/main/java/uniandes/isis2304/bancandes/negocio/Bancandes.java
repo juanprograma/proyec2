@@ -2,6 +2,7 @@ package uniandes.isis2304.bancandes.negocio;
 
 import uniandes.isis2304.bancandes.persistencia.PersistenciaBancandes;
 
+import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -60,7 +61,7 @@ public class Bancandes {
 		 
 		 	PagoNomina resp = null;
 		 	if(!pb.verificarCuentaCorporativa(idCuentaPJ)) {
-		 		throw new Exception("La cuenta que ingresó no es corporativa.");
+		 		throw new Exception("La cuenta que ingresï¿½ no es corporativa.");
 		 	}
 		 	else if (pb.existenCuentasAsociadasAPN(idCuentaPN)) {
 		 		throw new Exception("La cuenta de persona natural ya tiene asociada una cuenta corporativa");
@@ -126,5 +127,62 @@ public class Bancandes {
 	 }
 	 
 	 
+	 
+	 
+	 public long crearTransaccionCuenta(long idUsuario, int valor, long operacionespunto, String tipoOperacion, 
+			 									long cuentaOrigen, long cuentaDestino, long idCuenta)
+	 {
 
+			log.info ("Crear transaccion cuenta: " + idUsuario);
+	        
+			long  operacion = pb.crearTransaccion(idUsuario, new Timestamp (System.currentTimeMillis()), valor, operacionespunto, tipoOperacion, cuentaOrigen, cuentaDestino, idCuenta);
+				
+			log.info ("CrearTransaccion cuenta: " + idUsuario); 
+			return operacion;
+		 
+		 
+	 }
+	 
+
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 }

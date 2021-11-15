@@ -6,9 +6,6 @@ public class OperacionCuenta implements VOOperacionCuenta {
 
 	private long idOperacion;
 	
-	
-
-	
 	private String tipo;
 	
 	private long idTransaccion;
@@ -17,7 +14,6 @@ public class OperacionCuenta implements VOOperacionCuenta {
 	
 	public long cuentaorigen;
 	
-
 	public long cuentadestino;
 	
 	public OperacionCuenta() {

@@ -14,12 +14,11 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-<<<<<<< HEAD
+
 import uniandes.isis2304.bancandes.negocio.OperacionCuenta;
 import uniandes.isis2304.bancandes.negocio.OperacionPrestamo;
-=======
 import uniandes.isis2304.bancandes.negocio.Cuenta;
->>>>>>> 7cd92ba4af8b51cd055fe549c7192445f9faf837
+
 import uniandes.isis2304.bancandes.negocio.PagoNomina;
 import uniandes.isis2304.bancandes.negocio.Transaccion;
 
@@ -35,6 +34,8 @@ import com.google.gson.JsonObject;
 
 
 public class PersistenciaBancandes {
+	
+	private static Logger log = Logger.getLogger(PersistenciaBancandes.class.getName());
 	
 	public final static String SQL = "javax.jdo.query.SQL";
 	
@@ -296,6 +297,209 @@ public class PersistenciaBancandes {
         }
 	}
 	
+	public boolean verificarCuentaCorporativa(long idCuentaPJ) {
+		
+		if(sqlCuenta.verificarCuentaCorporativa(pmf.getPersistenceManager(), idCuentaPJ).equals("Juridica")) 
+			return true;
+		
+		else 
+			return false;
+	}
+	
+	public boolean existenCuentasAsociadasAPN(long idCuentaPN) {
+		
+		PagoNomina cuentaPN = sqlPagoNomina.existenCuentasAsociadasAPN(pmf.getPersistenceManager(), idCuentaPN);
+		
+		if(cuentaPN != null)
+			return true;
+
+		else
+			return false;
+			
+	}
+	
+	public List<PagoNomina> listarPagosNominaPorIdCorporativa(long idCuentaPJ){
+		
+		return sqlPagoNomina.listarPagosNominaPorIdCorporativa(pmf.getPersistenceManager(), idCuentaPJ); 
+	}
+	
+	public boolean consignarCuenta(int cantidad, long idCuenta) {
+
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long tuplasActualizadas = sqlCuenta.consignarCuenta(pm, cantidad, idCuenta);
+            tx.commit();
+
+            return true; 
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	System.out.println("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return false;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
+	public boolean cobrarDeCuenta(int cantidad, long idCuenta) {
+		
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long tuplasActualizadas = sqlCuenta.cobrarDeCuenta(pm, cantidad, idCuenta);
+            tx.commit();
+
+            return true; 
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	System.out.println("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return false;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
+	public int consultarSaldoCuenta(long idCuenta) {
+		
+		int saldo = sqlCuenta.consultarSaldoCuenta(pmf.getPersistenceManager(), idCuenta);
+		return saldo;
+		
+	}
+	
+	
+	
+	
+		
+			
+
+	public long crearTransaccion ( long idUsuario, Timestamp fechahora, int valor, long operacionespunto, String tipoOperacion, 
+										long cuentaOrigen, long cuentaDestino, long idCuenta) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long idtransaccion = nextval ();
+            long idOperacion = nextval();
+            long idCuenta1 = nextval();
+            long insertarTran = 0;
+            long insertarOpe = 0;
+            long insertarCuen = 0;
+            if (tipoOperacion.equals("Abrir"))
+            {
+            	insertarTran = sqlTransaccion.crearTransaccion(pm, idtransaccion, idUsuario, fechahora, valor, operacionespunto);
+                insertarOpe = sqlOperacionCuenta.crearOperacionCuenta(pm, idOperacion, tipoOperacion, idtransaccion, idCuenta1, cuentaOrigen, cuentaDestino);
+                insertarCuen = sqlCuenta.crearCuenta(pm, idCuenta1, "Y", fechahora, valor, fechahora, "Ahorro" , idUsuario, 1);
+            	
+            }
+            
+            else if (tipoOperacion.equals("Cerrar"))
+            {
+            	insertarTran = sqlTransaccion.crearTransaccion(pm, idtransaccion, idUsuario, fechahora, valor, operacionespunto);
+                insertarOpe = sqlOperacionCuenta.crearOperacionCuenta(pm, idOperacion, tipoOperacion, idtransaccion, idCuenta1, cuentaOrigen, cuentaDestino);
+                insertarCuen = sqlCuenta.cerrarCuenta(pm, idCuenta);
+            	
+            	
+            }
+            
+            else if (tipoOperacion.equals("Consignar"))
+            {
+            	insertarTran = sqlTransaccion.crearTransaccion(pm, idtransaccion, idUsuario, fechahora, valor, operacionespunto);
+                insertarOpe = sqlOperacionCuenta.crearOperacionCuenta(pm, idOperacion, tipoOperacion, idtransaccion, idCuenta1, cuentaOrigen, cuentaDestino);
+                insertarCuen = sqlCuenta.consignarCuenta(pm, valor, idCuenta);
+            	
+            	
+            }
+            
+            else
+            {
+            	insertarTran = sqlTransaccion.crearTransaccion(pm, idtransaccion, idUsuario, fechahora, valor, operacionespunto);
+                insertarOpe = sqlOperacionCuenta.crearOperacionCuenta(pm, idOperacion, tipoOperacion, idtransaccion, idCuenta1, cuentaOrigen, cuentaDestino);
+                insertarCuen = sqlCuenta.retirarCuenta(pm, valor, idCuenta);
+            	
+            }
+            
+          
+            tx.commit();
+            return insertarTran;
+
+           
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+
+	
+	
+	
+	
+	
+	public OperacionCuenta crearOperacionCuenta( String tipo, long idtransaccion, long idcuenta,
+			long cuentaorigen, long cuentadestinp) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long idoperacion = nextval ();
+            long tuplasInsertadas = sqlOperacionCuenta.crearOperacionCuenta(pm, idoperacion, tipo, idtransaccion, idcuenta,cuentaorigen,cuentadestinp);
+            tx.commit();
+
+            log.trace ("Inserción de Bar: " + tipo + ": " + tuplasInsertadas + " tuplas insertadas");
+
+            return new OperacionCuenta (idoperacion, tipo, idtransaccion, idcuenta,cuentaorigen,cuentadestinp);
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+
+
 
 
 	}

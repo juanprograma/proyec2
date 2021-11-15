@@ -1,5 +1,8 @@
 package uniandes.isis2304.bancandes.persistencia;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
@@ -45,6 +48,36 @@ private final static String SQL = PersistenciaBancandes.SQL;
 		return (Integer) q.executeUnique();
 		
 	}
+	
+	
+	public long crearCuenta (PersistenceManager pm, long idCuenta, String activa, Timestamp fecha, long saldo, Timestamp ultimoMovi, 
+							 String tipo, long idCliente, long cuentaOficina ) {
+		
+		Query q = pm.newQuery(SQL, "INSERT INTO " + pb.darTablaCuenta() + 
+				"(idCuenta, activa, fechacreacion, saldo, fechaUltimoMov, tipo, idCliente, cuentasOficina) values ( ?, ?, ?, ?, ?,?,?,?)");
+        q.setParameters(idCuenta, activa, fecha, saldo, ultimoMovi, 
+				 tipo, idCliente, cuentaOficina);
+        return (long) q.executeUnique();
+	}
+	
+	
+	
+	public long cerrarCuenta(PersistenceManager pm, long idCuenta) {
+		
+		Query q = pm.newQuery(SQL, "UPDATE " + pb.darTablaCuenta() +" SET ACTIVA = N - ? WHERE IDCLIENTE = ?");
+		q.setParameters(idCuenta);
+		return (long) q.executeUnique();
+	}
+	
+	
+	public long retirarCuenta(PersistenceManager pm, int cantidad, long idCuenta) {
+		
+		Query q = pm.newQuery(SQL, "UPDATE " + pb.darTablaCuenta() +" SET SALDO = SALDO - ? WHERE IDCLIENTE = ?");
+		q.setParameters(cantidad, idCuenta);
+		return (long) q.executeUnique();
+	}
+	
+	
 }
 
 

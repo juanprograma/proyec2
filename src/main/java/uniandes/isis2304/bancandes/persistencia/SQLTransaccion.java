@@ -21,6 +21,9 @@ public class SQLTransaccion {
 		this.pp = pp;
 	}
 	
+	
+	
+	
 	public long crearTransaccion (PersistenceManager pm, long idtransaccion, long idusuario, Timestamp fechahora, long valor,
 			long operacionespunto ) {
 		
@@ -30,8 +33,6 @@ public class SQLTransaccion {
         return (long) q.executeUnique();
 	}
 	
-		
-	
-	
+
 
 }
