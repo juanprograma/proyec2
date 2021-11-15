@@ -49,7 +49,7 @@ import com.google.gson.stream.JsonReader;
 import uniandes.isis2304.bancandes.negocio.Bancandes;
 import uniandes.isis2304.bancandes.negocio.Clienteaccion;
 import uniandes.isis2304.bancandes.negocio.VOPagoNomina;
-import uniandes.isis2304.bancandes.negocio.VOTipoBebida;
+
 
 /**
  * Clase principal de la interfaz
@@ -245,76 +245,7 @@ public class InterfazBancandesApp extends JFrame implements ActionListener
      * Adiciona un tipo de bebida con la informaciÃ³n dada por el usuario
      * Se crea una nueva tupla de tipoBebida en la base de datos, si un tipo de bebida con ese nombre no existÃ­a
      */
-    public void registrarOperacioncuenta( )
-    {
-    	try 
-    	{
-    		String tipoOperacion = JOptionPane.showInputDialog (this, "ingrese tipo transacion?", "tipo", JOptionPane.QUESTION_MESSAGE);
-    		String  idTransaccion  = JOptionPane.showInputDialog (this, "ingrese Id transacion?", "id transaccion", JOptionPane.QUESTION_MESSAGE);
-    		 String cuentaOrigen = JOptionPane.showInputDialog (this, "ingrese cuenta de origen?", "cuenta origen", JOptionPane.QUESTION_MESSAGE);
-    		 String cuentaDestino = JOptionPane.showInputDialog (this, "ingrese cuenta destino?", "cuenta destino", JOptionPane.QUESTION_MESSAGE);
-    		 String idCuenta = JOptionPane.showInputDialog (this, "ingrese id cuetna?", "id cuenta", JOptionPane.QUESTION_MESSAGE);
-    		 String  idUsuario = JOptionPane.showInputDialog (this, "transacion?", "id cuenta", JOptionPane.QUESTION_MESSAGE);
-    		 String valor = JOptionPane.showInputDialog (this, "ingrese valor?", "id cuenta", JOptionPane.QUESTION_MESSAGE);
-    		 String operacionPunto =JOptionPane.showInputDialog (this, "ingrese id punto?", "id cuenta", JOptionPane.QUESTION_MESSAGE);
-    		 if (tipoOperacion != null && idTransaccion != null && cuentaOrigen != null && cuentaDestino != null && idCuenta != null && idUsuario != null && valor != null && operacionPunto != null) 
-    		{
-        		VOOperacioncuenta tb = Bancandes.registrarOperacioncuenta(nombreTipo);
-        	if (tb == null)
-        		{
-        			throw new Exception ("No se pudo registrar Cuenta " + nombreTipo);
-        		}
-        		String resultado = "En registraCuenta\n\n";
-        		resultado += "Tipo de bebida adicionado exitosamente: " + tb;
-    			resultado += "\n OperaciÃ³n terminada";
-    			panelDatos.actualizarInterfaz(resultado);
-    		}
-    		 
-    		 
-    		 
-    		else
-    		{
-    			panelDatos.actualizarInterfaz("OperaciÃ³n cancelada por el usuario");
-    		}
-		} 
-    	catch (Exception e) 
-    	{
-//			e.printStackTrace();
-			String resultado = generarMensajeError(e);
-			panelDatos.actualizarInterfaz(resultado);
-		}
-    }
-
-    
-    public void registrarOperacionprestamo( )
-    {
-    	try 
-    	{
-    		String nombreTipo = JOptionPane.showInputDialog (this, "Nombre del tipo de bedida?", "Adicionar tipo de bebida", JOptionPane.QUESTION_MESSAGE);
-    		if (nombreTipo != null)
-    		{
-        		VOTipoBebida tb = parranderos.adicionarTipoBebida (nombreTipo);
-        		if (tb == null)
-        		{
-        			throw new Exception ("No se pudo crear un tipo de bebida con nombre: " + nombreTipo);
-        		}
-        		String resultado = "En adicionarTipoBebida\n\n";
-        		resultado += "Tipo de bebida adicionado exitosamente: " + tb;
-    			resultado += "\n OperaciÃ³n terminada";
-    			panelDatos.actualizarInterfaz(resultado);
-    		}
-    		else
-    		{
-    			panelDatos.actualizarInterfaz("OperaciÃ³n cancelada por el usuario");
-    		}
-		} 
-    	catch (Exception e) 
-    	{
-//			e.printStackTrace();
-			String resultado = generarMensajeError(e);
-			panelDatos.actualizarInterfaz(resultado);
-		}
-    }
+   
 
 	/* ****************************************************************
 	 * 			Requerimientos iteracion 3
@@ -323,10 +254,10 @@ public class InterfazBancandesApp extends JFrame implements ActionListener
     public void registrarPagoNomina() {
     	
     	try {
-    		String idCuentaPJstr = JOptionPane.showInputDialog(this, "Ingrese el id de la cuenta corporativa", "Asociar un pago de nómina", JOptionPane.QUESTION_MESSAGE);
-    		String idCuentaPNstr = JOptionPane.showInputDialog(this, "Ingrese el id de la cuenta a la que se le va asignar", "Asociar un pago de nómina", JOptionPane.QUESTION_MESSAGE);
-    		String valorPagarstr = JOptionPane.showInputDialog(this, "Ingrese el valor a pagar", "Asociar un pago de nómina", JOptionPane.QUESTION_MESSAGE);
-    		String frecuencia = JOptionPane.showInputDialog(this, "Ingrese la frecuencia del pago", "Asociar un pago de nómina", JOptionPane.QUESTION_MESSAGE);
+    		String idCuentaPJstr = JOptionPane.showInputDialog(this, "Ingrese el id de la cuenta corporativa", "Asociar un pago de nï¿½mina", JOptionPane.QUESTION_MESSAGE);
+    		String idCuentaPNstr = JOptionPane.showInputDialog(this, "Ingrese el id de la cuenta a la que se le va asignar", "Asociar un pago de nï¿½mina", JOptionPane.QUESTION_MESSAGE);
+    		String valorPagarstr = JOptionPane.showInputDialog(this, "Ingrese el valor a pagar", "Asociar un pago de nï¿½mina", JOptionPane.QUESTION_MESSAGE);
+    		String frecuencia = JOptionPane.showInputDialog(this, "Ingrese la frecuencia del pago", "Asociar un pago de nï¿½mina", JOptionPane.QUESTION_MESSAGE);
     		
     		if(idCuentaPJstr != null && idCuentaPNstr != null && valorPagarstr != null && frecuencia != null)
     		{
@@ -342,12 +273,12 @@ public class InterfazBancandesApp extends JFrame implements ActionListener
     			}
     			String resultado = "En PagoNomina\n\n";
     			resultado += "Pago de Nomina asociado exitosamente: " + pn;
-    			resultado += "\n Operación terminada";
+    			resultado += "\n Operaciï¿½n terminada";
     			panelDatos.actualizarInterfaz(resultado);
     		}
     		
     		else {
-    			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+    			panelDatos.actualizarInterfaz("Operaciï¿½n cancelada por el usuario");
     		} 		
     	}
     	catch (Exception e) {

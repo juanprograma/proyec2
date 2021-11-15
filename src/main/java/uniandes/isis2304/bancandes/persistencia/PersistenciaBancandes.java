@@ -1,5 +1,6 @@
 package uniandes.isis2304.bancandes.persistencia;
 
+import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,7 +14,13 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import uniandes.isis2304.bancandes.negocio.OperacionCuenta;
+import uniandes.isis2304.bancandes.negocio.OperacionPrestamo;
 import uniandes.isis2304.bancandes.negocio.PagoNomina;
+import uniandes.isis2304.bancandes.negocio.Transaccion;
+
+
+
 import javax.jdo.PersistenceManagerFactory;
 
 import org.apache.log4j.Logger;
@@ -285,12 +292,116 @@ public class PersistenciaBancandes {
         }
 	}
 	
-	
-	
-	
+
+
+	public OperacionPrestamo crearOperacionPrestamo ( String tipo, long idtransaccion, long idprestamo) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long idoperacion = nextval ();
+            long tuplasInsertadas = sqlOperacionPrestamo.crearOperacionPrestamo (pm, idoperacion, tipo, idtransaccion, idprestamo);
+            tx.commit();
+
+            log.trace ("Inserción de operacionprestamo: " + nombre + ": " + tuplasInsertadas + " tuplas insertadas");
+
+            return new OperacionPrestamo (idoperacion, tipo, idtransaccion, idprestamo);
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
 	
 
-}
+
+	
+		
+			
+
+	public Transaccion crearTransaccion ( long idusuario, Timestamp fechahora, long  valor, long operacionespunto) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long idtransaccion = nextval ();
+            long tuplasInsertadas = sqlTransaccion.crearTransaccion(pm, idtransaccion, idusuario, fechahora, valor, operacionespunto);
+            tx.commit();
+
+            log.trace ("Inserción de : " + nombre + ": " + tuplasInsertadas + " tuplas insertadas");
+
+            return new Transaccion (idtransaccion, idusuario, fechahora, valor, operacionespunto);
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+
+	
+	public OperacionCuenta crearOperacionCuenta( String tipo, long idtransaccion, long idcuenta,
+			long cuentaorigen, long cuentadestinp) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long idoperacion = nextval ();
+            long tuplasInsertadas = sqlOperacionCuenta.crearOperacionCuenta(pm, idoperacion, tipo, idtransaccion, idcuenta,cuentaorigen,cuentadestinp);
+            tx.commit();
+
+            log.trace ("Inserción de Bar: " + nombre + ": " + tuplasInsertadas + " tuplas insertadas");
+
+            return new OperacionCuenta (idoperacion, tipo, idtransaccion, idcuenta,cuentaorigen,cuentadestinp);
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+
+
+
+	}
+
+	
+
+
 
 	
 	
