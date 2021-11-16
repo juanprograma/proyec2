@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class Prestamo implements VOPrestamo{
 	
+	
 	private long idPrestamo;
 	
 	private int monto;
@@ -24,6 +25,10 @@ public class Prestamo implements VOPrestamo{
 	
 	private long cuentasOficina;
 	
+	
+	
+	
+
 	public Prestamo() {
 		this.idPrestamo=0;
 		this.monto=0;
@@ -35,9 +40,10 @@ public class Prestamo implements VOPrestamo{
 		this.tipo="";
 		this.idCliente=0;
 		this.cuentasOficina=0;
+	
 	}
 	
-	public Prestamo(long idPrestamo, int monto, int interes, int saldoPendiente, Date diaPago, int valorCuotaMinima, int numeroCuotas, String tipo, long idCliente, long cuentasOficina) {
+	public Prestamo(long idPrestamo, int monto, int interes, int saldoPendiente, Date diaPago, int valorCuotaMinima, int numeroCuotas, String tipo, long idCliente, long cuentasOficina, long cuentaOrigen) {
 		this.idPrestamo=idPrestamo;
 		this.monto=monto;
 		this.interes=interes;
@@ -48,6 +54,7 @@ public class Prestamo implements VOPrestamo{
 		this.tipo=tipo;
 		this.idCliente=idCliente;
 		this.cuentasOficina=cuentasOficina;
+	
 	}
 	
 
@@ -141,4 +148,13 @@ public class Prestamo implements VOPrestamo{
 		this.cuentasOficina = cuentasOficina;
 	}
 	
+	
+	@Override
+	public String toString() {
+		return "Prestamo [idPrestamo=" + idPrestamo + ", monto=" + monto + ", interes=" + interes + ", saldoPendiente="
+				+ saldoPendiente + ", diaPago=" + diaPago + ", valorCuotaMinima=" + valorCuotaMinima + ", numeroCuotas="
+				+ numeroCuotas + ", tipo=" + tipo + ", idCliente=" + idCliente + ", cuentasOficina=" + cuentasOficina
+				+ "]";
+	}
+
 }

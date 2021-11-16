@@ -1,9 +1,14 @@
 package uniandes.isis2304.bancandes.persistencia;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
+
+import uniandes.isis2304.bancandes.negocio.Prestamo;
+
+
 
 
 
@@ -36,6 +41,20 @@ public long consignarPrestamo(PersistenceManager pm, int cantidad, long idPresta
 	return (long) q.executeUnique();
 	
 	
+}
+public List<Prestamo> darPrestamoPoridPrestamo (PersistenceManager pm, long idprestamo) 
+{
+	Query q = pm.newQuery(SQL, "SELECT * FROM " + pb.darTablaPrestamo () + " WHERE idprestamo = ?");
+	q.setResultClass(Prestamo.class);
+	q.setParameters(idprestamo);
+	return (List<Prestamo>) q.executeList();
+}
+public List<Prestamo> darPrestamoPorTipo (PersistenceManager pm, String tipo) 
+{
+	Query q = pm.newQuery(SQL, "SELECT * FROM " + pb.darTablaPrestamo () + " WHERE tipo = ?");
+	q.setResultClass(Prestamo.class);
+	q.setParameters(tipo);
+	return (List<Prestamo>) q.executeList();
 }
 
 }

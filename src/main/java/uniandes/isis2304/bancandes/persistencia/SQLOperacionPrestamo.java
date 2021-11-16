@@ -15,10 +15,10 @@ public class SQLOperacionPrestamo {
 		this.pp = pp;
 	}
 	
-	public long crearOperacionPrestamo (PersistenceManager pm, long idoperacion, String tipo, long idtransaccion, long idprestamo) {
+	public long crearOperacionPrestamo (PersistenceManager pm, long idoperacion, String tipo, long idtransaccion, long idprestamo, long cuentaOrigen) {
 		
 		Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaOperacionCuenta() + 
-				"(idoperacion, tipo, idtransaccion, idprestamo) values ( ?, ?, ?, ?)");
+				"(idoperacion, tipo, idtransaccion, idprestamo, cuentaOrigen) values ( ?, ?, ?, ?,?)");
         q.setParameters(idoperacion, tipo, idtransaccion, idprestamo);
         return (long) q.executeUnique();
 	}

@@ -2,6 +2,7 @@ package uniandes.isis2304.bancandes.negocio;
 
 import uniandes.isis2304.bancandes.persistencia.PersistenciaBancandes;
 
+import uniandes.isis2304.bancandes.negocio.Prestamo;
 import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
@@ -140,12 +141,12 @@ public class Bancandes {
 	 }
 	 
 
-	 public long crearOperacionPrestamo(Timestamp diaPago, long interes, long saldoPendiente, long operacionesPunto, Timestamp fechahora,  String tipo, long idprestamo, long idUsuario, int valor , long cuentasOficina, long valorCuotaMinima, long numeroCuotas, long idCliente, String tipoPrestamo)
+	 public long crearOperacionPrestamo(Timestamp diaPago, long interes, long saldoPendiente, long operacionesPunto, Timestamp fechahora,  String tipo, long idprestamo, long idUsuario, int valor , long cuentasOficina, long valorCuotaMinima, long numeroCuotas, long idCliente, String tipoPrestamo, long cuentaOrigen)
 	 {
 
 		 log.info ("Crear transaccion : " + idCliente);
 
-		 long  prestamo = pb.crearOperacionPrestamo( diaPago,  interes,  saldoPendiente,  operacionesPunto, tipo,  idprestamo,  idUsuario,  valor ,  cuentasOficina, valorCuotaMinima,  numeroCuotas, idCliente, tipoPrestamo);
+		 long  prestamo = pb.crearOperacionPrestamo( diaPago,  interes,  saldoPendiente,  operacionesPunto, tipo,  idprestamo,  idUsuario,  valor ,  cuentasOficina, valorCuotaMinima,  numeroCuotas, idCliente, tipoPrestamo, cuentaOrigen);
 		 log.info ("CrearTransaccion : " + idCliente); 
 		 return prestamo;
 
@@ -177,43 +178,66 @@ public class Bancandes {
 			 resp = pb.cerrarCuenta(idCuenta);
 			 return resp;
 		 }
+		
 		 
 	 }
 	 
+	 
+	 
+	 
+	 public List<VOPrestamo> darListaPrestamos (long id)
+		{
+	        log.info ("Dar información de un prestamo por id: " + id);
+	        List<VOPrestamo> prestamos = new LinkedList<VOPrestamo> ();
+	        for (Prestamo tb :  pb.darPrestamoPoridPrestamo(id))
+         {
+         	prestamos.add(tb);
+         }
+	        log.info ("Buscando Prestamo por Id:" + id);
+	        return prestamos;
+		}
+
+	 
+	 public List<VOPrestamo> darListaPrestamosPorTipo (String tipo)
+		{
+	        log.info ("Dar información de un prestamo por tipo: " + tipo);
+	        List<VOPrestamo> prestamos = new LinkedList<VOPrestamo> ();
+	        for (Prestamo tb :  pb.darPrestamoPorTipo(tipo))
+      {
+      	prestamos.add(tb);
+      }
+	        log.info ("Buscando Prestamo por tipo:" + tipo);
+	        return prestamos;
+		}
+
+	 
+	 public List<VOOperacionCuenta> darOperacionesPorTipo (String tipo)
+		{
+	        log.info ("Dar información de un bebedor por tipo: " + tipo);
+	        List<VOOperacionCuenta> operacionescuenta = new LinkedList<VOOperacionCuenta> ();
+	        for (OperacionCuenta tb :  pb.darOperacionCuentaPortipo(tipo))
+         {
+	        	operacionescuenta.add(tb);
+         }
+	        log.info ("Buscando bebedor por tipo:" + tipo);
+	        return operacionescuenta;
+		}
+
+	 
+	 public List<VOOperacionCuenta> darOperacionesporIdOperacion (long id)
+		{
+	        log.info ("Dar información de un bebedor por id: " + id);
+	        List<VOOperacionCuenta> operacionescuenta = new LinkedList<VOOperacionCuenta> ();
+	        for (OperacionCuenta tb :  pb.darOperacionCuentaPoridCuenta(id))
+      {
+	        	operacionescuenta .add(tb);
+      }
+	        log.info ("Buscando bebedor por id:" + id);
+	        return operacionescuenta ;
+		}
 
 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
+
 	 
 	 
 	 

@@ -21,6 +21,7 @@ import uniandes.isis2304.bancandes.negocio.Cuenta;
 
 import uniandes.isis2304.bancandes.negocio.PagoNomina;
 import uniandes.isis2304.bancandes.negocio.Transaccion;
+
 import uniandes.isis2304.bancandes.negocio.Prestamo;
 
 
@@ -498,7 +499,7 @@ public class PersistenciaBancandes {
 	
 	
 	
-	public long crearOperacionPrestamo (Timestamp diaPago, long interes, long saldoPendiente, long operacionesPunto, String tipo, long idprestamo, long idUsuario, int valor , long cuentasOficina, long valorCuotaMinima, long numeroCuotas, long idCliente, String tipoPrestamo) 
+	public long crearOperacionPrestamo (Timestamp diaPago, long interes, long saldoPendiente, long operacionesPunto, String tipo, long idprestamo, long idUsuario, int valor , long cuentasOficina, long valorCuotaMinima, long numeroCuotas, long idCliente, String tipoPrestamo,long cuentaOrigen) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
@@ -516,7 +517,7 @@ public class PersistenciaBancandes {
             {
             	
             	insertarTran = sqlTransaccion.crearTransaccion(pm, idtransaccion, idUsuario, fechahora, valor, operacionesPunto);
-                insertarOpe = sqlOperacionPrestamo.crearOperacionPrestamo(pm,idOperacion, tipo, idtransaccion, idPrestamo1);
+                insertarOpe = sqlOperacionPrestamo.crearOperacionPrestamo(pm,idOperacion, tipo, idtransaccion, idPrestamo1,cuentaOrigen);
                 insertarPres = sqlPrestamo.crearPrestamo(pm,  idPrestamo1,  interes,  saldoPendiente,  diaPago, valorCuotaMinima,  numeroCuotas, tipoPrestamo ,idCliente,cuentasOficina);
             	
             }
@@ -526,7 +527,7 @@ public class PersistenciaBancandes {
             else if (tipo.equals("Pagar"))
             {
             	insertarTran = sqlTransaccion.crearTransaccion(pm, idtransaccion, idUsuario, fechahora, valor, operacionesPunto);
-                insertarOpe = sqlOperacionPrestamo.crearOperacionPrestamo(pm,idOperacion, tipo, idtransaccion, idprestamo);
+                insertarOpe = sqlOperacionPrestamo.crearOperacionPrestamo(pm,idOperacion, tipo, idtransaccion, idprestamo, cuentaOrigen);
                 insertarPres = sqlPrestamo.consignarPrestamo(pm, valor, idprestamo);
             	
             	
@@ -585,6 +586,26 @@ public class PersistenciaBancandes {
             pm.close();
         }
 	}
+	
+	public List<Prestamo> darPrestamoPorTipo (String tipo)
+	{
+		return sqlPrestamo.darPrestamoPorTipo (pmf.getPersistenceManager(), tipo);
+	}
+	
+	public List<Prestamo> darPrestamoPoridPrestamo (long idprestamo)
+	{
+		return sqlPrestamo.darPrestamoPoridPrestamo (pmf.getPersistenceManager(), idprestamo);
+	}
+	public List<OperacionCuenta> darOperacionCuentaPortipo (String tipo)
+	{
+		return sqlOperacionCuenta.darOperacionCuentaPortipo (pmf.getPersistenceManager(), tipo);
+	}
+	
+	public List<OperacionCuenta> darOperacionCuentaPoridCuenta (long idcuenta)
+	{
+		return sqlOperacionCuenta.darOperacionCuentaPoridCuenta(pmf.getPersistenceManager(), idcuenta);
+	}
+ 
 	}
 
 	
