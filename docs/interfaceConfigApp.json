@@ -1,95 +1,35 @@
 {
-	"title": "Aplicación transaccional de Parranderos Uniandes",
+	"title": "Aplicacion transaccional de Bancandes Uniandes",
 	"frameH": 600,
 	"frameW": 800,
 	"bannerPath": "./src/main/resources/config/logo.png",
 	"menuBar":
 	[
-		{ "menuTitle": "TipoBebida",
+		{ "menuTitle": "Iteracion tres",
 		  "options":
 			[
 				{
-					"label": "Adicionar",
-					"event": "adicionarTipoBebida"
+					"label": "Asociar usuario pago nomina (RF10)",
+					"event": "registrarPagoNomina"
 				},
 				{
-					"label": "Listar",
-					"event": "listarTipoBebida"
+					"label": "Crear operacion cuenta (RF11)",
+					"event": "crearOperacionCuenta"
 				},
 				{
-					"label": "Borrar por Id",
-					"event": "eliminarTipoBebidaPorId"
+					"label": "Crear operacion prestamo (RF12)",
+					"event": "crearOperacionPrestamo"
 				},
 				{
-					"label": "Buscar por Nombre",
-					"event": "buscarTipoBebidaPorNombre"
+					"label": "Pagar Nomina (RF13)",
+					"event": "pagoNomina"
+				},
+				{
+					"label": "Cancelar cuenta (RF14)",
+					"event": "cerrarCuenta"
 				}
 			]
-		},
-		{ "menuTitle": "Mantenimiento",
-		  "options":
-			[
-				{
-					"label": "Mostrar log Parranderos",
-					"event": "mostrarLogParranderos"
-				},
-				{
-					"label": "Mostrar log datanucleus",
-					"event": "mostrarLogDatanuecleus"
-				},
-				{
-					"label": "Limpiar log de parranderos",
-					"event": "limpiarLogParranderos"
-				},
-				{
-					"label": "Limpiar log de datanucleus",
-					"event": "limpiarLogDatanucleus"
-				},
-				{
-					"label": "Limpiar Base de Datos",
-					"event": "limpiarBD"
-				}
-			]
-		},		
-		{ "menuTitle": "Documentación",
-		  "options":
-			[
-				{
-					"label": "Presentación general",
-					"event": "mostrarPresentacionGeneral"
-				},
-				{
-					"label": "Modelo conceptual",
-					"event": "mostrarModeloConceptual"
-				},
-				{
-					"label": "Esquema de la BD",
-					"event": "mostrarEsquemaBD"
-				},
-				{
-					"label": "Script creación de la BD",
-					"event": "mostrarScriptBD"
-				},
-				{
-					"label": "Arquitectura de referencia",
-					"event": "mostrarArqRef"
-				},
-				{
-					"label": "Javadoc Parranderos",
-					"event": "mostrarJavadoc"
-				}
-			]
-		},		
-		{ "menuTitle": "Acerca de ...",
-		  "options":
-			[
-				{
-					"label": "Acerca de ...",
-					"event": "acercaDe"
-				}
-			]
-		}		
-		
+		}	
 	]
 }
 	

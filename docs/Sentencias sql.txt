@@ -1,0 +1,42 @@
+RF10:
+INSERT INTO PAGONOMINA (IDCUENTAPJ, IDCUENTAPN, VALORPAGAR, FRECUENCIA) VALUES(?, ?, ?, ?);
+Confirmar si es cuenta corporativa
+SELECT U.TIPO FROM USUARIO U, CUENTA C WHERE U.NUMERODOCUMENTO = C.IDCLIENTE AND C.IDCUENTA = ?;
+Confirmar si no existen cuentas corporativas a la cuenta de persona natural
+SELECT * FROM PAGONOMINA PN WHERE PN.IDCUENTAPN = ?; 
+
+(Datos de prueba: IDCUENTAPJ = 123, IDCUENTAPN = 12, VALORPAGAR = 1000, FRECUENCIA = quincenal)
+
+RF13:
+Selecciona a los empleados a los cuales va a pagar
+SELECT IDCUENTAPN FROM PAGONOMINA WHERE IDCUENTAPJ = ?;
+
+Consignación a una cuenta
+UPDATE CUENTA SET SALDO = SALDO + ? WHERE IDCLIENTE = ?;
+
+Cobro de una cuenta
+UPDATE CUENTA SET SALDO = SALDO - ? WHERE IDCLIENTE = ?;
+
+Consultar saldo de cuenta
+SELECT SALDO FROM CUENTA WHERE IDCUENTA = ?;
+
+(Datos de prueba: 123 está asociada con 122, 124, 125, 126. A 122 se le paga 2, a 124 se le paga 4 y a 126 se le paga 6).
+
+RF14:
+Cerrar cuenta
+UPDATE CUENTA SET ACTIVA = N, SALDO = 0 WHERE IDCLIENTE = ?
+Eliminar fila de PagoNomina
+DELETE FROM PAGONOMINA WHERE IDCUENTAPJ = ?
+
+(Datos de prueba: Cuenta a borrar = 123, Cuenta alterna = 127
+
+insert into cuenta (idcuenta, activa, fechacreacion, saldo, fechaultimomov, tipo, idcliente, cuentasoficina)
+values(123, 'Y', '10/12/98', 50000, '12/12/19', 'Ahorros', 123456789, 12345)
+
+insert into usuario (numerodocumento, tipodocumento, nombre, nacionalidad, direccionfisica, direccionelectronica, telefono, ciudad, departamento, codigopostal, tipo, login, palabraclave)
+values(231456, 'CC', 'Andres', 'Chile', 'calle 72', 'doomie@hotmail.com', 3232352, 'Medellin' 'Antioquia', 111321, 'Juridica', 'ande.13', 'arroz');
+
+)
+
+
+

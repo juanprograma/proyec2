@@ -1,0 +1,401 @@
+--CREACION DE LA SECUENCIA--
+
+create sequence bancandes_sequence;
+
+--CREACION DE LA TABLA USUARIO--
+
+create table usuario 
+(numerodocumento NUMBER,
+tipodocumento char(2),
+nombre varchar2(100 byte) NOT NULL,
+nacionalidad varchar2(50 byte) NOT NULL,
+direccionfisica varchar2(100 byte) NOT NULL,
+direccionelectronica varchar2(100 byte) UNIQUE,
+telefono number UNIQUE,
+ciudad varchar2(50 byte) NOT NULL,
+departamento varchar2(50 byte) NOT NULL,
+codigopostal number,
+tipo varchar2(10 byte),
+login varchar2(100 byte),
+palabraClave varchar2(100 byte) UNIQUE,
+constraint usuario_pk primary key (numerodocumento)
+);
+
+alter table usuario
+add constraint ck_usuario_tipodocumento
+check(tipodocumento in ('CC','TI','CE'))
+enable;
+
+alter table usuario
+add constraint ck_usuario_tipo
+check(tipo in ('Natural', 'Juridica'))
+enable;
+
+-CREACION DE LA TABLA USUARIOROL--
+
+create table usuariorol
+(idcliente number,
+rol varchar2(50 byte),
+constraint usuariorol_pk primary key (idcliente, rol)
+);
+
+alter table usuariorol
+add constraint fk_usuariorol_idcliente 
+foreign key(idcliente)
+references usuario(numerodocumento)
+enable;
+
+alter table usuariorol
+add constraint ck_usuariorol_rol
+check(rol in ('cliente', 'cajero', 'gerente general', 'gerente oficina'))
+enable;
+
+--CREACION DE LA TABLA OFICINA -- 
+
+create table oficina
+(idoficina number,
+nombre varchar2(100 byte) NOT NULL,
+direccion varchar2(100 byte) NOT NULL,
+puntosatencion number NOT NULL,
+gerente number,
+constraint oficina_pk primary key(idoficina)
+);
+
+alter table oficina
+add constraint fk_oficina_gerente
+foreign key(gerente)
+references usuario(numerodocumento)
+enable;
+
+-- CREACION DE LA TABLA CUENTA -- 
+
+create table cuenta
+(idcuenta number,
+activa char(1) NOT NULL,
+fechacreacion date NOT NULL,
+saldo number NOT NULL,
+fechaultimomov date NOT NULL,
+tipo varchar2(20 byte),
+idcliente number NOT NULL,
+cuentasoficina number NOT NULL,
+constraint cuenta_pk primary key(idcuenta)
+);
+
+alter table cuenta
+add constraint ck_cuenta_tipo
+check(tipo in ('Ahorros', 'Corriente', 'AFC', 'CDT'))
+enable;
+
+alter table cuenta
+add constraint ck_cuenta_activa
+check(activa in ('Y','N'))
+enable;
+
+alter table cuenta
+add constraint fk_cuenta_idcuenta
+foreign key(idcliente)
+references usuario(numerodocumento)
+enable;
+
+alter table cuenta
+add constraint fk_cuenta_cuentasoficina
+foreign key(cuentasoficina)
+references oficina(idoficina)
+enable;
+
+--CREACIÓN DE LA TABLA CDT--
+
+create table cdt
+(idcdt number,
+idcliente number,
+fechavencimiento date,
+tasarendimiento number(3,2),
+constraint pk_cdt primary key(idcdt)
+);
+
+alter table cdt
+add constraint fk_cdt_idcdt
+foreign key(idcdt)
+references cuenta(idcuenta)
+enable;
+
+alter table cdt
+add constraint fk_cdt_idcliente
+foreign key(idcliente)
+references usuario(numerodocumento)
+enable;
+
+--CREACION DE LA TABLA PRESTAMO--
+
+create table prestamo
+(idprestamo number,
+monto number NOT NULL,
+interes number NOT NULL,
+saldopendiente number NOT NULL,
+diapago date NOT NULL,
+valorcuotaminima number NOT NULL,
+numerocuotas number,
+tipo varchar2(20 byte) NOT NULL,
+idcliente number,
+cuentasoficina number,
+constraint prestamo_pk primary key(idprestamo)
+);
+
+alter table prestamo 
+add constraint ck_prestamo_tipo
+check(tipo in ('Vivienda','Estudio','Automovil','CalamidadDomestica','LibreInversion'))
+enable;
+
+alter table prestamo
+add constraint fk_prestamo_idcliente
+foreign key(idcliente)
+references usuario(numerodocumento)
+enable;
+
+alter table prestamo 
+add constraint fk_prestamo_cuentasoficina
+foreign key(cuentasoficina)
+references oficina(idoficina)
+enable;
+
+--CREACION DE LA TABLA ACCION-
+
+create table accion
+(idaccion number,
+cantidad number,
+constraint pk_accion primary key(idaccion)
+);
+
+-- CREACION DE LA TABLA CLIENTEACCION -- 
+
+create table clienteaccion
+(id number,
+idaccion number,
+idcliente number,
+cantidad number NOT NULL,
+constraint pk_clienteaccion primary key(id)
+);
+
+alter table clienteaccion
+add constraint fk_clienteaccion_idaccion
+foreign key(idaccion)
+references accion(idaccion)
+enable;
+
+alter table clienteaccion
+add constraint fk_clienteaccion_idcliente
+foreign key(idcliente)
+references usuario(numerodocumento)
+enable;
+
+-- CREACION DE LA TABLA PUNTOATENCION --
+
+create table puntoatencion
+(idpuntoatencion number,
+tipo varchar2(50 byte),
+localizacion varchar2(100 byte) NOT NULL,
+pertenece number,
+constraint pk_puntoatencion primary key(idpuntoatencion)
+);
+
+alter table puntoatencion
+add constraint ck_puntoatencion_tipo
+check(tipo in ('en oficina','cajero automatico'))
+enable;
+
+alter table puntoatencion
+add constraint fk_puntoatencion_pertenece
+foreign key(pertenece)
+references oficina(idoficina)
+enable;
+
+-- CREACION DE LA TABLA CAJEROATM --
+
+create table cajeroatm
+(idcajeroatm number,
+idpuntoatencion number,
+constraint pk_cajeroatm primary key(idcajeroatm)
+);
+
+alter table cajeroatm
+add constraint fk_cajeroatm_idpuntoatencion
+foreign key(idpuntoatencion)
+references puntoatencion(idpuntoatencion)
+enable;
+
+-- CREACION DE LA TABLA ATIENDE --
+
+create table atiende
+(idcajero number,
+idpuntoatencion number,
+constraint pk_atiende primary key(idcajero, idpuntoatencion)
+);
+
+alter table atiende
+add constraint fk_atiende_idcajero
+foreign key(idcajero)
+references usuario(numerodocumento)
+enable;
+
+alter table atiende
+add constraint fk_atiende_idpuntoatencion
+foreign key(idpuntoatencion)
+references puntoatencion(idpuntoatencion)
+enable;
+
+-- CREACION DE LA TABLA TRANSACCION --
+
+create table transaccion
+(idtransaccion number,
+idusuario number,
+fechahora timestamp,
+valor number,
+operacionespunto number,
+constraint pk_transaccion primary key(idtransaccion)
+);
+
+alter table transaccion
+add constraint fk_transaccion_idusuario
+foreign key(idusuario)
+references usuario(numerodocumento)
+enable;
+
+alter table transaccion
+add constraint fk_transaccion_operacionespunto
+foreign key(operacionespunto)
+references puntoatencion(idpuntoatencion)
+enable;
+
+--CREACION DE LA TABLA OPERACIONCUENTA -- 
+
+create table operacioncuenta
+(idoperacion number,
+tipo varchar2(20 byte),
+idtransaccion number,
+idcuenta number,
+constraint pk_operacioncuenta primary key(idoperacion)
+);
+
+alter table operacioncuenta
+add constraint ck_operacioncuenta_tipo
+check(tipo in ('Abrir', 'Cerrar', 'Retirar', 'Consignar'))
+enable;
+
+alter table operacioncuenta
+add constraint fk_operacioncuenta_idtransaccion
+foreign key(idtransaccion)
+references transaccion(idtransaccion)
+enable;
+
+alter table operacioncuenta
+add constraint fk_operacioncuenta_idcuenta
+foreign key(idcuenta)
+references cuenta(idcuenta)
+enable;
+
+-- CREACION DE LA TABLA OPERACIONCDT -- 
+
+create table operacioncdt
+(idoperacion number,
+tipo varchar2(20 byte),
+idtransaccion number,
+idcuenta number,
+constraint pk_operacioncdt primary key(idoperacion)
+);
+
+alter table operacioncdt
+add constraint ck_operacioncdt_tipo
+check(tipo in ('abrir', 'renovar', 'cerrar'))
+enable;
+
+alter table operacioncdt
+add constraint fk_operacioncdt_idtransaccion
+foreign key(idtransaccion)
+references transaccion(idtransaccion)
+enable;
+
+alter table operacioncdt
+add constraint fk_operacioncdt_idcuenta
+foreign key(idcuenta)
+references cdt(idcdt)
+enable;
+
+--CREACION DE LA TABLA OPERACIONPRESTAMO -- 
+
+create table operacionprestamo
+(idoperacion number,
+tipo varchar2(30 byte),
+idtransaccion number,
+idprestamo number,
+constraint pk_operacionprestamo primary key(idoperacion)
+);
+
+alter table operacionprestamo
+add constraint ck_operacionprestamo_tipo
+check(tipo in ('Solicitar', 'Aprobar', 'PagarCuota', 'PagarCuotaExtraordinaria', 'Rechazar', 'cerrar'))
+enable;
+
+alter table operacionprestamo
+add constraint fk_operacionprestamo_idtransaccion
+foreign key(idtransaccion)
+references transaccion(idtransaccion)
+enable;
+
+alter table operacionprestamo
+add constraint fk_operacionprestamo_idprestamo
+foreign key(idprestamo)
+references prestamo(idprestamo)
+enable;
+
+--CREACION TABLA OPERACIONDEPOSITOSINVERSION -- 
+create table operaciondepositosinversion
+(idoperacion number,
+tipo varchar2(20 byte),
+idtransaccion number,
+idcuenta number,
+constraint pk_operaciondepositosinversion primary key(idoperacion)
+);
+
+alter table operaciondepositosinversion
+add constraint ck_operaciondepositosinversion_tipo
+check(tipo in ('abrir', 'liquidar', 'cerrar', 'renovar'))
+enable;
+
+alter table operaciondepositosinversion
+add constraint fk_operaciondepositosinversion_idtransaccion
+foreign key(idtransaccion)
+references transaccion(idtransaccion)
+enable;
+
+-- CREACION DE TABLA OPERACIONACCIONES -- 
+
+create table operacionacciones
+(idoperacion number,
+tipo varchar2(20 byte),
+idtransaccion number,
+idclienteaccion number,
+constraint pk_operacionacciones primary key(idoperacion)
+);
+
+alter table operacionacciones
+add constraint ck_operacionacciones_tipo
+check(tipo in ('vender', 'comprar'))
+enable;
+
+alter table operacionacciones
+add constraint fk_operacionacciones_idtransaccion
+foreign key(idtransaccion)
+references transaccion(idtransaccion)
+enable;
+
+alter table operacionacciones
+add constraint fk_operacionacciones_idclienteaccion
+foreign key(idclienteaccion)
+references clienteaccion(id)
+enable;
+
+commit;
+
+
+
+
