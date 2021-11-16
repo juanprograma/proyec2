@@ -426,61 +426,88 @@ public class InterfazBancandesApp extends JFrame implements ActionListener
     }
     
     public void crearOperacionPrestamo() {
-    	
+
     	try {
-    		
-    		String tipo = JOptionPane.showInputDialog(this, "Indique el tipo de operación de prestamo que desea registrar", "Operacion prestamo", JOptionPane.QUESTION_MESSAGE);
-    		String idUsuariostr = JOptionPane.showInputDialog(this, "Ingrese el id del usuario", "Operacion cuenta", JOptionPane.QUESTION_MESSAGE);
-    		String valorstr = JOptionPane.showInputDialog(this, "Ingrese el valor (si su tipo de operacion es abrir o cerrar coloque 0)", "Operacion cuenta", JOptionPane.QUESTION_MESSAGE);
-    		String operacionesPuntostr = JOptionPane.showInputDialog(this, "Ingrese el id del punto de atencion", "Operacion cuenta", JOptionPane.QUESTION_MESSAGE);
-    		String cuentaOrigenstr = JOptionPane.showInputDialog(this, "Ingrese el id de la cuenta de origen(si su tipo es abrir, cerrar o retirar el id de origen y destino es el mismo.)", "Operacion cuenta", JOptionPane.QUESTION_MESSAGE);
-    		String cuentaDestinostr = JOptionPane.showInputDialog(this, "Ingrese el id de la cuenta de destino(si su tipo es abrir, cerrar o retirar el id de origen y destino es el mismo.)", "Operacion cuenta", JOptionPane.QUESTION_MESSAGE);
-    		String tipo = JOptionPane.showInputDialog(this, "Ingrese el tipo de la cuenta a abrir (en caso que la operacion no sea abrir no ingrese nada)", "Operacion cuenta", JOptionPane.QUESTION_MESSAGE);
-    		
-   
+
+    		String tipoOperacion = JOptionPane.showInputDialog(this, "Indique el tipo de operación de prestamo que desea registrar", "Operacion prestamo", JOptionPane.QUESTION_MESSAGE);
+
+
     		if(tipoOperacion != null)
     		{
-    			//Cuando se va a crear
-    			Timestamp diaPago = 
-    			long interes = 0;
-    			long saldoPendiente = 
-    			long operacionesPunto =
-    			long valorCuotaMinima =
-    			long numeroCuotas =
-    			String tipoPrestamo =
-    	    	long idCliente =
-    	    	long cuentasOficina =
+    			if(tipoOperacion.equals("Pedir")) {
 
-    	    	//Cuando se va a abonar
-    	    	int valor
-    			long idprestamo 
+    				String diastr = JOptionPane.showInputDialog(this, "Ingrese el dia de pago limite", "Operacion prestamo", JOptionPane.QUESTION_MESSAGE);
+    				String messtr = JOptionPane.showInputDialog(this, "Indique el mes de pago limite", "Operacion prestamo", JOptionPane.QUESTION_MESSAGE);
+    				String aniostr = JOptionPane.showInputDialog(this, "Indique el año de pago limite", "Operacion prestamo", JOptionPane.QUESTION_MESSAGE);
+    				String saldoPendientestr = JOptionPane.showInputDialog(this, "Ingrese el valor del prestamo", "Operacion prestamo", JOptionPane.QUESTION_MESSAGE);
+    				String valorCuotaMinimastr = JOptionPane.showInputDialog(this, "Ingrese el valor de la cuota minima del prestamo", "Operacion prestamo", JOptionPane.QUESTION_MESSAGE);
+    				String tipoPrestamo = JOptionPane.showInputDialog(this, "Ingrese el tipo del prestamo", "Operacion prestamo", JOptionPane.QUESTION_MESSAGE);
+    				String numeroCuotasstr = JOptionPane.showInputDialog(this, "Ingrese le numero de cuotas", "Operacion prestamo", JOptionPane.QUESTION_MESSAGE);
+    				String idClientestr = JOptionPane.showInputDialog(this, "Ingrese el id del cliente que pide el prestamo", "Operacion prestamo", JOptionPane.QUESTION_MESSAGE);
+    				String cuentasOficinastr = JOptionPane.showInputDialog(this, "Indique el id de la oficina", "Operacion prestamo", JOptionPane.QUESTION_MESSAGE);
+    				String operacionesPuntostr = JOptionPane.showInputDialog(this, "Ingrese el id del punto de atencion", "Operacion prestamo", JOptionPane.QUESTION_MESSAGE);
 
-    			
-    			String tipo, 
-    			long idUsuario, 
-    			 
-    			long cuentasOficina, 
-    			long valorCuotaMinima, 
-    			long numeroCuotas, 
-    			String tipoPrestamo =
-    			
-    			long oc = bancandes.crearOperacionCuenta(idUsuario, valor, operacionesPunto, tipoOperacion, cuentaOrigen, cuentaDestino, idCuenta, tipo);
-    	
-    			panelDatos.actualizarInterfaz("Se han insertado: " + oc + " transacciones");
+    				if(diastr != null && messtr != null && aniostr != null && saldoPendientestr != null && valorCuotaMinimastr != null && tipoPrestamo != null && numeroCuotasstr != null 
+    						&& idClientestr != null && cuentasOficinastr != null && operacionesPuntostr != null)
+    				{
+    					//Cuando se va a crear
+    					int dia = Integer.parseInt(diastr);
+    					int mes = Integer.parseInt(messtr);
+    					int anio = Integer.parseInt(aniostr);
+
+    					Timestamp diaPago = null;
+    					diaPago.setDate(dia);
+    					diaPago.setMonth(mes);
+    					diaPago.setYear(anio);
+
+    					long interes = 0;
+    					long saldoPendiente = Long.parseLong(saldoPendientestr);
+    					long operacionesPunto = Long.parseLong(operacionesPuntostr);
+    					long valorCuotaMinima = Long.parseLong(valorCuotaMinimastr);
+    					long numeroCuotas = Long.parseLong(numeroCuotasstr); 
+    					long idCliente = Long.parseLong(idClientestr);
+    					long cuentasOficina = Long.parseLong(cuentasOficinastr);
+
+    					long op = bancandes.crearOperacionPrestamo(diaPago, interes, saldoPendiente, operacionesPunto, tipoOperacion, 0, idCliente, 0, cuentasOficina, valorCuotaMinima, numeroCuotas, idCliente, tipoPrestamo);
+    				}
+    				else {
+    	    			panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
+    				}
+    			}
+
+    			else if (tipoOperacion.equals("Pagar")){
+
+    				String valorstr = JOptionPane.showInputDialog(this, "Ingrese el valor a abonar", "Operacion prestamo", JOptionPane.QUESTION_MESSAGE);
+    				String idPrestamostr = JOptionPane.showInputDialog(this, "Ingrese el id del prestamo a abonar", "Operacion prestamo", JOptionPane.QUESTION_MESSAGE);
+    				String idCliente = JOptionPane.showInputDialog(this, "Ingrese el id del cliente", "Operacion prestamo", JOptionPane.QUESTION_MESSAGE);
+
+    				if(valorstr != null && idPrestamostr !=null && idCliente != null) {
+
+    					int valor = Integer.parseInt(valorstr);
+    					long idprestamo = Long.parseLong(idPrestamostr); 
+    					long idUsuario = Long.parseLong(idCliente);
+    					
+    					long op = bancandes.crearOperacionPrestamo(null, 0, 0, 0, tipoOperacion, idprestamo, idUsuario, valor , 0, 0, 0, idUsuario, null);
+    					
+    				}
+    				
+    				else {
+    	    			panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
+    				}
+
+    			}
     		}
-    		
+
     		else {
     			panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
     		} 		
     	}
     	catch (Exception e) {
     		e.printStackTrace();
-			String resultado = generarMensajeError(e);
-			panelDatos.actualizarInterfaz(resultado);
+    		String resultado = generarMensajeError(e);
+    		panelDatos.actualizarInterfaz(resultado);
     	}
     }
-    
-    
   
 
 

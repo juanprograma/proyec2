@@ -140,7 +140,7 @@ public class Bancandes {
 	 }
 	 
 
-	 public long crearOperacionPrestamo(Timestamp diaPago, long interes, long saldoPendiente, long operacionesPunto, Timestamp fechahora,  String tipo, long idprestamo, long idUsuario, int valor , long cuentasOficina, long valorCuotaMinima, long numeroCuotas, long idCliente, String tipoPrestamo)
+	 public long crearOperacionPrestamo(Timestamp diaPago, long interes, long saldoPendiente, long operacionesPunto,  String tipo, long idprestamo, long idUsuario, int valor , long cuentasOficina, long valorCuotaMinima, long numeroCuotas, long idCliente, String tipoPrestamo)
 	 {
 
 		 log.info ("Crear transaccion : " + idCliente);

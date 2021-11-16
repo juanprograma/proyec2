@@ -27,16 +27,7 @@
 				{
 					"label": "Cancelar cuenta (RF14)",
 					"event": "cerrarCuenta"
-				},
-				{
-					"label": "Consultar prestamos (RFC5)",
-					"event": "consultarPrestamos"
-				},
-				{
-					"label": "Consultar operaciones (RFC6)",
-					"event": "consultarOperaciones"
 				}
-				
 			]
 		}	
 	]
