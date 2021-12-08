@@ -1,5 +1,7 @@
 package uniandes.isis2304.bancandes.persistencia;
 
+import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,7 +16,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-
+import oracle.sql.TIMESTAMP;
 import uniandes.isis2304.bancandes.negocio.OperacionCuenta;
 import uniandes.isis2304.bancandes.negocio.OperacionPrestamo;
 import uniandes.isis2304.bancandes.negocio.Cuenta;
@@ -529,7 +531,7 @@ public class PersistenciaBancandes {
             	insertarTran = sqlTransaccion.crearTransaccion(pm, idtransaccion, idUsuario, fechahora, valor, operacionesPunto);
                 insertarOpe = sqlOperacionPrestamo.crearOperacionPrestamo(pm,idOperacion, tipo, idtransaccion, idprestamo, cuentaOrigen);
                 insertarPres = sqlPrestamo.consignarPrestamo(pm, valor, idprestamo);
-            	
+    
             	
             }
             
@@ -604,6 +606,1149 @@ public class PersistenciaBancandes {
 	public List<OperacionCuenta> darOperacionCuentaPoridCuenta (long idcuenta)
 	{
 		return sqlOperacionCuenta.darOperacionCuentaPoridCuenta(pmf.getPersistenceManager(), idcuenta);
+	}
+	
+	public List<Object[]> darOperacionAccionesPorRangoDeFecha(String primeraFecha, String segundaFecha) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionAcciones.darOperacionAccionesPorRangoDeFecha(pmf.getPersistenceManager(), primeraFecha, segundaFecha);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipo = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipo;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darOperacionAccionesNoPorRangoDeFecha(String primeraFecha, String segundaFecha) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionAcciones.darOperacionAccionesNoPorRangoDeFecha(pmf.getPersistenceManager(), primeraFecha, segundaFecha);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipo = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipo;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darOperacionCDTPorRangoDeFecha(String primeraFecha, String segundaFecha) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionCDT.darOperacionCDTPorRangoDeFecha(pmf.getPersistenceManager(), primeraFecha, segundaFecha);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipo = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipo;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darOperacionCDTNoPorRangoDeFecha(String primeraFecha, String segundaFecha) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionCDT.darOperacionCDTNoPorRangoDeFecha(pmf.getPersistenceManager(), primeraFecha, segundaFecha);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipo = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipo;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darOperacionCuentaPorRangoDeFecha(String primeraFecha, String segundaFecha) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionCuenta.darOperacionCuentaPorRangoDeFecha(pmf.getPersistenceManager(), primeraFecha, segundaFecha);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipo = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipo;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darOperacionCuentaNoPorRangoDeFecha(String primeraFecha, String segundaFecha) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionCuenta.darOperacionCuentaNoPorRangoDeFecha(pmf.getPersistenceManager(), primeraFecha, segundaFecha);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipo = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipo;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darOperacionDepositosInversionPorRangoDeFecha(String primeraFecha, String segundaFecha) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionDepositosInversion.darOperacionDepositosInversionPorRangoDeFecha(pmf.getPersistenceManager(), primeraFecha, segundaFecha);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipo = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipo;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darOperacionDepositosInversionNoPorRangoDeFecha(String primeraFecha, String segundaFecha) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionDepositosInversion.darOperacionDepositosInversionNoPorRangoDeFecha(pmf.getPersistenceManager(), primeraFecha, segundaFecha);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipo = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipo;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darOperacionPrestamoPorRangoDeFecha(String primeraFecha, String segundaFecha) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionPrestamo.darOperacionPrestamoPorRangoDeFecha(pmf.getPersistenceManager(), primeraFecha, segundaFecha);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipo = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipo;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darOperacionPrestamoNoPorRangoDeFecha(String primeraFecha, String segundaFecha) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionPrestamo.darOperacionPrestamoNoPorRangoDeFecha(pmf.getPersistenceManager(), primeraFecha, segundaFecha);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipo = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipo;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	
+	public List<Object[]> darOperacionAccionesPorTipo(String tipo) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionAcciones.darOperacionAccionesPorTipo(pmf.getPersistenceManager(), tipo);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipoOperacion = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipoOperacion;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darOperacionAccionesNoPorTipo(String tipo) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionAcciones.darOperacionAccionesNoPorTipo(pmf.getPersistenceManager(), tipo);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipoOperacion = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipoOperacion;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darOperacionCDTPorTipo(String tipo) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionCDT.darOperacionCDTPorTipo(pmf.getPersistenceManager(), tipo);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipoOperacion = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipoOperacion;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darOperacionCDTNoPorTipo(String tipo) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionCDT.darOperacionCDTNoPorTipo(pmf.getPersistenceManager(), tipo);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipoOperacion = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipoOperacion;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darOperacionCuentaPorTipo(String tipo) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionCuenta.darOperacionCuentaPorTipo(pmf.getPersistenceManager(), tipo);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipoOperacion = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipoOperacion;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darOperacionCuentaNoPorTipo(String tipo) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionCuenta.darOperacionCuentaNoPorTipo(pmf.getPersistenceManager(), tipo);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipoOperacion = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipoOperacion;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darOperacionDepositosInversionPorTipo(String tipo) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionDepositosInversion.darOperacionDepositosInversionPorTipo(pmf.getPersistenceManager(), tipo);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipoOperacion = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipoOperacion;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darOperacionDepositosInversionNoPorTipo(String tipo) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionDepositosInversion.darOperacionDepositosInversionNoPorTipo(pmf.getPersistenceManager(), tipo);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipoOperacion = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipoOperacion;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darOperacionPrestamoPorTipo(String tipo) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionPrestamo.darOperacionPrestamoPorTipo(pmf.getPersistenceManager(), tipo);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipoOperacion = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipoOperacion;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darOperacionPrestamoNoPorTipo(String tipo) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionPrestamo.darOperacionPrestamoNoPorTipo(pmf.getPersistenceManager(), tipo);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipoOperacion = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipoOperacion;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	
+	public List<Object[]> darOperacionAccionesMayoresA(int valorPar) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionAcciones.darOperacionAccionesMayoresA(pmf.getPersistenceManager(), valorPar);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipoOperacion = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipoOperacion;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darOperacionAccionesNoMayoresA(int valorPar) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionAcciones.darOperacionAccionesNoMayoresA(pmf.getPersistenceManager(), valorPar);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipoOperacion = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipoOperacion;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darOperacionCDTMayoresA(int valorPar) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionCDT.darOperacionCDTMayoresA(pmf.getPersistenceManager(), valorPar);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipoOperacion = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipoOperacion;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darOperacionCDTNoMayoresA(int valorPar) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionCDT.darOperacionCDTNoMayoresA(pmf.getPersistenceManager(), valorPar);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipoOperacion = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipoOperacion;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darOperacionCuentaMayoresA(int valorPar) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionCuenta.darOperacionCuentaMayoresA(pmf.getPersistenceManager(), valorPar);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipoOperacion = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipoOperacion;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darOperacionCuentaNoMayoresA(int valorPar) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionCuenta.darOperacionCuentaNoMayoresA(pmf.getPersistenceManager(), valorPar);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipoOperacion = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipoOperacion;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darOperacionDepositosInversionMayoresA(int valorPar) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionDepositosInversion.darOperacionDepositosInversionMayoresA(pmf.getPersistenceManager(), valorPar);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipoOperacion = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipoOperacion;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darOperacionDepositosInversionNoMayoresA(int valorPar) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionDepositosInversion.darOperacionDepositosInversionNoMayoresA(pmf.getPersistenceManager(), valorPar);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipoOperacion = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipoOperacion;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darOperacionPrestamoMayoresA(int valorPar) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionPrestamo.darOperacionPrestamoMayoresA(pmf.getPersistenceManager(), valorPar);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipoOperacion = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipoOperacion;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darOperacionPrestamoNoMayoresA(int valorPar) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionPrestamo.darOperacionPrestamoNoMayoresA(pmf.getPersistenceManager(), valorPar);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipoOperacion = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipoOperacion;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darOperacionAccionesMenoresA(int valorPar) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionAcciones.darOperacionAccionesMenoresA(pmf.getPersistenceManager(), valorPar);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipoOperacion = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipoOperacion;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darOperacionAccionesNoMenoresA(int valorPar) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionAcciones.darOperacionAccionesNoMenoresA(pmf.getPersistenceManager(), valorPar);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipoOperacion = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipoOperacion;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darOperacionCDTMenoresA(int valorPar) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionCDT.darOperacionCDTMenoresA(pmf.getPersistenceManager(), valorPar);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipoOperacion = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipoOperacion;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darOperacionCDTNoMenoresA(int valorPar) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionCDT.darOperacionCDTNoMenoresA(pmf.getPersistenceManager(), valorPar);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipoOperacion = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipoOperacion;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darOperacionCuentaMenoresA(int valorPar) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionCuenta.darOperacionCuentaMenoresA(pmf.getPersistenceManager(), valorPar);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipoOperacion = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipoOperacion;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darOperacionCuentaNoMenoresA(int valorPar) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionCuenta.darOperacionCuentaNoMenoresA(pmf.getPersistenceManager(), valorPar);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipoOperacion = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipoOperacion;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darOperacionDepositosInversionMenoresA(int valorPar) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionDepositosInversion.darOperacionDepositosInversionMenoresA(pmf.getPersistenceManager(), valorPar);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipoOperacion = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipoOperacion;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darOperacionDepositosInversionNoMenoresA(int valorPar) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionDepositosInversion.darOperacionDepositosInversionNoMenoresA(pmf.getPersistenceManager(), valorPar);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipoOperacion = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipoOperacion;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darOperacionPrestamoMenoresA(int valorPar) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionPrestamo.darOperacionPrestamoMenoresA(pmf.getPersistenceManager(), valorPar);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipoOperacion = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipoOperacion;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darOperacionPrestamoNoMenoresA(int valorPar) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionPrestamo.darOperacionPrestamoNoMenoresA(pmf.getPersistenceManager(), valorPar);
+		
+		for ( Object[] tupla : tuplas) {
+	
+			String tipoOperacion = (String) tupla[0];
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[1];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			int valor = ((BigDecimal) tupla[2]).intValue ();
+			
+			Object[] operacion = new Object[3];
+			operacion[0] = tipoOperacion;
+			operacion[1] = fechahora;
+			operacion[2] = valor;
+			
+			respuesta.add(operacion);
+		}
+		return respuesta;
+	}
+	
+	public List<Object[]> darConsignacionesDeClientesQueTienenPrestamoConMontoMayorA(int monto) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionCuenta.darConsignacionesDeClientesQueTienenPrestamoConMontoMayorA(pmf.getPersistenceManager(), monto);
+		
+		for ( Object[] tupla : tuplas) {
+			
+			String tipoOperacion = (String) tupla[0];
+			int valor = ((BigDecimal) tupla[1]).intValue ();
+			long idCuenta = ((BigDecimal) tupla[2]).longValue();
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[3];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			
+			Object[] consignacion = new Object[4];
+			consignacion[0] = tipoOperacion;
+			consignacion[1] = valor;
+			consignacion[2] = idCuenta;
+			consignacion[3] = fechahora;
+			
+			respuesta.add(consignacion);
+			
+		}
+		
+		return respuesta;	
+	}
+	
+	public List<Object[]> darConsignacionesDeClientesQueTienenCDTConMontoMayorA(int monto) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionCuenta.darConsignacionesDeClientesQueTienenCDTConMontoMayorA(pmf.getPersistenceManager(), monto);
+		
+		for ( Object[] tupla : tuplas) {
+			
+			String tipoOperacion = (String) tupla[0];
+			int valor = ((BigDecimal) tupla[1]).intValue ();
+			long idCuenta = ((BigDecimal) tupla[2]).longValue();
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[3];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			
+			Object[] consignacion = new Object[4];
+			consignacion[0] = tipoOperacion;
+			consignacion[1] = valor;
+			consignacion[2] = idCuenta;
+			consignacion[3] = fechahora;
+			
+			respuesta.add(consignacion);
+			
+		}
+		
+		return respuesta;	
+	}
+	
+	public List<Object[]> darConsignacionesDeClientesQueTienenAccionesConMontoMayorA(int monto) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionCuenta.darConsignacionesDeClientesQueTienenAccionesConMontoMayorA(pmf.getPersistenceManager(), monto);
+		
+		for ( Object[] tupla : tuplas) {
+			
+			String tipoOperacion = (String) tupla[0];
+			int valor = ((BigDecimal) tupla[1]).intValue ();
+			long idCuenta = ((BigDecimal) tupla[2]).longValue();
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[3];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			
+			Object[] consignacion = new Object[4];
+			consignacion[0] = tipoOperacion;
+			consignacion[1] = valor;
+			consignacion[2] = idCuenta;
+			consignacion[3] = fechahora;
+			
+			respuesta.add(consignacion);
+			
+		}
+		
+		return respuesta;	
+	}
+	
+	public List<Object[]> darConsignacionesDeClientesQueTienenCuentasConMontoMayorA(int monto) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlOperacionCuenta.darConsignacionesDeClientesQueTienenCuentasConMontoMayorA(pmf.getPersistenceManager(), monto);
+		
+		for ( Object[] tupla : tuplas) {
+			
+			String tipoOperacion = (String) tupla[0];
+			int valor = ((BigDecimal) tupla[1]).intValue ();
+			long idCuenta = ((BigDecimal) tupla[2]).longValue();
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[3];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			
+			Object[] consignacion = new Object[4];
+			consignacion[0] = tipoOperacion;
+			consignacion[1] = valor;
+			consignacion[2] = idCuenta;
+			consignacion[3] = fechahora;
+			
+			respuesta.add(consignacion);
+			
+		}
+		
+		return respuesta;	
+	}
+	
+	public List<Object[]> buscarOperacionesEnDosPuntos(long primerPunto, long segundoPunto) throws SQLException{
+		
+		List<Object []> respuesta = new LinkedList <Object []> ();
+		List<Object[]> tuplas = sqlPuntoAtencion.buscarOperacionesEnAccionesEnDosPuntosAtencion(pmf.getPersistenceManager(), primerPunto, segundoPunto);
+		
+		for ( Object[] tupla : tuplas) {
+			
+			String tipoDocumento = (String) tupla[0];
+			long numeroDocumento = ((BigDecimal) tupla[1]).longValue();
+			String nombre = (String) tupla[2];
+			String tipoDePersona = (String) tupla[3];
+			String direccionElectronica = (String) tupla[4];
+			long idPuntoAtencion = ((BigDecimal) tupla[5]).longValue();
+			String tipo = (String) tupla[6];
+			String tipoOperacion = "Tipo de operacion en acciones: " + tipo;
+			int valor = ((BigDecimal) tupla[7]).intValue();
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[8];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			
+			Object[] operacion = new Object[9];
+			operacion[0] = tipoDocumento;
+			operacion[1] = numeroDocumento;
+			operacion[2] = nombre;
+			operacion[3] = tipoDePersona;
+			operacion[4] = direccionElectronica;
+			operacion[5] = idPuntoAtencion;
+			operacion[6] = tipoOperacion;
+			operacion[7] = valor;
+			operacion[8] = fechahora;
+			
+			respuesta.add(operacion);
+		}
+		
+		tuplas = sqlPuntoAtencion.buscarOperacionesEnCDTEnDosPuntosAtencion(pmf.getPersistenceManager(), primerPunto, segundoPunto);
+		
+		for ( Object[] tupla : tuplas) {
+			
+			String tipoDocumento = (String) tupla[0];
+			long numeroDocumento = ((BigDecimal) tupla[1]).longValue();
+			String nombre = (String) tupla[2];
+			String tipoDePersona = (String) tupla[3];
+			String direccionElectronica = (String) tupla[4];
+			long idPuntoAtencion = ((BigDecimal) tupla[5]).longValue();
+			String tipo = (String) tupla[6];
+			String tipoOperacion = "Tipo de operacion en CDT: " + tipo;
+			int valor = ((BigDecimal) tupla[7]).intValue();
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[8];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			
+			Object[] operacion = new Object[9];
+			operacion[0] = tipoDocumento;
+			operacion[1] = numeroDocumento;
+			operacion[2] = nombre;
+			operacion[3] = tipoDePersona;
+			operacion[4] = direccionElectronica;
+			operacion[5] = idPuntoAtencion;
+			operacion[6] = tipoOperacion;
+			operacion[7] = valor;
+			operacion[8] = fechahora;
+			
+			respuesta.add(operacion);
+		}
+		
+		tuplas = sqlPuntoAtencion.buscarOperacionesEnCuentaEnDosPuntosAtencion(pmf.getPersistenceManager(), primerPunto, segundoPunto);
+		
+		for ( Object[] tupla : tuplas) {
+			
+			String tipoDocumento = (String) tupla[0];
+			long numeroDocumento = ((BigDecimal) tupla[1]).longValue();
+			String nombre = (String) tupla[2];
+			String tipoDePersona = (String) tupla[3];
+			String direccionElectronica = (String) tupla[4];
+			long idPuntoAtencion = ((BigDecimal) tupla[5]).longValue();
+			String tipo = (String) tupla[6];
+			String tipoOperacion = "Tipo de operacion en cuentas: " + tipo;
+			int valor = ((BigDecimal) tupla[7]).intValue();
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[8];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			
+			Object[] operacion = new Object[9];
+			operacion[0] = tipoDocumento;
+			operacion[1] = numeroDocumento;
+			operacion[2] = nombre;
+			operacion[3] = tipoDePersona;
+			operacion[4] = direccionElectronica;
+			operacion[5] = idPuntoAtencion;
+			operacion[6] = tipoOperacion;
+			operacion[7] = valor;
+			operacion[8] = fechahora;
+			
+			respuesta.add(operacion);
+		}
+		
+		tuplas = sqlPuntoAtencion.buscarOperacionesEnDepositosDeInversionEnDosPuntosAtencion(pmf.getPersistenceManager(), primerPunto, segundoPunto);
+		
+		for ( Object[] tupla : tuplas) {
+			
+			String tipoDocumento = (String) tupla[0];
+			long numeroDocumento = ((BigDecimal) tupla[1]).longValue();
+			String nombre = (String) tupla[2];
+			String tipoDePersona = (String) tupla[3];
+			String direccionElectronica = (String) tupla[4];
+			long idPuntoAtencion = ((BigDecimal) tupla[5]).longValue();
+			String tipo = (String) tupla[6];
+			String tipoOperacion = "Tipo de operacion en depositos de inversion: " + tipo;
+			int valor = ((BigDecimal) tupla[7]).intValue();
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[8];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			
+			Object[] operacion = new Object[9];
+			operacion[0] = tipoDocumento;
+			operacion[1] = numeroDocumento;
+			operacion[2] = nombre;
+			operacion[3] = tipoDePersona;
+			operacion[4] = direccionElectronica;
+			operacion[5] = idPuntoAtencion;
+			operacion[6] = tipoOperacion;
+			operacion[7] = valor;
+			operacion[8] = fechahora;
+			
+			respuesta.add(operacion);
+		}
+		
+		tuplas = sqlPuntoAtencion.buscarOperacionesEnPrestamoEnDosPuntosAtencion(pmf.getPersistenceManager(), primerPunto, segundoPunto);
+		
+		for ( Object[] tupla : tuplas) {
+			
+			String tipoDocumento = (String) tupla[0];
+			long numeroDocumento = ((BigDecimal) tupla[1]).longValue();
+			String nombre = (String) tupla[2];
+			String tipoDePersona = (String) tupla[3];
+			String direccionElectronica = (String) tupla[4];
+			long idPuntoAtencion = ((BigDecimal) tupla[5]).longValue();
+			String tipo = (String) tupla[6];
+			String tipoOperacion = "Tipo de operacion en prestamos: " + tipo;
+			int valor = ((BigDecimal) tupla[7]).intValue();
+			oracle.sql.TIMESTAMP fechahoraoracle = (TIMESTAMP) tupla[8];
+			Timestamp fechahora = (Timestamp) fechahoraoracle.timestampValue();
+			
+			Object[] operacion = new Object[9];
+			operacion[0] = tipoDocumento;
+			operacion[1] = numeroDocumento;
+			operacion[2] = nombre;
+			operacion[3] = tipoDePersona;
+			operacion[4] = direccionElectronica;
+			operacion[5] = idPuntoAtencion;
+			operacion[6] = tipoOperacion;
+			operacion[7] = valor;
+			operacion[8] = fechahora;
+			
+			respuesta.add(operacion);
+		}
+		
+		return respuesta;
+				
 	}
  
 	}

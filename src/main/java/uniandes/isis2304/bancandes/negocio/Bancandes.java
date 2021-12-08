@@ -3,6 +3,8 @@ package uniandes.isis2304.bancandes.negocio;
 import uniandes.isis2304.bancandes.persistencia.PersistenciaBancandes;
 
 import uniandes.isis2304.bancandes.negocio.Prestamo;
+
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
@@ -238,16 +240,275 @@ public class Bancandes {
 	        log.info ("Buscando bebedor por id:" + id);
 	        return operacionescuenta ;
 		}
-
-
-
 	 
+	 public List<Object[]> darOperacionAccionesPorRangoDeFecha(String primeraFecha, String segundaFecha) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionAccionesPorRangoDeFecha(primeraFecha, segundaFecha);
+		 return tuplas;
+	 }
 	 
+	 public List<Object[]> darOperacionAccionesNoPorRangoDeFecha(String primeraFecha, String segundaFecha) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionAccionesNoPorRangoDeFecha(primeraFecha, segundaFecha);
+		 return tuplas;
+	 }
 	 
+	 public List<Object[]> darOperacionCDTPorRangoDeFecha(String primeraFecha, String segundaFecha) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionCDTPorRangoDeFecha(primeraFecha, segundaFecha);
+		 return tuplas;
+	 }
 	 
+	 public List<Object[]> darOperacionCDTNoPorRangoDeFecha(String primeraFecha, String segundaFecha) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionCDTNoPorRangoDeFecha(primeraFecha, segundaFecha);
+		 return tuplas;
+	 }
 	 
+	 public List<Object[]> darOperacionCuentaPorRangoDeFecha(String primeraFecha, String segundaFecha) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionCuentaPorRangoDeFecha(primeraFecha, segundaFecha);
+		 return tuplas;
+	 }
 	 
+	 public List<Object[]> darOperacionCuentaNoPorRangoDeFecha(String primeraFecha, String segundaFecha) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionCuentaNoPorRangoDeFecha(primeraFecha, segundaFecha);
+		 return tuplas;
+	 }
 	 
+	 public List<Object[]> darOperacionDepositosInversionPorRangoDeFecha(String primeraFecha, String segundaFecha) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionDepositosInversionPorRangoDeFecha(primeraFecha, segundaFecha);
+		 return tuplas;
+	 }
 	 
+	 public List<Object[]> darOperacionDepositosInversionNoPorRangoDeFecha(String primeraFecha, String segundaFecha) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionDepositosInversionNoPorRangoDeFecha(primeraFecha, segundaFecha);
+		 return tuplas;
+	 }
+	 
+	 public List<Object[]> darOperacionPrestamoPorRangoDeFecha(String primeraFecha, String segundaFecha) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionPrestamoPorRangoDeFecha(primeraFecha, segundaFecha);
+		 return tuplas;
+	 }
+	 
+	 public List<Object[]> darOperacionPrestamoNoPorRangoDeFecha(String primeraFecha, String segundaFecha) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionPrestamoNoPorRangoDeFecha(primeraFecha, segundaFecha);
+		 return tuplas;
+	 }
+	 
+	 public List<Object[]> darOperacionAccionesPorTipo(String tipo) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionAccionesPorTipo(tipo);
+		 return tuplas;
+	 }
+	 
+	 public List<Object[]> darOperacionAccionesNoPorTipo(String tipo) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionAccionesNoPorTipo(tipo);
+		 return tuplas;
+	 }
+	 
+	 public List<Object[]> darOperacionCDTPorTipo(String tipo) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionCDTPorTipo(tipo);
+		 return tuplas;
+	 }
+	 
+	 public List<Object[]> darOperacionCDTNoPorTipo(String tipo) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionCDTNoPorTipo(tipo);
+		 return tuplas;
+	 }
+	 
+	 public List<Object[]> darOperacionCuentaPorTipo(String tipo) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionCuentaPorTipo(tipo);
+		 return tuplas;
+	 }
+	 
+	 public List<Object[]> darOperacionCuentaNoPorTipo(String tipo) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionCuentaNoPorTipo(tipo);
+		 return tuplas;
+	 }
+	 
+	 public List<Object[]> darOperacionDepositosInversionPorTipo(String tipo) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionDepositosInversionPorTipo(tipo);
+		 return tuplas;
+	 }
+	 
+	 public List<Object[]> darOperacionDepositosInversionNoPorTipo(String tipo) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionDepositosInversionNoPorTipo(tipo);
+		 return tuplas;
+	 }
+	 
+	 public List<Object[]> darOperacionPrestamoPorTipo(String tipo) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionPrestamoPorTipo(tipo);
+		 return tuplas;
+	 }
+	 
+	 public List<Object[]> darOperacionPrestamoNoPorTipo(String tipo) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionPrestamoNoPorTipo(tipo);
+		 return tuplas;
+	 }
+	 
+	 public List<Object[]> darOperacionAccionesMayoresA(int valor) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionAccionesMayoresA(valor);
+		 return tuplas;
+	 }
+	 
+	 public List<Object[]> darOperacionAccionesNoMayoresA(int valor) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionAccionesNoMayoresA(valor);
+		 return tuplas;
+	 }
+	 
+	 public List<Object[]> darOperacionCDTMayoresA(int valor) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionCDTMayoresA(valor);
+		 return tuplas;
+	 }
+	 
+	 public List<Object[]> darOperacionCDTNoMayoresA(int valor) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionCDTNoMayoresA(valor);
+		 return tuplas;
+	 }
+	 
+	 public List<Object[]> darOperacionCuentaMayoresA(int valor) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionCuentaMayoresA(valor);
+		 return tuplas;
+	 }
+	 
+	 public List<Object[]> darOperacionCuentaNoMayoresA(int valor) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionCuentaNoMayoresA(valor);
+		 return tuplas;
+	 }
+	 
+	 public List<Object[]> darOperacionDepositosInversionMayoresA(int valor) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionDepositosInversionMayoresA(valor);
+		 return tuplas;
+	 }
+	 
+	 public List<Object[]> darOperacionDepositosInversionNoMayoresA(int valor) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionDepositosInversionNoMayoresA(valor);
+		 return tuplas;
+	 }
+	 
+	 public List<Object[]> darOperacionPrestamoMayoresA(int valor) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionPrestamoMayoresA(valor);
+		 return tuplas;
+	 }
+	 
+	 public List<Object[]> darOperacionPrestamoNoMayoresA(int valor) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionPrestamoNoMayoresA(valor);
+		 return tuplas;
+	 }
+	 
+	 public List<Object[]> darOperacionAccionesMenoresA(int valor) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionAccionesMenoresA(valor);
+		 return tuplas;
+	 }
+	 
+	 public List<Object[]> darOperacionAccionesNoMenoresA(int valor) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionAccionesNoMenoresA(valor);
+		 return tuplas;
+	 }
+	 
+	 public List<Object[]> darOperacionCDTMenoresA(int valor) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionCDTMenoresA(valor);
+		 return tuplas;
+	 }
+	 
+	 public List<Object[]> darOperacionCDTNoMenoresA(int valor) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionCDTNoMenoresA(valor);
+		 return tuplas;
+	 }
+	 
+	 public List<Object[]> darOperacionCuentaMenoresA(int valor) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionCuentaMenoresA(valor);
+		 return tuplas;
+	 }
+	 
+	 public List<Object[]> darOperacionCuentaNoMenoresA(int valor) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionCuentaNoMenoresA(valor);
+		 return tuplas;
+	 }
+	 
+	 public List<Object[]> darOperacionDepositosInversionMenoresA(int valor) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionDepositosInversionMenoresA(valor);
+		 return tuplas;
+	 }
+	 
+	 public List<Object[]> darOperacionDepositosInversionNoMenoresA(int valor) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionDepositosInversionNoMenoresA(valor);
+		 return tuplas;
+	 }
+	 
+	 public List<Object[]> darOperacionPrestamoMenoresA(int valor) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionPrestamoMenoresA(valor);
+		 return tuplas;
+	 }
+	 
+	 public List<Object[]> darOperacionPrestamoNoMenoresA(int valor) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darOperacionPrestamoNoMenoresA(valor);
+		 return tuplas;
+	 }
+	 
+	 public List<Object[]> darConsignacionesDeClientesQueTienenPrestamoConMontoMayorA(int monto) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darConsignacionesDeClientesQueTienenPrestamoConMontoMayorA(monto);
+		 return tuplas;
+	 }
+	 
+	 public List<Object[]> darConsignacionesDeClientesQueTienenCDTConMontoMayorA(int monto) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darConsignacionesDeClientesQueTienenCDTConMontoMayorA(monto);
+		 return tuplas;
+	 } 
+	 
+	 public List<Object[]> darConsignacionesDeClientesQueTienenAccionesConMontoMayorA(int monto) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darConsignacionesDeClientesQueTienenAccionesConMontoMayorA(monto);
+		 return tuplas;
+	 }
+	 
+	 public List<Object[]> darConsignacionesDeClientesQueTienenCuentasConMontoMayorA(int monto) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.darConsignacionesDeClientesQueTienenCuentasConMontoMayorA(monto);
+		 return tuplas;
+	 }
+	 
+	 public List<Object[]> buscarOperacionesEnDosPuntosDeAtencion(long primerPunto, long segundoPunto) throws SQLException{
+		 
+		 List<Object[]> tuplas = pb.buscarOperacionesEnDosPuntos(primerPunto, segundoPunto);
+		 return tuplas;
+	 }
 	 
 }

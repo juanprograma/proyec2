@@ -5,6 +5,64 @@
 	"bannerPath": "./src/main/resources/config/logo.png",
 	"menuBar":
 	[
+			{ "menuTitle": "Iteracion dos",
+		  "options":
+			[
+				{
+					"label": "Registrar usuario (RF1)",
+					"event": "registrarUsuario"
+				},
+				{
+					"label": "Registrar oficina (RF2)",
+					"event": "registrarOficina"
+				},
+				{
+					"label": "Registrar punto de atención (RF3)",
+					"event": "registrarPuntoAtencion"
+				},
+				{
+					"label": "Registrar cuenta (RF4)",
+					"event": "registrarCuenta"
+				},
+				{
+					"label": "Cerrar cuenta (RF5)",
+					"event": "cerrarCuenta"
+				},
+				{
+					"label": "Registrar operación sobre cuenta (RF6)",
+					"event": "registrarOperacionCuenta"
+				},
+				{
+					"label": "Registrar prestamo (RF7)",
+					"event": "registrarPrestamo"
+				},
+				{
+					"label": "Registrar operacion sobre prestamo (RF8)",
+					"event": "registrarOperacionPrestamo"
+				},
+				{
+					"label": "Cerrar prestamo (RF9)",
+					"event": "cerrarPrestamo"
+				},
+				{
+					"label": "Consultar cuentas en Bancandes (RFC1)",
+					"event": "consultarCuentas"
+				},
+				{
+					"label": "Consultar un cliente (RFC2)",
+					"event": "consultarCliente"
+				},
+				{
+					"label": "Consultar top 10 operaciones (RFC3)",
+					"event": "consultarOperacionesTop"
+				},
+				{
+					"label": "Obtener usuario más activo (RFC4)",
+					"event": "obtenerUsuarioActivo"
+				}
+				
+			]
+		},
 		{ "menuTitle": "Iteracion tres",
 		  "options":
 			[
@@ -38,7 +96,29 @@
 				}
 				
 			]
-		}	
+		},
+		{ "menuTitle": "Iteracion cuatro",
+		  "options":
+			[
+				{
+					"label": "Consultar operaciones v2 (RFC7)",
+					"event": "consultarOperaciones"
+				},
+				{
+					"label": "Consultar operaciones v3 (RFC8)",
+					"event": "consultarNoOperaciones"
+				},
+				{
+					"label": "Consultar consignaciones (RFC9)",
+					"event": "consultarConsignaciones"
+				},
+				{
+					"label": "Consultar punto(s) de atención (RFC10)",
+					"event": "buscarOperacionesEnDosPuntos"
+				}
+			]
+		}
+			
 	]
 }
 	
