@@ -390,6 +390,853 @@ public class InterfazBancandesApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
+	
+	public void consultarOperaciones() {
+		
+		try {
+			int seleccion = JOptionPane.showOptionDialog(this, 
+						"Seleccione en que tipo de operaciones desea buscar:", 
+						"Selector de operaciones",
+						JOptionPane.YES_NO_CANCEL_OPTION,
+						JOptionPane.QUESTION_MESSAGE,
+						null,
+						new Object[] { "Acciones", "CDT", "Cuenta", "Depositos de inversión", "Prestamo"},
+					   	null);
+			
+			if(seleccion == 0) {
+				
+				int filtro = JOptionPane.showOptionDialog(this, 
+						"Seleccione por qué filtro desea buscar:", 
+						"Selector de filtro de consulta",
+						JOptionPane.YES_NO_CANCEL_OPTION,
+						JOptionPane.QUESTION_MESSAGE,
+						null,
+						new Object[] { "Fechas", "Tipo", "Mayor a un valor", "Menor a un valor"},
+					   	null);
+				
+				if(filtro == 0) {
+					
+					String respuesta = "Operaciones en Acciones \n\n";
+					String primeraFecha = JOptionPane.showInputDialog(this, "Ingrese la fecha mínima del rango (DD/MM/YY): ", "Rango de fechas", JOptionPane.QUESTION_MESSAGE);
+					String segundaFecha = JOptionPane.showInputDialog(this, "Ingrese la fecha máxima del rango (DD/MM/YY): ", "Rango de fechas", JOptionPane.QUESTION_MESSAGE);
+					
+					List<Object[]> tuplas = bancandes.darOperacionAccionesPorRangoDeFecha(primeraFecha, segundaFecha);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+					
+				}
+				
+				else if(filtro == 1) {
+					
+					String respuesta = "Operaciones en Acciones \n\n";
+					String tipo = JOptionPane.showInputDialog(this, "Ingrese el tipo de la operacion en acciones: ", "Tipo de operación", JOptionPane.QUESTION_MESSAGE);
+					
+					List<Object[]> tuplas = bancandes.darOperacionAccionesPorTipo(tipo);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+				}
+				
+				else if(filtro == 2) {
+					
+					String respuesta = "Operaciones en Acciones \n\n";
+					String valorStr = JOptionPane.showInputDialog(this, "Ingrese el valor: ", "Mayor a un valor", JOptionPane.QUESTION_MESSAGE);
+					int valor = Integer.valueOf(valorStr);
+					
+					List<Object[]> tuplas = bancandes.darOperacionAccionesMayoresA(valor);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+					
+				}
+				
+				else if(filtro == 3) {
+					
+					String respuesta = "Operaciones en Acciones \n\n";
+					String valorStr = JOptionPane.showInputDialog(this, "Ingrese el valor: ", "Menor a un valor", JOptionPane.QUESTION_MESSAGE);
+					int valor = Integer.valueOf(valorStr);
+					
+					List<Object[]> tuplas = bancandes.darOperacionAccionesMenoresA(valor);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+					
+				}
+			}
+			
+			else if(seleccion == 1) {
+				
+				int filtro = JOptionPane.showOptionDialog(this, 
+						"Seleccione por qué filtro desea buscar:", 
+						"Selector de filtro de consulta",
+						JOptionPane.YES_NO_CANCEL_OPTION,
+						JOptionPane.QUESTION_MESSAGE,
+						null,
+						new Object[] { "Fechas", "Tipo", "Mayor a un valor", "Menor a un valor"},
+					   	null);
+				
+				if(filtro == 0) {
+					
+					String respuesta = "Operaciones en CDT \n\n";
+					String primeraFecha = JOptionPane.showInputDialog(this, "Ingrese la fecha mínima del rango (DD/MM/YY): ", "Rango de fechas", JOptionPane.QUESTION_MESSAGE);
+					String segundaFecha = JOptionPane.showInputDialog(this, "Ingrese la fecha máxima del rango (DD/MM/YY): ", "Rango de fechas", JOptionPane.QUESTION_MESSAGE);
+					
+					List<Object[]> tuplas = bancandes.darOperacionCDTPorRangoDeFecha(primeraFecha, segundaFecha);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+					
+				}
+				
+				else if(filtro == 1) {
+					
+					String respuesta = "Operaciones en CDT \n\n";
+					String tipo = JOptionPane.showInputDialog(this, "Ingrese el tipo de la operacion en CDT: ", "Tipo de operación", JOptionPane.QUESTION_MESSAGE);
+					
+					List<Object[]> tuplas = bancandes.darOperacionCDTPorTipo(tipo);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+				}
+				
+				else if(filtro == 2) {
+					
+					String respuesta = "Operaciones en CDT \n\n";
+					String valorStr = JOptionPane.showInputDialog(this, "Ingrese el valor: ", "Mayor a un valor", JOptionPane.QUESTION_MESSAGE);
+					int valor = Integer.valueOf(valorStr);
+					
+					List<Object[]> tuplas = bancandes.darOperacionCDTMayoresA(valor);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+					
+				}
+				
+				else if(filtro == 3) {
+					
+					String respuesta = "Operaciones en CDT \n\n";
+					String valorStr = JOptionPane.showInputDialog(this, "Ingrese el valor: ", "Menor a un valor", JOptionPane.QUESTION_MESSAGE);
+					int valor = Integer.valueOf(valorStr);
+					
+					List<Object[]> tuplas = bancandes.darOperacionCDTMenoresA(valor);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+					
+				}
+				
+			}
+			
+			else if(seleccion == 2) {
+				
+				int filtro = JOptionPane.showOptionDialog(this, 
+						"Seleccione por qué filtro desea buscar:", 
+						"Selector de filtro de consulta",
+						JOptionPane.YES_NO_CANCEL_OPTION,
+						JOptionPane.QUESTION_MESSAGE,
+						null,
+						new Object[] { "Fechas", "Tipo", "Mayor a un valor", "Menor a un valor"},
+					   	null);
+				
+				if(filtro == 0) {
+					
+					String respuesta = "Operaciones en Cuenta \n\n";
+					String primeraFecha = JOptionPane.showInputDialog(this, "Ingrese la fecha mínima del rango (DD/MM/YY): ", "Rango de fechas", JOptionPane.QUESTION_MESSAGE);
+					String segundaFecha = JOptionPane.showInputDialog(this, "Ingrese la fecha máxima del rango (DD/MM/YY): ", "Rango de fechas", JOptionPane.QUESTION_MESSAGE);
+					
+					List<Object[]> tuplas = bancandes.darOperacionCuentaPorRangoDeFecha(primeraFecha, segundaFecha);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+					
+				}
+				
+				else if(filtro == 1) {
+					
+					String respuesta = "Operaciones en Cuenta \n\n";
+					String tipo = JOptionPane.showInputDialog(this, "Ingrese el tipo de la operacion en Cuenta: ", "Tipo de operación", JOptionPane.QUESTION_MESSAGE);
+					
+					List<Object[]> tuplas = bancandes.darOperacionCuentaPorTipo(tipo);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+				}
+				
+				else if(filtro == 2) {
+					
+					String respuesta = "Operaciones en Cuenta \n\n";
+					String valorStr = JOptionPane.showInputDialog(this, "Ingrese el valor: ", "Mayor a un valor", JOptionPane.QUESTION_MESSAGE);
+					int valor = Integer.valueOf(valorStr);
+					
+					List<Object[]> tuplas = bancandes.darOperacionCuentaMayoresA(valor);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+					
+				}
+				
+				else if(filtro == 3) {
+					
+					String respuesta = "Operaciones en Cuenta \n\n";
+					String valorStr = JOptionPane.showInputDialog(this, "Ingrese el valor: ", "Menor a un valor", JOptionPane.QUESTION_MESSAGE);
+					int valor = Integer.valueOf(valorStr);
+					
+					List<Object[]> tuplas = bancandes.darOperacionCuentaMenoresA(valor);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+					
+				}
+				
+			}
+			
+			else if(seleccion == 3) {
+				
+				int filtro = JOptionPane.showOptionDialog(this, 
+						"Seleccione por qué filtro desea buscar:", 
+						"Selector de filtro de consulta",
+						JOptionPane.YES_NO_CANCEL_OPTION,
+						JOptionPane.QUESTION_MESSAGE,
+						null,
+						new Object[] { "Fechas", "Tipo", "Mayor a un valor", "Menor a un valor"},
+					   	null);
+				
+				if(filtro == 0) {
+					
+					String respuesta = "Operaciones en Depositos de Inversion \n\n";
+					String primeraFecha = JOptionPane.showInputDialog(this, "Ingrese la fecha mínima del rango (DD/MM/YY): ", "Rango de fechas", JOptionPane.QUESTION_MESSAGE);
+					String segundaFecha = JOptionPane.showInputDialog(this, "Ingrese la fecha máxima del rango (DD/MM/YY): ", "Rango de fechas", JOptionPane.QUESTION_MESSAGE);
+					
+					List<Object[]> tuplas = bancandes.darOperacionDepositosInversionPorRangoDeFecha(primeraFecha, segundaFecha);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+					
+				}
+				
+				else if(filtro == 1) {
+					
+					String respuesta = "Operaciones en Depositos de Inversion \n\n";
+					String tipo = JOptionPane.showInputDialog(this, "Ingrese el tipo de la operacion en Depositos de Inversion: ", "Tipo de operación", JOptionPane.QUESTION_MESSAGE);
+					
+					List<Object[]> tuplas = bancandes.darOperacionDepositosInversionPorTipo(tipo);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+				}
+				
+				else if(filtro == 2) {
+					
+					String respuesta = "Operaciones en Depositos en Inversion \n\n";
+					String valorStr = JOptionPane.showInputDialog(this, "Ingrese el valor: ", "Mayor a un valor", JOptionPane.QUESTION_MESSAGE);
+					int valor = Integer.valueOf(valorStr);
+					
+					List<Object[]> tuplas = bancandes.darOperacionDepositosInversionMayoresA(valor);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+					
+				}
+				
+				else if(filtro == 3) {
+					
+					String respuesta = "Operaciones en Depositos en Inversion \n\n";
+					String valorStr = JOptionPane.showInputDialog(this, "Ingrese el valor: ", "Menor a un valor", JOptionPane.QUESTION_MESSAGE);
+					int valor = Integer.valueOf(valorStr);
+					
+					List<Object[]> tuplas = bancandes.darOperacionDepositosInversionMenoresA(valor);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+					
+				}
+				
+			}
+			
+			else if(seleccion == 4) {
+				
+				int filtro = JOptionPane.showOptionDialog(this, 
+						"Seleccione por qué filtro desea buscar:", 
+						"Selector de filtro de consulta",
+						JOptionPane.YES_NO_CANCEL_OPTION,
+						JOptionPane.QUESTION_MESSAGE,
+						null,
+						new Object[] { "Fechas", "Tipo", "Mayor a un valor", "Menor a un valor"},
+					   	null);
+				
+				if(filtro == 0) {
+					
+					String respuesta = "Operaciones en Prestamo \n\n";
+					String primeraFecha = JOptionPane.showInputDialog(this, "Ingrese la fecha mínima del rango (DD/MM/YY): ", "Rango de fechas", JOptionPane.QUESTION_MESSAGE);
+					String segundaFecha = JOptionPane.showInputDialog(this, "Ingrese la fecha máxima del rango (DD/MM/YY): ", "Rango de fechas", JOptionPane.QUESTION_MESSAGE);
+					
+					List<Object[]> tuplas = bancandes.darOperacionPrestamoPorRangoDeFecha(primeraFecha, segundaFecha);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+					
+				}
+				
+				else if(filtro == 1) {
+					
+					String respuesta = "Operaciones en Prestamo \n\n";
+					String tipo = JOptionPane.showInputDialog(this, "Ingrese el tipo de la operacion en Prestamo: ", "Tipo de operación", JOptionPane.QUESTION_MESSAGE);
+					
+					List<Object[]> tuplas = bancandes.darOperacionPrestamoPorTipo(tipo);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+				}
+				
+				else if(filtro == 2) {
+					
+					String respuesta = "Operaciones en Prestamo \n\n";
+					String valorStr = JOptionPane.showInputDialog(this, "Ingrese el valor: ", "Mayor a un valor", JOptionPane.QUESTION_MESSAGE);
+					int valor = Integer.valueOf(valorStr);
+					
+					List<Object[]> tuplas = bancandes.darOperacionPrestamoMayoresA(valor);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+					
+				}
+				
+				else if(filtro == 3) {
+					
+					String respuesta = "Operaciones en Prestamo \n\n";
+					String valorStr = JOptionPane.showInputDialog(this, "Ingrese el valor: ", "Menor a un valor", JOptionPane.QUESTION_MESSAGE);
+					int valor = Integer.valueOf(valorStr);
+					
+					List<Object[]> tuplas = bancandes.darOperacionPrestamoMenoresA(valor);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+					
+				}
+				
+			}
+			
+		}
+		catch (Exception e){
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
+	public void consultarNoOperaciones() {
+		
+		try {
+			int seleccion = JOptionPane.showOptionDialog(this, 
+						"Seleccione en que tipo de operaciones desea buscar:", 
+						"Selector de operaciones",
+						JOptionPane.YES_NO_CANCEL_OPTION,
+						JOptionPane.QUESTION_MESSAGE,
+						null,
+						new Object[] { "Acciones", "CDT", "Cuenta", "Depositos de inversión", "Prestamo"},
+					   	null);
+			
+			if(seleccion == 0) {
+				
+				int filtro = JOptionPane.showOptionDialog(this, 
+						"Seleccione por qué filtro desea buscar:", 
+						"Selector de filtro de consulta",
+						JOptionPane.YES_NO_CANCEL_OPTION,
+						JOptionPane.QUESTION_MESSAGE,
+						null,
+						new Object[] { "Fechas", "Tipo", "No mayor a un valor", "No menor a un valor"},
+					   	null);
+				
+				if(filtro == 0) {
+					
+					String respuesta = "Operaciones en Acciones \n\n";
+					String primeraFecha = JOptionPane.showInputDialog(this, "Ingrese la fecha mínima del rango que no desea buscar (DD/MM/YY): ", "Rango de fechas", JOptionPane.QUESTION_MESSAGE);
+					String segundaFecha = JOptionPane.showInputDialog(this, "Ingrese la fecha máxima del rango que no desea buscar (DD/MM/YY): ", "Rango de fechas", JOptionPane.QUESTION_MESSAGE);
+					
+					List<Object[]> tuplas = bancandes.darOperacionAccionesNoPorRangoDeFecha(primeraFecha, segundaFecha);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+					
+				}
+				
+				else if(filtro == 1) {
+					
+					String respuesta = "Operaciones en Acciones \n\n";
+					String tipo = JOptionPane.showInputDialog(this, "Ingrese el tipo de la operacion que no desea buscar en acciones: ", "Tipo de operación", JOptionPane.QUESTION_MESSAGE);
+					
+					List<Object[]> tuplas = bancandes.darOperacionAccionesNoPorTipo(tipo);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+				}
+				
+				else if(filtro == 2) {
+					
+					String respuesta = "Operaciones en Acciones \n\n";
+					String valorStr = JOptionPane.showInputDialog(this, "Ingrese el valor: ", "No mayor a un valor", JOptionPane.QUESTION_MESSAGE);
+					int valor = Integer.valueOf(valorStr);
+					
+					List<Object[]> tuplas = bancandes.darOperacionAccionesNoMayoresA(valor);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+					
+				}
+				
+				else if(filtro == 3) {
+					
+					String respuesta = "Operaciones en Acciones \n\n";
+					String valorStr = JOptionPane.showInputDialog(this, "Ingrese el valor: ", "No menor a un valor", JOptionPane.QUESTION_MESSAGE);
+					int valor = Integer.valueOf(valorStr);
+					
+					List<Object[]> tuplas = bancandes.darOperacionAccionesNoMenoresA(valor);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+					
+				}
+			}
+			
+			else if(seleccion == 1) {
+				
+				int filtro = JOptionPane.showOptionDialog(this, 
+						"Seleccione por qué filtro desea buscar:", 
+						"Selector de filtro de consulta",
+						JOptionPane.YES_NO_CANCEL_OPTION,
+						JOptionPane.QUESTION_MESSAGE,
+						null,
+						new Object[] { "Fechas", "Tipo", "No mayor a un valor", "No menor a un valor"},
+					   	null);
+				
+				if(filtro == 0) {
+					
+					String respuesta = "Operaciones en CDT \n\n";
+					String primeraFecha = JOptionPane.showInputDialog(this, "Ingrese la fecha mínima del rango que no desea buscar (DD/MM/YY): ", "Rango de fechas", JOptionPane.QUESTION_MESSAGE);
+					String segundaFecha = JOptionPane.showInputDialog(this, "Ingrese la fecha máxima del rango que no desea buscar(DD/MM/YY): ", "Rango de fechas", JOptionPane.QUESTION_MESSAGE);
+					
+					List<Object[]> tuplas = bancandes.darOperacionCDTNoPorRangoDeFecha(primeraFecha, segundaFecha);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+					
+				}
+				
+				else if(filtro == 1) {
+					
+					String respuesta = "Operaciones en CDT \n\n";
+					String tipo = JOptionPane.showInputDialog(this, "Ingrese el tipo de la operacion que no desea buscar en CDT: ", "Tipo de operación", JOptionPane.QUESTION_MESSAGE);
+					
+					List<Object[]> tuplas = bancandes.darOperacionCDTNoPorTipo(tipo);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+				}
+				
+				else if(filtro == 2) {
+					
+					String respuesta = "Operaciones en CDT \n\n";
+					String valorStr = JOptionPane.showInputDialog(this, "Ingrese el valor: ", "No mayor a un valor", JOptionPane.QUESTION_MESSAGE);
+					int valor = Integer.valueOf(valorStr);
+					
+					List<Object[]> tuplas = bancandes.darOperacionCDTNoMayoresA(valor);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+					
+				}
+				
+				else if(filtro == 3) {
+					
+					String respuesta = "Operaciones en CDT \n\n";
+					String valorStr = JOptionPane.showInputDialog(this, "Ingrese el valor: ", "No menor a un valor", JOptionPane.QUESTION_MESSAGE);
+					int valor = Integer.valueOf(valorStr);
+					
+					List<Object[]> tuplas = bancandes.darOperacionCDTNoMenoresA(valor);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+					
+				}
+				
+			}
+			
+			else if(seleccion == 2) {
+				
+				int filtro = JOptionPane.showOptionDialog(this, 
+						"Seleccione por qué filtro desea buscar:", 
+						"Selector de filtro de consulta",
+						JOptionPane.YES_NO_CANCEL_OPTION,
+						JOptionPane.QUESTION_MESSAGE,
+						null,
+						new Object[] { "Fechas", "Tipo", "No mayor a un valor", "No menor a un valor"},
+					   	null);
+				
+				if(filtro == 0) {
+					
+					String respuesta = "Operaciones en Cuenta \n\n";
+					String primeraFecha = JOptionPane.showInputDialog(this, "Ingrese la fecha mínima del rango que no desea buscar (DD/MM/YY): ", "Rango de fechas", JOptionPane.QUESTION_MESSAGE);
+					String segundaFecha = JOptionPane.showInputDialog(this, "Ingrese la fecha máxima del rango que no desea buscar(DD/MM/YY): ", "Rango de fechas", JOptionPane.QUESTION_MESSAGE);
+					
+					List<Object[]> tuplas = bancandes.darOperacionCuentaNoPorRangoDeFecha(primeraFecha, segundaFecha);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+					
+				}
+				
+				else if(filtro == 1) {
+					
+					String respuesta = "Operaciones en Cuenta \n\n";
+					String tipo = JOptionPane.showInputDialog(this, "Ingrese el tipo de la operacion que no desea buscar en Cuenta: ", "Tipo de operación", JOptionPane.QUESTION_MESSAGE);
+					
+					List<Object[]> tuplas = bancandes.darOperacionCuentaNoPorTipo(tipo);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+				}
+				
+				else if(filtro == 2) {
+					
+					String respuesta = "Operaciones en Cuenta \n\n";
+					String valorStr = JOptionPane.showInputDialog(this, "Ingrese el valor: ", "No mayor a un valor", JOptionPane.QUESTION_MESSAGE);
+					int valor = Integer.valueOf(valorStr);
+					
+					List<Object[]> tuplas = bancandes.darOperacionCuentaNoMayoresA(valor);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+					
+				}
+				
+				else if(filtro == 3) {
+					
+					String respuesta = "Operaciones en Cuenta \n\n";
+					String valorStr = JOptionPane.showInputDialog(this, "Ingrese el valor: ", "No menor a un valor", JOptionPane.QUESTION_MESSAGE);
+					int valor = Integer.valueOf(valorStr);
+					
+					List<Object[]> tuplas = bancandes.darOperacionCuentaNoMenoresA(valor);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+					
+				}
+				
+			}
+			
+			else if(seleccion == 3) {
+				
+				int filtro = JOptionPane.showOptionDialog(this, 
+						"Seleccione por qué filtro desea buscar:", 
+						"Selector de filtro de consulta",
+						JOptionPane.YES_NO_CANCEL_OPTION,
+						JOptionPane.QUESTION_MESSAGE,
+						null,
+						new Object[] { "Fechas", "Tipo", "No mayor a un valor", "No menor a un valor"},
+					   	null);
+				
+				if(filtro == 0) {
+					
+					String respuesta = "Operaciones en Depositos de Inversion \n\n";
+					String primeraFecha = JOptionPane.showInputDialog(this, "Ingrese la fecha mínima del rango que no desea buscar (DD/MM/YY): ", "Rango de fechas", JOptionPane.QUESTION_MESSAGE);
+					String segundaFecha = JOptionPane.showInputDialog(this, "Ingrese la fecha máxima del rango que no desea buscar (DD/MM/YY): ", "Rango de fechas", JOptionPane.QUESTION_MESSAGE);
+					
+					List<Object[]> tuplas = bancandes.darOperacionDepositosInversionNoPorRangoDeFecha(primeraFecha, segundaFecha);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+					
+				}
+				
+				else if(filtro == 1) {
+					
+					String respuesta = "Operaciones en Depositos de Inversion \n\n";
+					String tipo = JOptionPane.showInputDialog(this, "Ingrese el tipo de la operacion que no desea buscar en Depositos de Inversion: ", "Tipo de operación", JOptionPane.QUESTION_MESSAGE);
+					
+					List<Object[]> tuplas = bancandes.darOperacionDepositosInversionNoPorTipo(tipo);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+				}
+				
+				else if(filtro == 2) {
+					
+					String respuesta = "Operaciones en Depositos en Inversion \n\n";
+					String valorStr = JOptionPane.showInputDialog(this, "Ingrese el valor: ", "No mayor a un valor", JOptionPane.QUESTION_MESSAGE);
+					int valor = Integer.valueOf(valorStr);
+					
+					List<Object[]> tuplas = bancandes.darOperacionDepositosInversionNoMayoresA(valor);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+					
+				}
+				
+				else if(filtro == 3) {
+					
+					String respuesta = "Operaciones en Depositos en Inversion \n\n";
+					String valorStr = JOptionPane.showInputDialog(this, "Ingrese el valor: ", "No menor a un valor", JOptionPane.QUESTION_MESSAGE);
+					int valor = Integer.valueOf(valorStr);
+					
+					List<Object[]> tuplas = bancandes.darOperacionDepositosInversionNoMenoresA(valor);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+					
+				}
+				
+			}
+			
+			else if(seleccion == 4) {
+				
+				int filtro = JOptionPane.showOptionDialog(this, 
+						"Seleccione por qué filtro desea buscar:", 
+						"Selector de filtro de consulta",
+						JOptionPane.YES_NO_CANCEL_OPTION,
+						JOptionPane.QUESTION_MESSAGE,
+						null,
+						new Object[] { "Fechas", "Tipo", "No mayor a un valor", "No menor a un valor"},
+					   	null);
+				
+				if(filtro == 0) {
+					
+					String respuesta = "Operaciones en Prestamo \n\n";
+					String primeraFecha = JOptionPane.showInputDialog(this, "Ingrese la fecha mínima del rango que no desea buscar (DD/MM/YY): ", "Rango de fechas", JOptionPane.QUESTION_MESSAGE);
+					String segundaFecha = JOptionPane.showInputDialog(this, "Ingrese la fecha máxima del rango que no desea buscar (DD/MM/YY): ", "Rango de fechas", JOptionPane.QUESTION_MESSAGE);
+					
+					List<Object[]> tuplas = bancandes.darOperacionPrestamoNoPorRangoDeFecha(primeraFecha, segundaFecha);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+					
+				}
+				
+				else if(filtro == 1) {
+					
+					String respuesta = "Operaciones en Prestamo \n\n";
+					String tipo = JOptionPane.showInputDialog(this, "Ingrese el tipo de la operacion que no desea buscar en Prestamo: ", "Tipo de operación", JOptionPane.QUESTION_MESSAGE);
+					
+					List<Object[]> tuplas = bancandes.darOperacionPrestamoNoPorTipo(tipo);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+				}
+				
+				else if(filtro == 2) {
+					
+					String respuesta = "Operaciones en Prestamo \n\n";
+					String valorStr = JOptionPane.showInputDialog(this, "Ingrese el valor: ", "No mayor a un valor", JOptionPane.QUESTION_MESSAGE);
+					int valor = Integer.valueOf(valorStr);
+					
+					List<Object[]> tuplas = bancandes.darOperacionPrestamoNoMayoresA(valor);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+					
+				}
+				
+				else if(filtro == 3) {
+					
+					String respuesta = "Operaciones en Prestamo \n\n";
+					String valorStr = JOptionPane.showInputDialog(this, "Ingrese el valor: ", "No menor a un valor", JOptionPane.QUESTION_MESSAGE);
+					int valor = Integer.valueOf(valorStr);
+					
+					List<Object[]> tuplas = bancandes.darOperacionPrestamoNoMenoresA(valor);
+					
+					for ( Object[] tupla : tuplas) 
+						respuesta += "Tipo de operacion: " + tupla[0] + " Fecha: " + tupla[1] + " Valor: " + tupla[2] + "\n";
+					
+					panelDatos.actualizarInterfaz(respuesta);
+					
+				}
+				
+			}
+			
+		}
+		catch (Exception e){
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+		
+	}
+	
+	public void consultarConsignaciones(){
+		
+		try {
+			
+			int seleccion = JOptionPane.showOptionDialog(this, 
+					"Seleccione el producto que deben tener los clientes en la busqueda:", 
+					"Selector de productos",
+					JOptionPane.YES_NO_CANCEL_OPTION,
+					JOptionPane.QUESTION_MESSAGE,
+					null,
+					new Object[] { "Prestamo", "CDT", "Acciones", "Cuentas"},
+				   	null);
+			
+			String montoStr = JOptionPane.showInputDialog(this, "Ingrese el monto que desea que las consignaciones buscadas tengan mayor valor a:", "Consignaciones mayores a monto", JOptionPane.QUESTION_MESSAGE);
+			int monto = Integer.valueOf(montoStr);
+			
+			if(seleccion == 0) {
+				
+				String respuesta = "Consignaciones de clientes que tienen prestamos en bancandes: \n\n";
+				List<Object[]> tuplas = bancandes.darConsignacionesDeClientesQueTienenPrestamoConMontoMayorA(monto);
+				
+				for ( Object[] tupla : tuplas) 
+					respuesta += "Tipo de operacion: " + tupla[0] + " Valor: " + tupla[1] + " IdCuenta: " + tupla[2] + " Fecha: " + tupla[3] + "\n";
+				
+				panelDatos.actualizarInterfaz(respuesta);
+			}
+			
+			else if(seleccion == 1) {
+				
+				String respuesta = "Consignaciones de clientes que tienen CDT en bancandes: \n\n";
+				List<Object[]> tuplas = bancandes.darConsignacionesDeClientesQueTienenCDTConMontoMayorA(monto);
+				
+				for ( Object[] tupla : tuplas) 
+					respuesta += "Tipo de operacion: " + tupla[0] + " Valor: " + tupla[1] + " IdCuenta: " + tupla[2] + " Fecha: " + tupla[3] + "\n";
+				
+				panelDatos.actualizarInterfaz(respuesta);
+			}
+			
+			else if(seleccion == 2) {
+				
+				String respuesta = "Consignaciones de clientes que tienen acciones en bancandes: \n\n";
+				List<Object[]> tuplas = bancandes.darConsignacionesDeClientesQueTienenAccionesConMontoMayorA(monto);
+				
+				for ( Object[] tupla : tuplas) 
+					respuesta += "Tipo de operacion: " + tupla[0] + " Valor: " + tupla[1] + " IdCuenta: " + tupla[2] + " Fecha: " + tupla[3] + "\n";
+				
+				panelDatos.actualizarInterfaz(respuesta);
+			}
+			
+			else if(seleccion == 3) {
+				
+				String respuesta = "Consignaciones de clientes que tienen cuentas en bancandes: \n\n";
+				List<Object[]> tuplas = bancandes.darConsignacionesDeClientesQueTienenCuentasConMontoMayorA(monto);
+				
+				for ( Object[] tupla : tuplas) 
+					respuesta += "Tipo de operacion: " + tupla[0] + " Valor: " + tupla[1] + " IdCuenta: " + tupla[2] + " Fecha: " + tupla[3] + "\n";
+				
+				panelDatos.actualizarInterfaz(respuesta);
+			}
+			
+		}
+		catch(Exception e) {
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+		
+		
+	}
+	
+	public void buscarOperacionesEnDosPuntos() {
+		
+		try {
+			
+			String primerPuntoStr = JOptionPane.showInputDialog(this, "Ingrese el primer identificador de un punto de atención: ", "Primer punto de atención", JOptionPane.QUESTION_MESSAGE);
+			String segundoPuntoStr = JOptionPane.showInputDialog(this, "Ingrese el segundo identificador de un punto de atención: ", "Segundo punto de atención", JOptionPane.QUESTION_MESSAGE);
+			
+			long primerPunto = Long.valueOf(primerPuntoStr);
+			long segundoPunto = Long.valueOf(segundoPuntoStr);
+			
+			String respuesta = "Operaciones encontradas en los puntos de atención " + primerPunto + " y " + segundoPunto + "\n\n";
+			List<Object[]> tuplas = bancandes.buscarOperacionesEnDosPuntosDeAtencion(primerPunto, segundoPunto);
+			
+			for(Object[] tupla : tuplas) {
+				
+				respuesta += "CLIENTE Tipo de documento: " + tupla[0] + " Numero de documento: " + tupla[1]
+						+ " Nombre: " + tupla[2] + " Tipo de persona: " + tupla[3] + " Direccion electronica: "
+						+ tupla[4] + "\n";
+				
+				respuesta += "OPERACION Identificador del punto de atencion: " + tupla[5] + " " + tupla[6] 
+						+ " Valor de la operacion: " + tupla[7] + " Fecha: " + tupla[8] + "\n\n"; 
+			}
+			
+			panelDatos.actualizarInterfaz(respuesta);
+		}
+		catch(Exception e) {
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
 
 	public void crearOperacionCuenta() {
 
@@ -472,7 +1319,7 @@ public class InterfazBancandesApp extends JFrame implements ActionListener
 						long idCliente = Long.parseLong(idClientestr);
 						long cuentasOficina = Long.parseLong(cuentasOficinastr);
 
-						long op = bancandes.crearOperacionPrestamo(diaPago, interes, saldoPendiente, operacionesPunto, tipoOperacion, 0, idCliente, 0, cuentasOficina, valorCuotaMinima, numeroCuotas, idCliente, tipoPrestamo);
+						long op = bancandes.crearOperacionPrestamo(diaPago, interes, saldoPendiente, operacionesPunto, tipoOperacion, 0, idCliente, 0, cuentasOficina, valorCuotaMinima, numeroCuotas, idCliente, tipoPrestamo, 0);
 					}
 					else {
 						panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
@@ -491,7 +1338,7 @@ public class InterfazBancandesApp extends JFrame implements ActionListener
 						long idprestamo = Long.parseLong(idPrestamostr); 
 						long idUsuario = Long.parseLong(idCliente);
 
-						long op = bancandes.crearOperacionPrestamo(null, 0, 0, 0, tipoOperacion, idprestamo, idUsuario, valor , 0, 0, 0, idUsuario, null);
+						long op = bancandes.crearOperacionPrestamo(null, 0, 0, 0, tipoOperacion, idprestamo, idUsuario, valor , 0, 0, 0, idUsuario, null, 0);
 
 					}
 
@@ -797,27 +1644,6 @@ public class InterfazBancandesApp extends JFrame implements ActionListener
 else { panelDatos.actualizarInterfaz("Operacion cancelada por el usuario"); }}
 
 
-
-	public void consultarOperaciones()
-	{String operacionid = JOptionPane.showInputDialog(this, "Ingrese id a buscar", "Operacion prestamo", JOptionPane.QUESTION_MESSAGE);
-	long prestamo = Long.parseLong (operacionid );
-	if(operacionid != null) {
-		List<VOOperacionCuenta> Resultado =	bancandes.darOperacionesporIdOperacion (prestamo);
-		
-		String ans = "";
-		for (VOOperacionCuenta cuenta: Resultado) {
-			ans += cuenta.toString();
-		}
-panelDatos.actualizarInterfaz(ans);}
-
-
-else { panelDatos.actualizarInterfaz("Operacion cancelada por el usuario"); }
-
-
-
-
-
-	  }
 
 
 

@@ -46,6 +46,206 @@ public class SQLOperacionCuenta {
 		q.setParameters(tipo);
 		return (List<OperacionCuenta>) q.executeList();
 	}
+	
+	public List<Object[]> darOperacionCuentaPorRangoDeFecha(PersistenceManager pm, String primeraFecha, String segundaFecha) 
+	{
+		String sql = "SELECT O.TIPO, T.FECHAHORA, T.VALOR ";
+		sql += " FROM ";
+		sql += pp.darTablaOperacionCuenta() + " O, ";
+		sql += pp.darTablaTransaccion() + " T ";
+		sql += " WHERE ";
+		sql += "O.IDTRANSACCION = T.IDTRANSACCION ";
+		sql += "AND T.FECHAHORA BETWEEN ? AND ?";
+		
+		Query q = pm.newQuery(SQL, sql);
+		q.setParameters(primeraFecha, segundaFecha);
+		return q.executeList();
+	}
+	
+	public List<Object[]> darOperacionCuentaNoPorRangoDeFecha(PersistenceManager pm, String primeraFecha, String segundaFecha) 
+	{
+		String sql = "SELECT O.TIPO, T.FECHAHORA, T.VALOR ";
+		sql += " FROM ";
+		sql += pp.darTablaOperacionCuenta() + " O, ";
+		sql += pp.darTablaTransaccion() + " T ";
+		sql += " WHERE ";
+		sql += "O.IDTRANSACCION = T.IDTRANSACCION ";
+		sql += "AND T.FECHAHORA NOT BETWEEN ? AND ?";
+		
+		Query q = pm.newQuery(SQL, sql);
+		q.setParameters(primeraFecha, segundaFecha);
+		return q.executeList();
+	}
+	
+	public List<Object[]> darOperacionCuentaPorTipo(PersistenceManager pm, String tipo) 
+	{
+		String sql = "SELECT O.TIPO, T.FECHAHORA, T.VALOR ";
+		sql += " FROM ";
+		sql += pp.darTablaOperacionCuenta() + " O, ";
+		sql += pp.darTablaTransaccion() + " T ";
+		sql += " WHERE ";
+		sql += "O.IDTRANSACCION = T.IDTRANSACCION ";
+		sql += "AND O.TIPO = ? ";
+		
+		Query q = pm.newQuery(SQL, sql);
+		q.setParameters(tipo);
+		return q.executeList();
+	}
+	
+	public List<Object[]> darOperacionCuentaNoPorTipo(PersistenceManager pm, String tipo) 
+	{
+		String sql = "SELECT O.TIPO, T.FECHAHORA, T.VALOR ";
+		sql += " FROM ";
+		sql += pp.darTablaOperacionCuenta() + " O, ";
+		sql += pp.darTablaTransaccion() + " T ";
+		sql += " WHERE ";
+		sql += "O.IDTRANSACCION = T.IDTRANSACCION ";
+		sql += "AND NOT O.TIPO = ? ";
+		
+		Query q = pm.newQuery(SQL, sql);
+		q.setParameters(tipo);
+		return q.executeList();
+	}
+	
+	public List<Object[]> darOperacionCuentaMayoresA(PersistenceManager pm, int valor) 
+	{
+		String sql = "SELECT O.TIPO, T.FECHAHORA, T.VALOR ";
+		sql += " FROM ";
+		sql += pp.darTablaOperacionCuenta() + " O, ";
+		sql += pp.darTablaTransaccion() + " T ";
+		sql += " WHERE ";
+		sql += "O.IDTRANSACCION = T.IDTRANSACCION ";
+		sql += "AND T.VALOR > ? ";
+		
+		Query q = pm.newQuery(SQL, sql);
+		q.setParameters(valor);
+		return q.executeList();
+	}
+	
+	public List<Object[]> darOperacionCuentaNoMayoresA(PersistenceManager pm, int valor) 
+	{
+		String sql = "SELECT O.TIPO, T.FECHAHORA, T.VALOR ";
+		sql += " FROM ";
+		sql += pp.darTablaOperacionCuenta() + " O, ";
+		sql += pp.darTablaTransaccion() + " T ";
+		sql += " WHERE ";
+		sql += "O.IDTRANSACCION = T.IDTRANSACCION ";
+		sql += "AND NOT T.VALOR > ? ";
+		
+		Query q = pm.newQuery(SQL, sql);
+		q.setParameters(valor);
+		return q.executeList();
+	}
+	
+	public List<Object[]> darOperacionCuentaMenoresA(PersistenceManager pm, int valor) 
+	{
+		String sql = "SELECT O.TIPO, T.FECHAHORA, T.VALOR ";
+		sql += " FROM ";
+		sql += pp.darTablaOperacionCuenta() + " O, ";
+		sql += pp.darTablaTransaccion() + " T ";
+		sql += " WHERE ";
+		sql += "O.IDTRANSACCION = T.IDTRANSACCION ";
+		sql += "AND T.VALOR < ? ";
+		
+		Query q = pm.newQuery(SQL, sql);
+		q.setParameters(valor);
+		return q.executeList();
+	}
+	
+	public List<Object[]> darOperacionCuentaNoMenoresA(PersistenceManager pm, int valor) 
+	{
+		String sql = "SELECT O.TIPO, T.FECHAHORA, T.VALOR ";
+		sql += " FROM ";
+		sql += pp.darTablaOperacionCuenta() + " O, ";
+		sql += pp.darTablaTransaccion() + " T ";
+		sql += " WHERE ";
+		sql += "O.IDTRANSACCION = T.IDTRANSACCION ";
+		sql += "AND NOT T.VALOR < ? ";
+		
+		Query q = pm.newQuery(SQL, sql);
+		q.setParameters(valor);
+		return q.executeList();
+	}
+	
+	public List<Object[]> darConsignacionesDeClientesQueTienenPrestamoConMontoMayorA(PersistenceManager pm, int monto){
+		
+		String sql = "SELECT O.TIPO, T.VALOR, O.IDCUENTA, T.FECHAHORA ";
+		sql += "FROM ";
+		sql += pp.darTablaUsuario() + " U, ";
+		sql += pp.darTablaPrestamo() + " P, "; 
+		sql += pp.darTablaOperacionCuenta() + " O, ";
+		sql += pp.darTablaTransaccion() + " T ";
+		sql += "WHERE ";
+		sql += "U.NUMERODOCUMENTO = P.IDCLIENTE ";
+		sql += "AND O.IDTRANSACCION = T.IDTRANSACCION ";
+		sql += "AND U.NUMERODOCUMENTO = T.IDUSUARIO ";
+		sql += "AND O.TIPO = 'Consignar' ";
+		sql += "AND T.VALOR > ? ";
+		
+		Query q = pm.newQuery(SQL, sql);
+		q.setParameters(monto);
+		return q.executeList();
+	}
+	
+	public List<Object[]> darConsignacionesDeClientesQueTienenCDTConMontoMayorA(PersistenceManager pm, int monto){
+		
+		String sql = "SELECT O.TIPO, T.VALOR, O.IDCUENTA, T.FECHAHORA ";
+		sql += "FROM ";
+		sql += pp.darTablaUsuario() + " U, ";
+		sql += pp.darTablaCDT() + " C, "; 
+		sql += pp.darTablaOperacionCuenta() + " O, ";
+		sql += pp.darTablaTransaccion() + " T ";
+		sql += "WHERE ";
+		sql += "U.NUMERODOCUMENTO = C.IDCLIENTE ";
+		sql += "AND O.IDTRANSACCION = T.IDTRANSACCION ";
+		sql += "AND U.NUMERODOCUMENTO = T.IDUSUARIO ";
+		sql += "AND O.TIPO = 'Consignar' ";
+		sql += "AND T.VALOR > ? ";
+		
+		Query q = pm.newQuery(SQL, sql);
+		q.setParameters(monto);
+		return q.executeList();
+	}
+	
+	public List<Object[]> darConsignacionesDeClientesQueTienenAccionesConMontoMayorA(PersistenceManager pm, int monto){
+		
+		String sql = "SELECT O.TIPO, T.VALOR, O.IDCUENTA, T.FECHAHORA ";
+		sql += "FROM ";
+		sql += pp.darTablaUsuario() + " U, ";
+		sql += pp.darTablaClienteAccion() + " CA, "; 
+		sql += pp.darTablaOperacionCuenta() + " O, ";
+		sql += pp.darTablaTransaccion() + " T ";
+		sql += "WHERE ";
+		sql += "U.NUMERODOCUMENTO = CA.IDCLIENTE ";
+		sql += "AND O.IDTRANSACCION = T.IDTRANSACCION ";
+		sql += "AND U.NUMERODOCUMENTO = T.IDUSUARIO ";
+		sql += "AND O.TIPO = 'Consignar' ";
+		sql += "AND T.VALOR > ? ";
+		
+		Query q = pm.newQuery(SQL, sql);
+		q.setParameters(monto);
+		return q.executeList();
+	}
+	
+	public List<Object[]> darConsignacionesDeClientesQueTienenCuentasConMontoMayorA(PersistenceManager pm, int monto){
+		
+		String sql = "SELECT O.TIPO, T.VALOR, O.IDCUENTA, T.FECHAHORA ";
+		sql += "FROM ";
+		sql += pp.darTablaUsuario() + " U, ";
+		sql += pp.darTablaCuenta() + " C, "; 
+		sql += pp.darTablaOperacionCuenta() + " O, ";
+		sql += pp.darTablaTransaccion() + " T ";
+		sql += "WHERE ";
+		sql += "U.NUMERODOCUMENTO = C.IDCLIENTE ";
+		sql += "AND O.IDTRANSACCION = T.IDTRANSACCION ";
+		sql += "AND U.NUMERODOCUMENTO = T.IDUSUARIO ";
+		sql += "AND O.TIPO = 'Consignar' ";
+		sql += "AND T.VALOR > ? ";
+		
+		Query q = pm.newQuery(SQL, sql);
+		q.setParameters(monto);
+		return q.executeList();
+	}
 }
 	
 		
